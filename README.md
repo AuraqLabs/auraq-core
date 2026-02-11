@@ -1,6 +1,6 @@
-# Shabaka
+# Auraq
 
-**Shabaka** is a modular frontend template design for all my static portfolio sites with shared components, including direct manipulation scrolling, horizontal navigation systems, and compatibility fallbacks. It enables consistent behavior across my multiple sites while remaining fully modular and maintainable via Git submodules. The noscript section lets the site remain functional even when JavaScript is disabled.
+**Auraq core** is a modular frontend templating system. It provides the UI/UX and interaction layer for all of my static portfolio sites. Unique features include direct manipulation scrolling, horizontal navigation systems, and backward compatibility. The system ensures consistent behavior across multiple sites while remaining fully modular and maintainable via Git submodules. The <noscript> fallback lets the site remain functional even when JavaScript is disabled.
 
 ---
 
@@ -19,7 +19,7 @@
 
 ## Overview
 
-Shabaka provides a clean, reusable template for web projects with the following goals:
+Auraq provides a clean, reusable template for web projects with the following goals:
 
 - Fully modular architecture  
 - User-friendly UI/UX design
@@ -31,18 +31,18 @@ Shabaka provides a clean, reusable template for web projects with the following 
 
 ## Features
 
-- **DragScroll:** Smooth pointer-based scrolling with momentum and elastic feel  
+Auraq has the following planned modules:
+
+- **panning:** Smooth pointer-based panning with momentum and elastic feel  
 - **Navigation:** Modular vertical or horizontal nav bars with active indicators  
-- **Utilities:** Common helper functions for DOM manipulation and event handling  
-- **Modular:** Each component is independent and can be updated without breaking other modules  
+- **Data:** A shared dataset between multiple sites
 - **Centralized Documentation:** Each module has its own `API.md` for function reference  
-- **JavaScript Disabled Fallback:** Remains functional when JavaScript is disabled
+- **JavaScript Disabled Fallback:** Remains functional even when JavaScript is disabled
 ---
 
 ## Repository Structure
 
-```text
-shabaka/
+Auraq/
 ├─ modules/             # Core modules (panning, carousel, nav, utils)
 │   ├─ panning/
 │   │   ├─ vertical.js
@@ -58,24 +58,23 @@ shabaka/
 ├─ templates/           # HTML/CSS templates for consistent layout
 ├─ API.md               # Global API overview & module links
 └─ README.md
-```
 
 ---
 
 ## Installation
 
-1. Clone the Shabaka repo as a **submodule** in your project:
+1. Clone the Auraq repo as a **submodule** in your project:
 
 ```bash
-git submodule add https://github.com/YourUsername/shabaka.git js/modules/shabaka
+git submodule add https://github.com/YourUsername/Auraq.git js/modules/Auraq
 git submodule update --init --recursive
 ```
 
 2. Include desired modules in your HTML:
 
 ```html
-<script type="module" src="js/modules/shabaka/modules/panning/vertical.js"></script>
-<script type="module" src="js/modules/shabaka/modules/carousel/carousel.js"></script>
+<script type="module" src="js/modules/Auraq/modules/panning/vertical.js"></script>
+<script type="module" src="js/modules/Auraq/modules/carousel/carousel.js"></script>
 ```
 
 ---
@@ -124,17 +123,4 @@ initCarousel(carouselEl, { autoplay: true, interval: 5000 });
 
 ## License
 
-MIT License © 2026 Shabaka Project
-
-```
-
----
-
-This README:
-
-- Highlights **modularity and ES6 usage**  
-- Documents **submodule setup for multiple projects**  
-- Links to **API.md** 
-- Provides a **quickstart usage snippet**  
-
----
+GPL License © 2026 Auraq Project
