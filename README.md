@@ -123,4 +123,4 @@ initCarousel(carouselEl, { autoplay: true, interval: 5000 });
 
 ## License
 
-GPL License © 2026 Auraq Project
+GPL-3.0 License © 2026 Auraq Project
