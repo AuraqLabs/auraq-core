@@ -1,4 +1,4 @@
-# Auraq
+# Auraq Core
 
 **Auraq core** is a modular frontend templating system. It provides the UI/UX and interaction layer for all of my static portfolio sites. Unique features include direct manipulation scrolling, horizontal navigation systems, and backward compatibility. The system ensures consistent behavior across multiple sites while remaining fully modular and maintainable via Git submodules. The <noscript> fallback lets the site remain functional even when JavaScript is disabled.
 
