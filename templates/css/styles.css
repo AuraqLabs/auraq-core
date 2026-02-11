@@ -1,0 +1,115 @@
+:root {
+    --theme-color: 255,111,0; /* Orange theme */
+        --secondary-color: 40,40,40;
+        }   
+
+/* Global Reset */
+*,
+*::before,
+*::after {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 { white-space: nowrap; }
+
+/* Default */
+body, html {
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: transparent;
+  color: #e0e0e0
+}
+
+body {
+  border: 1px solid green;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-height: 100%;
+  position: relative;
+  z-index: auto;
+  background-color: #1e1e1e;
+}
+
+header, footer {
+  border: 1px solid blue;
+  background-color: rgb(var(--secondary-color));
+  display: flex;
+  padding: 10px;
+  position: relative;
+  width: 100%;
+  color: rgb(var(--theme-color));
+  text-align: center;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+nav {
+  border: 1px solid purple;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem;
+  display: flex;
+}
+
+nav a {
+  color: rgb(var(--theme-color));
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 1rem;
+}
+
+.site-identity {
+  border: 1px solid purple;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+}
+
+/* Panel Containers for panning */
+#panningContainer {
+  background-color: transparent;
+  border: 1px solid red;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  overflow-x: hidden;
+  scroll-behavior: auto;
+  touch-action: none;
+  overscroll-behavior: contain;
+  cursor: default;
+
+  /* hide the scrollbar */
+  scrollbar-width: none;
+}
+
+/* Panel Styling */
+.panel {
+  aspect-ratio: 16/9;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 20px;
+  background: rgb(var(--secondary-color));
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.5);
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+
+  /* Disable Text Selection */  
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE */
+  user-select: none;         /* Standard */
+}
