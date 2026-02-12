@@ -115,7 +115,7 @@ nav a {
 
 /* Panel Styling */
 .panel {
-  aspect-ratio: 16/9;
+  aspect-ratio: 5/3;
   margin-left: 10px;
   margin-right: 10px;
   padding: 20px;
@@ -132,4 +132,10 @@ nav a {
   -moz-user-select: none;    /* Firefox */
   -ms-user-select: none;     /* IE */
   user-select: none;         /* Standard */
+}
+
+@media (max-width: 800px) {
+  .panel {
+    aspect-ratio: 3/5;
+  }
 }
