@@ -9,7 +9,7 @@
   --font-orbitron: "Orbitron", system-ui, sans-serif;
 
   /* active font */
-  --font-primary: var(--font-orbitron);
+  --font-primary: var(--font-exo);
 }   
 
 /* Global Reset */
@@ -22,7 +22,7 @@
     box-sizing: border-box;
 }
 
-h1 { white-space: nowrap; }
+.site-identiity h1 { white-space: nowrap; }
 
 /* Default */
 body, html {
