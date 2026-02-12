@@ -1,7 +1,7 @@
 :root {
     --theme-color: 255,111,0; /* Orange theme */
         --secondary-color: 40,40,40;
-        }   
+}   
 
 /* Global Reset */
 *,
@@ -72,6 +72,16 @@ nav a {
   align-items: center;
   gap: 10px;
   padding: 5px;
+}
+
+@media (max-width: 800px) {
+  .site-identity h1 {
+    display: none;
+  }
+  nav {
+    position: relative;
+    left: 0%;
+    transform: translateX(0%);
 }
 
 /* Panel Containers for panning */
