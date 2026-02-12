@@ -1,6 +1,15 @@
 :root {
   --theme-color: 255,111,0; /* Orange theme */
   --secondary-color: 40,40,40;
+
+
+  --font-exo: "Exo 2", system-ui, sans-serif;
+  --font-space-grotesk: "Space Grotesk", system-ui, sans-serif;
+  --font-space-mono: "Space Mono", monospace;
+  --font-orbitron: "Orbitron", system-ui, sans-serif;
+
+  /* active font */
+  --font-primary: var(--font-orbitron);
 }   
 
 /* Global Reset */
@@ -20,7 +29,7 @@ body, html {
   overflow-x: hidden;
   height: 100%;
   width: 100%;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-primary);
   background-color: transparent;
   color: #e0e0e0
 }
@@ -82,6 +91,7 @@ nav a {
     position: relative;
     left: 0%;
     transform: translateX(0%);
+  }
 }
 
 /* Panel Containers for panning */
