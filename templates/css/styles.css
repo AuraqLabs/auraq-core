@@ -22,6 +22,11 @@
     box-sizing: border-box;
 }
 
+img {
+  pointer-events: none;
+  user-select: none;
+}
+
 .site-identiity h1 { white-space: nowrap; }
 
 /* Default */
