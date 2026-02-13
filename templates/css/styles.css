@@ -120,7 +120,10 @@ nav a {
 
 /* Panel Styling */
 .panel {
-  aspect-ratio: 5/3;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-between;
   margin-left: 10px;
   margin-right: 10px;
   padding: 20px;
@@ -141,6 +144,25 @@ nav a {
 
 @media (max-width: 800px) {
   .panel {
-    aspect-ratio: 3/5;
   }
+}
+
+.panel article, .panel figure {
+  border: 1px solid yellow;
+  width: 650px;
+}
+.panel article {
+  aspect-ratio: 1/1;
+}
+
+@media (max-width: 800px) {
+  .panel article, .panel figure {
+    width: auto;
+    height: auto;
+  }
+}
+
+.transparent {
+  background: transparent;
+  box-shadow: 0px 0px 0px rgba(0,0,0,0);
 }
