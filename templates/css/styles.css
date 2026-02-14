@@ -217,7 +217,7 @@ nav a:hover{
   scrollbar-width: none;
 }
 
-/* Panel Styling */
+/* Content Section Styling */
 .content-section {
   border: 1px solid red;
   background: transparent;
@@ -227,13 +227,13 @@ nav a:hover{
   justify-content: space-between;
   margin-left: 10px;
   margin-right: 10px;
-  padding: 20px;
+  padding: 24px;
   background: rgb(var(--secondary-color));
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(0,0,0,0);
   text-align: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 32px;
+  margin-top: 32px;
   box-sizing: border-box;
 
   /* Disable Text Selection */  
