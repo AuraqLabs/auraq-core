@@ -1,19 +1,91 @@
+/* STYLE GUIDE
+
+ * | --- Color Theme --- |
+ * Theme:        #FF9124
+ * Accent:       #149B48
+ * Primary:  	 #140A0A (background)
+ * Secondary:    #1E1E1E (surface)
+ * Foreground:   #EFF9F0 (text)
+
+ * | --- Text Hierarchy --- |
+ *
+
+ * | -- Type Scale --- |
+ * 12px  → micro
+ * 14px  → meta
+ * 16px  → base
+ * 20px  → h6
+ * 25px  → h5
+ * 31px  → h4
+ * 39px  → h3
+ * 49px  → h2
+ * 61px  → h1
+
+ * | --- Spacing Rythom --- |
+ * 4   8   12   16   24   32   48   64   96   128
+
+ * | --- Motion Language --- |
+ * cubic-bezier(0.22, 1, 0.36, 1)
+ *
+ * | Action           | Duration  |
+ * | ---------------- | --------- |
+ * | Hover            | 120–180ms |
+ * | Panels           | 300–450ms |
+ * | Page transitions | 450–700ms |
+ * | Modals           | 350–500ms |
+
+ */
+
 :root {
+
+  /* ── Color ── */
+  
   --theme-color: 255, 145, 36; /* Orange theme */
   --accent-color: 20, 155, 72; /* Green accent */
   --primary-color: 20, 10, 10; /* Primary base */
   --secondary-color: 30, 30, 30; /* Surface */
   --foreground-color: 239, 249, 240; /* Text */
 
+  /* ── Type Scale ── */
 
-  --font-exo: "Exo 2", system-ui, sans-serif;
-  --font-space-grotesk: "Space Grotesk", system-ui, sans-serif;
-  --font-space-mono: "Space Mono", monospace;
-  --font-orbitron: "Orbitron", system-ui, sans-serif;
+  --fs-micro: 0.75rem;   /* 12px */
+  --fs-meta:  0.875rem;  /* 14px */
+  --fs-base:  1rem;      /* 16px */
 
-  /* active font */
+  --fs-h6: 1.25rem;      /* 20px */
+  --fs-h5: 1.5625rem;    /* 25px */
+  --fs-h4: 1.9375rem;    /* 31px */
+  --fs-h3: 2.4375rem;    /* 39px */
+  --fs-h2: 3.0625rem;    /* 49px */
+  --fs-h1: 3.8125rem;    /* 61px */
+
+  /* ── Type Fonts ── */
+  
+  --font-exo: "Exo 2", system-ui, sans-serif;			/* General */
+  --font-faustina: "Faustina", serif;				/* Heading */
+  --font-space-grotesk: "Space Grotesk", system-ui, sans-serif;	/* Heading alt */
+  --font-google-sans-code: "Google Sans Code", monospace;	/* Codes, micro UI */
+  --font-zain: "Zain", system-ui, sans-serif;			/* Arabic support */
+  --font-aldrich: "Aldrich", system-ui, sans-serif;		/* Display / Accent */
+  --font-orbitron: "Orbitron", system-ui, sans-serif;		/* Display / Accent */
+  --font-space-mono: "Space Mono", monospace;			/* Alternative Codes, Micro UI */
+  
+
+  /* Primary (Body + UI) */
   --font-primary: var(--font-exo);
-}   
+
+  /* Headings + Hero */
+  --font-heading: var(--font-faustina);
+  --font-heading-alt: var(--font-space-grotesk);
+
+  /* Code + Micro UI */
+  --font-mono: var(--font-google-sans-code);
+  --font-mono-alt: var(--font-space-mono);
+
+  /* Accent / Display (optional, rare) */
+  --font-display: var(--font-aldrich);
+  --font-display-alt: var(--font-orbitron);
+}
 
 /* Global Reset */
 *,
@@ -50,20 +122,36 @@ body {
   overflow-y: auto;
   min-height: 100%;
   position: relative;
+  font-size: var(--fs-base);
   z-index: auto;
   background-color: #1e1e1e;
 }
+
+small, .meta {
+  font-size: var(--fs-meta);
+}
+
+.micro {
+  font-size: var(--fs-micro);
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+h6 { font-size: var(--fs-h6); }
 
 header, footer {
   border: 1px solid blue;
   background-color: rgb(var(--secondary-color));
   display: flex;
-  padding: 10px;
+  padding: 4px;
   position: relative;
   width: 100%;
   color: rgb(var(--theme-color));
   text-align: center;
-  gap: 20px;
+  gap: 24px;
   justify-content: space-between;
 }
 
