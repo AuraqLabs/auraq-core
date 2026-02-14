@@ -165,22 +165,30 @@ nav {
 }
 
 nav a {
+  font-size: 16px;
   color: rgb(var(--theme-color));
+  transition: color 0.2s ease-out;
   text-decoration: none;
   font-weight: bold;
-  margin: 0 1rem;
+  margin: 0 8px;
+}
+
+nav a:hover{
+  color: rgb(var(--foreground-color));
+  text-shadow: 0 0 2px rgb(var(--accent-color));
 }
 
 .site-identity {
+  font-family: var(--font-display);
   border: 1px solid purple;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 5px;
 }
 
 @media (max-width: 800px) {
-  .site-identity h1 {
+  .site-identity h4 {
     display: none;
   }
   nav {
