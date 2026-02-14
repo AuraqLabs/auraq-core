@@ -1,6 +1,9 @@
 :root {
-  --theme-color: 255,111,0; /* Orange theme */
-  --secondary-color: 40,40,40;
+  --theme-color: 255, 145, 36; /* Orange theme */
+  --accent-color: 20, 155, 72; /* Green accent */
+  --primary-color: 20, 10, 10; /* Primary base */
+  --secondary-color: 30, 30, 30; /* Surface */
+  --foreground-color: 239, 249, 240; /* Text */
 
 
   --font-exo: "Exo 2", system-ui, sans-serif;
