@@ -11,11 +11,12 @@ export function createPanningController(container, state) {
   function startMomentum() {
     const friction = 0.85;
     const minVelocity = 0.02;
+    const weight = 20;
   
 
     function step() {
-      state.velocity *= friction;
-      setScroll(container, getScroll(container) - state.velocity * 20);
+      state.velocity *= friction; // Exponential decay
+      setScroll(container, getScroll(container) - state.velocity * weight);
 
       if (Math.abs(state.velocity) > minVelocity) {
         state.momentumID = requestAnimationFrame(step);
