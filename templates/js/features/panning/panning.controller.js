@@ -1,70 +1,70 @@
 import { setScrollX, setScrollY, getScrollX, getScrollY, capturePointer } from "./panning.dom.js";
 
-export function createPanningController(container, state, axis = 'xy', selector = '[data-panning]') {
+export function createPanningController(container, state, axis = 'xy', nestedContainerSelector = '[data-panning-axis]') {
   const friction = 0.85;
   const minVelocity = 0.02;
-  const weight = 20;
+  const momentumScale = 20;
 
-  const useX = axis === 'x' || axis === 'xy';
-  const useY = axis === 'y' || axis === 'xy';
+  const allowX = axis === 'x' || axis === 'xy';
+  const allowY = axis === 'y' || axis === 'xy';
 
   function cancelMomentum() {
-    if (state.momentumID) cancelAnimationFrame(state.momentumID);
-    state.momentumID = null;
+    if (state.momentumFrameID) cancelAnimationFrame(state.momentumFrameID);
+    state.momentumFrameID = null;
   }
 
   function startMomentum() {
-    function step() {
+    function momentumStep() {
       state.velocityX *= friction;
       state.velocityY *= friction;
 
-      if (useX) setScrollX(container, getScrollX(container) - state.velocityX * weight);
-      if (useY) setScrollY(container, getScrollY(container) - state.velocityY * weight);
+      if (allowX) setScrollX(container, getScrollX(container) - state.velocityX * momentumScale);
+      if (allowY) setScrollY(container, getScrollY(container) - state.velocityY * momentumScale);
 
       const stillMoving =
-        (useX && Math.abs(state.velocityX) > minVelocity) ||
-        (useY && Math.abs(state.velocityY) > minVelocity);
+        (allowX && Math.abs(state.velocityX) > minVelocity) ||
+        (allowY && Math.abs(state.velocityY) > minVelocity);
 
       if (stillMoving) {
-        state.momentumID = requestAnimationFrame(step);
+        state.momentumFrameID = requestAnimationFrame(momentumStep);
       }
     }
-    state.momentumID = requestAnimationFrame(step);
+    state.momentumFrameID = requestAnimationFrame(momentumStep);
   }
 
   function onPointerDown(e) {
-    state.isDragging = true;
+    state.isPanning = true;
     state.startX = e.clientX;
     state.startY = e.clientY;
-    state.startScrollLeft = getScrollX(container);
-    state.startScrollTop = getScrollY(container);
+    state.startScrollX = getScrollX(container);
+    state.startScrollY = getScrollY(container);
     state.lastX = e.clientX;
     state.lastY = e.clientY;
     state.lastTime = performance.now();
-    
-    const innerPanning = e.target.closest(selector);
-    if (!innerPanning || innerPanning === container) {
+
+    const nestedContainer = e.target.closest(nestedContainerSelector);
+    if (!nestedContainer || nestedContainer === container) {
       capturePointer(container, e.pointerId);
     }
-    
+
     cancelMomentum();
   }
 
   function onPointerMove(e) {
-    if (!state.isDragging) return;
+    if (!state.isPanning) return;
 
     const now = performance.now();
     const dt = now - state.lastTime;
 
-    if (useX) {
+    if (allowX) {
       const dx = e.clientX - state.startX;
-      setScrollX(container, state.startScrollLeft - dx);
+      setScrollX(container, state.startScrollX - dx);
       state.velocityX = (e.clientX - state.lastX) / dt;
     }
 
-    if (useY) {
+    if (allowY) {
       const dy = e.clientY - state.startY;
-      setScrollY(container, state.startScrollTop - dy);
+      setScrollY(container, state.startScrollY - dy);
       state.velocityY = (e.clientY - state.lastY) / dt;
     }
 
@@ -74,7 +74,7 @@ export function createPanningController(container, state, axis = 'xy', selector 
   }
 
   function onPointerUp() {
-    state.isDragging = false;
+    state.isPanning = false;
     startMomentum();
   }
 

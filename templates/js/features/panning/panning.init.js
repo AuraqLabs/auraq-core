@@ -6,7 +6,7 @@ export function initPanning() {
   const containers = getPanningContainers();
 
   if (!containers.length) {
-    console.warn('initPanning: no [data-panning] elements found');
+    console.warn('initPanning: no [data-panning-axis] elements found');
     return;
   }
 

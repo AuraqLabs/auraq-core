@@ -1,15 +1,15 @@
 export function createPanningState() {
   return {
-    isDragging: false,
+    isPanning: false,
     startX: 0,
     startY: 0,
-    startScrollLeft: 0,
-    startScrollTop: 0,
+    startScrollX: 0,
+    startScrollY: 0,
     velocityX: 0,
     velocityY: 0,
     lastX: 0,
     lastY: 0,
     lastTime: 0,
-    momentumID: null
+    momentumFrameID: null
   }
 }
