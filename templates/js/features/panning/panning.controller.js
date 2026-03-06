@@ -1,6 +1,6 @@
 import { setScrollX, setScrollY, getScrollX, getScrollY, capturePointer } from "./panning.dom.js";
 
-export function createPanningController(container, state, axis = 'xy', selector = '*[data-panning]') {
+export function createPanningController(container, state, axis = 'xy', selector = '[data-panning]') {
   const friction = 0.85;
   const minVelocity = 0.02;
   const weight = 20;

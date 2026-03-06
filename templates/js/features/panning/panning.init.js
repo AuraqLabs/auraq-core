@@ -1,18 +1,19 @@
 import { createPanningState } from './panning.state.js';
 import { createPanningController } from './panning.controller.js';
-import { bind } from './panning.dom.js';
+import { bind, getPanningContainers, getAxis } from './panning.dom.js';
 
 export function initPanning() {
-  const containers = document.querySelectorAll('[data-panning]');
+  const containers = getPanningContainers();
+
   if (!containers.length) {
     console.warn('initPanning: no [data-panning] elements found');
     return;
   }
 
   containers.forEach(container => {
-    const axis = container.dataset.panning || 'xy';
+    const axis = getAxis(container);
     const state = createPanningState();
-    const controller = createPanningController(container, state, axis, '[data-panning]');
+    const controller = createPanningController(container, state, axis);
 
     bind(container, 'pointerdown', controller.onPointerDown);
     bind(container, 'pointermove', controller.onPointerMove);
