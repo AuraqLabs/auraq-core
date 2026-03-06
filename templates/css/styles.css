@@ -199,15 +199,18 @@ nav a:hover{
 }
 
 /* Panel Containers for panning */
+#panningRoot {
+  width: 100%;
+  max-width: 1400px;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
 .panningContainer {
   background-color: transparent;
   border: 1px solid red;
   position: relative;
   box-sizing: border-box;
-  width: 100%;
-  max-width: 1400px;
-  height: 100vh;
-  overflow-x: hidden;
   scroll-behavior: auto;
   touch-action: none;
   overscroll-behavior: contain;
