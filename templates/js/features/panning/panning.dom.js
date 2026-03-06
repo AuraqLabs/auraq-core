@@ -1,15 +1,23 @@
-export function setScroll(container, value) {
+export function setScrollY(container, value) {
   container.scrollTop = value;
 }
 
-export function getScroll(container) {
+export function getScrollY(container) {
   return container.scrollTop;
 }
 
-export function capturePointer(pointer, pointerId) {
+export function setScrollX(container, value) {
+  container.scrollLeft = value;
+}
+
+export function getScrollX(container) {
+  return container.scrollLeft;
+}
+
+export function capturePointer(container, pointerId) {
   container.setPointerCapture(pointerId);
 }
 
-export function bind (container, event, handler, options) {
+export function bind(container, event, handler, options) {
   container.addEventListener(event, handler, options);
 }

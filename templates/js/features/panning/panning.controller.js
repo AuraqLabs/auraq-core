@@ -1,7 +1,12 @@
-import {setScroll, getScroll} from "./panning.dom.js";
+import { setScrollX, setScrollY, getScrollX, getScrollY, capturePointer } from "./panning.dom.js";
 
-export function createPanningController(container, state) {
-  const LINE_HEIGHT = 16;
+export function createPanningController(container, state, axis = 'xy') {
+  const friction = 0.85;
+  const minVelocity = 0.02;
+  const weight = 20;
+
+  const useX = axis === 'x' || axis === 'xy';
+  const useY = axis === 'y' || axis === 'xy';
 
   function cancelMomentum() {
     if (state.momentumID) cancelAnimationFrame(state.momentumID);
@@ -9,16 +14,18 @@ export function createPanningController(container, state) {
   }
 
   function startMomentum() {
-    const friction = 0.85;
-    const minVelocity = 0.02;
-    const weight = 20;
-  
-
     function step() {
-      state.velocity *= friction; // Exponential decay
-      setScroll(container, getScroll(container) - state.velocity * weight);
+      state.velocityX *= friction;
+      state.velocityY *= friction;
 
-      if (Math.abs(state.velocity) > minVelocity) {
+      if (useX) setScrollX(container, getScrollX(container) - state.velocityX * weight);
+      if (useY) setScrollY(container, getScrollY(container) - state.velocityY * weight);
+
+      const stillMoving =
+        (useX && Math.abs(state.velocityX) > minVelocity) ||
+        (useY && Math.abs(state.velocityY) > minVelocity);
+
+      if (stillMoving) {
         state.momentumID = requestAnimationFrame(step);
       }
     }
@@ -27,22 +34,36 @@ export function createPanningController(container, state) {
 
   function onPointerDown(e) {
     state.isDragging = true;
+    state.startX = e.clientX;
     state.startY = e.clientY;
-    state.startScrollTop = getScroll(container);
+    state.startScrollLeft = getScrollX(container);
+    state.startScrollTop = getScrollY(container);
+    state.lastX = e.clientX;
     state.lastY = e.clientY;
     state.lastTime = performance.now();
-    container.setPointerCapture(e.pointerId);
+    capturePointer(container, e.pointerId);
     cancelMomentum();
   }
 
   function onPointerMove(e) {
     if (!state.isDragging) return;
-    
-    const dy = e.clientY - state.startY;
-    setScroll(container, state.startScrollTop - dy);
 
     const now = performance.now();
-    state.velocity = (e.clientY - state.lastY) / (now - state.lastTime);
+    const dt = now - state.lastTime;
+
+    if (useX) {
+      const dx = e.clientX - state.startX;
+      setScrollX(container, state.startScrollLeft - dx);
+      state.velocityX = (e.clientX - state.lastX) / dt;
+    }
+
+    if (useY) {
+      const dy = e.clientY - state.startY;
+      setScrollY(container, state.startScrollTop - dy);
+      state.velocityY = (e.clientY - state.lastY) / dt;
+    }
+
+    state.lastX = e.clientX;
     state.lastY = e.clientY;
     state.lastTime = now;
   }
@@ -58,3 +79,4 @@ export function createPanningController(container, state) {
     onPointerUp
   };
 }
+
