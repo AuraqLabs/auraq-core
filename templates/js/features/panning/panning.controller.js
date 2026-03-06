@@ -41,7 +41,12 @@ export function createPanningController(container, state, axis = 'xy') {
     state.lastX = e.clientX;
     state.lastY = e.clientY;
     state.lastTime = performance.now();
-    capturePointer(container, e.pointerId);
+    
+    const innerPanning = e.target.closest('.panningContainer');
+    if (!innerPanning || innerPanning === container) {
+      capturePointer(container, e.pointerId);
+    }
+    
     cancelMomentum();
   }
 

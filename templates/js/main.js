@@ -1,5 +1,6 @@
 import { initPanning } from './features/panning/panning.init.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  initPanning('.panningContainer');
+  initPanning('#panningRoot', { axis: 'y' });
+  initPanning('.panningCards', { axis: 'x' });
 });

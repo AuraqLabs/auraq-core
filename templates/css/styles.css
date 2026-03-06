@@ -206,6 +206,20 @@ nav a:hover{
   overflow-x: hidden;
 }
 
+.panningCards {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  align-items: stretch;
+  overflow-y: hidden;
+}
+
+.panningCards .card {
+  flex-shrink: 0;
+  width: 400px;
+}
+
 .panningContainer {
   background-color: transparent;
   border: 1px solid red;

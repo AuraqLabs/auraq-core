@@ -9,7 +9,7 @@ export function initPanning(containerClass, { axis = 'xy' } = {}) {
 
   containers.forEach(container => {
     const state = createPanningState();
-    const controller = createPanningController(container, state, axis);
+    const controller = createPanningController(container, state, axis, containerClass);
 
     bind(container, 'pointerdown', controller.onPointerDown);
     bind(container, 'pointermove', controller.onPointerMove);
