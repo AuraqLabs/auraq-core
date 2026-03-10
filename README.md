@@ -27,7 +27,7 @@ Auraq provides a clean, reusable foundation for static web projects with the fol
 - Fully modular architecture — each feature is an independently importable module
 - Consistent UI/UX behavior across multiple consumer sites
 - Lightweight, ES6-native JavaScript with no bundler required
-- Deployed via Cloudflare Pages, served from `cdn.kinu3d.com`
+- Deployed via Cloudflare Pages, served from `cdn.auraq.org`
 - `templates/` serves as a one-time boilerplate — it does not update when Auraq modules change
 
 ---
@@ -47,15 +47,14 @@ Auraq provides a clean, reusable foundation for static web projects with the fol
 ```
 Auraq/
 ├─ modules/                        # Shared reusable modules
-│   ├─ panning/
-│   │   ├─ panning.init.js         # Composition root - Discovery & Wiring
-│   │   ├─ panning.controller.js   # Pointer Event Logic and Engine
-│   │   ├─ panning.dom.js          # DOM reads/writes and Pointer Capture
-│   │   ├─ panning.state.js        # State Factory
-│   │   └─ API.md
-│   └─ utils/
-│       └─ dom.js                  # Shared DOM Helpers ($, $$)
+│   └─ panning/
+│       ├─ panning.init.js         # Composition root - Discovery & Wiring
+│       ├─ panning.controller.js   # Pointer Event Logic and Engine
+│       ├─ panning.dom.js          # DOM reads/writes and Pointer Capture
+│       ├─ panning.state.js        # State Factory
+│       └─ API.md
 ├─ templates/                      # One-time Boilerplate
+│   ├─ assets/
 │   ├─ index.html
 │   ├─ css/
 │   │   └─ styles.css
@@ -64,6 +63,8 @@ Auraq/
 ├─ API.md                          # Global API overview and module index
 ├─ CONTRIBUTING.md
 ├─ CODE_OF_CONDUCT.md
+├─ further-reading/
+│   └─ resources.md
 └─ README.md
 ```
 
@@ -102,7 +103,7 @@ Add `data-panning-axis` to any scrollable container in your HTML and call `initP
 ```
 
 ```javascript
-import { initPanning } from 'https://cdn.kinu3d.com/modules/panning/panning.init.js';
+import { initPanning } from 'https://cdn.auraq.org/modules/panning/panning.init.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initPanning();
@@ -121,11 +122,11 @@ Auraq uses **Cloudflare Pages branch deployments** for versioning:
 
 | Branch  | URL                          | Purpose                        |
 |---------|------------------------------|--------------------------------|
-| `main`  | `cdn.kinu3d.com`             | Latest stable release          |
-| `v1`    | `v1.auraq.pages.dev`         | Frozen v1 release              |
-| `dev`   | `dev.auraq.pages.dev`        | Work in progress — do not import |
+| `main`  | `cdn.auraq.org`              | Latest stable release          |
+| `v1`    | `v1.auraq.org`               | Frozen v1 release              |
+| `dev`   | `dev.auraq.org`              | WIP — do not import            |
 
-Version branches are **write-once** — once cut from a stable `main`, they are never committed to again. Breaking changes to `main` propagate immediately to any site importing from `cdn.kinu3d.com`.
+Version branches are **write-once** — once cut from a stable `main`, they are never committed to again. Breaking changes to `main` propagate immediately to any site importing from `cdn.auraq.org`.
 
 ---
 
