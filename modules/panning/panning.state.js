@@ -1,3 +1,5 @@
+// panning.init.state
+
 export function createPanningState() {
   return {
     isPanning: false,

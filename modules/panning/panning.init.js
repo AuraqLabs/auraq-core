@@ -1,3 +1,5 @@
+// panning.init.js
+
 import { createPanningState } from './panning.state.js';
 import { createPanningController } from './panning.controller.js';
 import { bind, getPanningContainers, getAxis } from './panning.dom.js';

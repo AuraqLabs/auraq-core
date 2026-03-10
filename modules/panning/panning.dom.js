@@ -1,3 +1,5 @@
+// panning.dom.js
+
 export function getPanningContainers() {
   return document.querySelectorAll('[data-panning-axis]');
 }
