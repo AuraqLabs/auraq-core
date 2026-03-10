@@ -13,3 +13,5 @@ Resources and articles that inform the architecture and philosophy of Auraq Core
 ## Tooling & Infrastructure
 
 - [esm.sh](https://esm.sh/) — CDN that serves npm packages as native ES modules
+
+- [JavaScript Module Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
