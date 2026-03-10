@@ -1,3 +1,5 @@
+// panning.controller.js
+
 import { setScrollX, setScrollY, getScrollX, getScrollY, capturePointer } from "./panning.dom.js";
 
 export function createPanningController(container, state, axis = 'xy', nestedContainerSelector = '[data-panning-axis]') {
