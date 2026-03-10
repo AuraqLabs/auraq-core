@@ -71,19 +71,19 @@ Auraq/
 
 ## Installation
 
-Auraq modules are served from `cdn.kinu3d.com`. Import them directly in your JavaScript — no cloning, no package manager.
+Auraq modules are served from `cdn.auraq.org`. Import them directly in your JavaScript — no cloning, no package manager.
 
 ```javascript
-import { initPanning } from 'https://cdn.kinu3d.com/modules/panning/panning.init.js';
+import { initPanning } from 'https://cdn.auraq.org/modules/panning/panning.init.js';
 ```
 
 To pin to a stable release instead of `main`, use a version branch URL:
 
 ```javascript
-import { initPanning } from 'https://v1.auraq.pages.dev/modules/panning/panning.init.js';
+import { initPanning } from 'https://v1.auraq.org/modules/panning/panning.init.js';
 ```
 
-> **Note:** Imports from `cdn.kinu3d.com` (the `main` branch) will always reflect the latest release. Use a version branch URL for production sites where stability matters.
+> **Note:** Imports from `cdn.auraq.org` (the `main` branch) will always reflect the latest release. Use a version branch URL for production sites where stability matters.
 
 ---
 
