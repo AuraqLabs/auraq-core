@@ -13,7 +13,7 @@
  *   <canvas class="cobe" style="width: 500px; height: 500px" width="1000" height="1000"></canvas>
  */
 
-import createGlobe from './create.js';
+import createGlobe from './cobe.create.js';
 
 const MOBILE_BREAKPOINT = 800;
 
