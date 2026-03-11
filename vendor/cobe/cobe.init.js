@@ -26,7 +26,7 @@ const MOBILE_BREAKPOINT = 800;
  * @returns {object|null} The Phenomenon instance, or null if skipped.
  */
 export function initGlobe() {
-  const canvas = document.querySelectorAll('cobe');
+  const canvas = document.querySelectorAll('.cobe');
 
   if (!canvas) {
     console.warn('initGlobe: no #cobe canvas found, skipping');
