@@ -25,7 +25,15 @@ const MOBILE_BREAKPOINT = 800;
  *
  * @returns {object|null} The Phenomenon instance, or null if skipped.
  */
-export function initGlobe() {
+export function initGlobe({
+    width = 1000,
+    height = 1000,
+    brightness = 0.6,
+    themeColor,
+    markers = [
+      { location: [33.670682, 72.957342], size: 0.03 }
+    ],
+} = {}) {
   const canvases = document.querySelectorAll('.cobe');
 
   if (!canvases.length) {
@@ -37,30 +45,29 @@ export function initGlobe() {
     canvases.forEach(canvas.style.display = 'none');
     return null;
   }
-
+  
+  const color = themeColor ?? [0.08, 0.61, 0.28];
+  const glow  = color.map(c => c * 0.6);
 
   canvases.forEach(canvas => {
   let phi = 2;
 
     const globe = createGlobe(canvas, {
       devicePixelRatio: 2,
-      width:  1000,
-      height: 1000,
+      width:  width,
+      height: height,,
       phi:    0,
       theta:  0.4,
       dark:   1,
       diffuse: 1.2,
       scale:  1,
       mapSamples:    24000,
-      mapBrightness: 0.6,
-      baseColor:   [0, 1, 0],
+      mapBrightness: brightness,
+      baseColor:   color,
       markerColor: [1, 1, 1],
-      glowColor:   [0, 0.6, 0],
+      glowColor:   glow,
       offset:  [0, 0],
-      markers: [
-        { location: [33.670682, 72.957342], size: 0.03 },
-        { location: [6.1, 100.2], size: 0.03 },
-      ],
+      markers: markers,
       onRender: (state) => {
         state.phi = phi;
         phi += 0.006;
