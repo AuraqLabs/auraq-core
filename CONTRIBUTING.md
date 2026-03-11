@@ -1,5 +1,5 @@
 ````markdown
-# Contributing to [Your Project Name]
+# Contributing to Auraq Core
 
 Thank you for your interest in contributing! This guide outlines how to organize, document, and extend the codebase efficiently so that modularity does not compromise discoverability and maintainability.
 
@@ -10,12 +10,10 @@ Thank you for your interest in contributing! This guide outlines how to organize
 1. **Keep modules focused:** Each module should ideally export **3–5 functions**.  
    - If a module grows beyond this, split it into smaller, logically coherent modules.
 
-2. **Use consistent naming:** Prefix function names by module or type for clarity.  
+2. **Use consistent naming:** Prefix/suffix function names by module or type for clarity.  
    Example:
 ```javascript
-   dragScroll_init()
-   wheelScroll_init()
-   navScroll_scrollToModal()
+   initPanning()
 ```
 
 3. **Keep functions short:** Aim for functions to perform **a single responsibility**. This makes modules easier to understand, test, and reuse.
@@ -32,10 +30,10 @@ Example:
 
 ```javascript
 /**
- * dragScroll.js
+ * panning.init.js
  * Exports:
- *   - initDragScroll(container: HTMLElement): void
- * Handles drag + momentum scrolling for vertical containers.
+ *   - initPanning(): void
+ * Handles drag + momentum scrolling for div with 'data-panning-axis="xy"' attributes.
  */
 ```
 
@@ -47,13 +45,12 @@ Example:
 
 ```javascript
 /**
- * initDragScroll(container)
- * Initializes drag and momentum scrolling on the given container.
- *
- * @param {HTMLElement} container - The scrollable container element.
- * @returns {void}
+ * initPanning()
+ * Queries all divs with 'data-panning-axis="xy"' attribute
+ * Initializes drag and momentum scrolling on the given divs.
+ * Returns void
  */
-function initDragScroll(container) {
+function initPanning() {
     ...
 }
 ```
@@ -62,7 +59,7 @@ function initDragScroll(container) {
 
 ## 3. API Reference File
 
-Maintain a single **API reference file** (`API.md`) at the root of the `js/` directory.
+Maintain a single **API reference file** (`API.md`) at the repo root.
 
 * This file should list **all modules**, their **exported functions**, **parameters**, **return values**, and **example usage**.
 * Update this file **whenever you add, remove, or modify a function**.
@@ -72,28 +69,33 @@ Example:
 ````markdown
 # JS Modules API
 
-## dragScroll.js
-- `initDragScroll(container: HTMLElement): void`
-  - Initializes drag + momentum scroll on the container
+## panning.init.js
+- `initPanning(): void`
+  - Queries DOM for divs with `data-panning-axis=""` attributes
+  - Initializes drag + momentum scroll on the panning divs
   - Usage:
-    ```javascript
-    const modal = document.getElementById("modalContainer");
-    initDragScroll(modal);
+    ```html
+    <div data-panning-axis="xy">
     ```
-
-## wheelScroll.js
-- `initWheelScroll(container: HTMLElement, options?: {velocityMultiplier?: number}): void`
-  - Adds normalized wheel scrolling to container
+    ```javascript
+    import { initPanning } from 'https://cdn.auraq.org/modules/panning/panning.init.js';
+    initPanning();
+    ```
 ````
+
+Another file exists under each module folder.
+
+* This file should list all the features of the module.
+* Update this file whenever you add, remove or modify a function from corresponding module
 
 ---
 
-## 4. Navigation and Discoverability
+## 4. Navigation and Discoverability (for vim users)
 
 1. **Use `ctags` for fast navigation in Vim:**
 
    ```bash
-   ctags -R js/
+   ctags -R .
    ```
 
    * Jump to function definitions using:
@@ -105,10 +107,10 @@ Example:
 2. **Vim search patterns:** Use consistent function prefixes for quick searches:
 
    ```vim
-   :vimgrep /scrollToModal/ **/*.js
+   :vimgrep /initPanning/ **/*.js
    ```
 
-3. **Avoid scattering logic unnecessarily:** Keep related modules logically grouped in folders (`js/dragScroll.js`, `js/wheelScroll.js`, etc.).
+3. **Avoid scattering logic unnecessarily:** Keep related modules logically grouped in folders (`panning/panning.init.js`, `panning/panning.dom.js`, etc).
 
 ---
 
@@ -119,6 +121,7 @@ Example:
 
    * Add it to the correct module
    * Update the **module header comments**
+   * Update the module's API.md
    * Update **API.md**
 3. Test your changes in isolation before integrating with other modules.
 
@@ -135,39 +138,36 @@ Example:
 ## 7. File & Folder Structure
 
 ### This Repository
-shabaka/
+auraq-core/
 ├─ modules/     # Reusable modules (drag-scroll, navigation, etc.)
-│   ├─ dragScroll/
-│   │   ├─ vertical.js
-│   │   └─ horizontal.js
-│   ├─ carousel/
-│   │   └─ carousel.js
-│   ├─ nav/
-│   │   └─ nav.js
-│   └─ utils/
-│       └─ helpers.js
+│   ├─ panning/
+│   │   ├─ API.md
+│   │   ├─ panning.controller.js
+│   │   ├─ panning.dom.js
+│   │   ├─ panning.init.js
+│   │   └─ panning.state.js
+│   └─ utils/  # Reserved for future shared utilities
+├─ vendor/     # Third Party Modules (locally built)
+│   └─ cobe/
+│       ├─ cobe.create.js
+│       ├─ cobe.init.js
+│       ├─ cobe.phenomenon.js
+│       ├─ cobe.shader.js
+│       └─ cobe.texture.js
 ├─ templates/   # Base HTML/CSS/JS template for any new portfolio site
+│   ├─ assets/
 │   ├─ index.html
-│   ├─ styles.css
-│   └─ main.js
+│   ├─ css/
+│   │   └─styles.css
+│   └─ js/
+│       └─main.js
 ├─ API.md
+├─ CODE_OF_CONDUCT.md
+├─ CONTRIBUTING.md
+├─ LICENSE
+├─ further-reading/
+│   └─ resources.md
 └─ README.md
-
-### Child repositories (not submodules)
-shabaka-kinu-cyber/
-├─ index.html
-├─ css/
-│   └─ styles.css
-├─ js/
-│   ├─ main.js  # Site-specific logic
-│   └─ modules/ # Imported from Shabaka main repo (via submodule or copy)
-├─ assets/
-│   ├─ icons/
-│   ├─ images/
-│   └─ fonts/
-├─ API.md
-├─ README.md
-└─ .gitmodules  # If using Git submodules to pull Shabaka modules
 
 ---
 
@@ -184,5 +184,4 @@ shabaka-kinu-cyber/
 * **Document everything** (module headers, function docs, API.md)
 * **Use consistent names** for discoverability
 * **Keep modules small and focused**
-* **Use Vim-friendly navigation** with ctags and search patterns
 * **Update documentation with every change**
