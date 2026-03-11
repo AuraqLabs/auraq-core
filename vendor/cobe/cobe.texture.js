@@ -1,5 +1,5 @@
 /**
- * texture.js
+ * cobe.texture.js
  * World map texture for COBE, encoded as a base64 PNG data URI.
  *
  * Original map asset: https://de.wikipedia.org/wiki/Datei:World_map_blank_without_borders.svg

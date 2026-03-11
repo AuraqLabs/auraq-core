@@ -1,5 +1,5 @@
 /**
- * init.js
+ * cobe.init.js
  * Composition root for COBE on Kinu sites.
  *
  * Discovers the #cobe canvas, guards against mobile (where WebGL dot
@@ -42,7 +42,7 @@ export function initGlobe({
   }
 
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
-    canvases.forEach(canvas.style.display = 'none');
+    canvases.forEach(canvas => canvas.style.display = 'none');
     return null;
   }
   

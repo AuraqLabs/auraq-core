@@ -1,5 +1,5 @@
 /**
- * phenomenon.js
+ * cobe.phenomenon.js
  * A fast 2kB low-level WebGL API.
  *
  * Original: https://github.com/vaneenige/phenomenon
