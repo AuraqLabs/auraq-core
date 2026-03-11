@@ -1,5 +1,5 @@
 /**
- * index.js
+ * cobe.create.js
  * COBE — 5kB WebGL globe.
  *
  * Original: https://github.com/shuding/cobe

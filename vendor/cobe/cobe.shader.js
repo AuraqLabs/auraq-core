@@ -1,5 +1,5 @@
 /**
- * shader.js
+ * cobe.shader.js
  * Pre-compiled GLSL shader source and uniform name exports for COBE.
  *
  * Generated from shader.frag using glslx.
