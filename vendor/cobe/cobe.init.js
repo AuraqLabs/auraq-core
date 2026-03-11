@@ -66,7 +66,7 @@ export function initGlobe() {
         phi += 0.006;
       },
     });
-  }
+  });
 
   return globe;
 }
