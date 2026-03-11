@@ -55,7 +55,7 @@ export function initGlobe({
     const globe = createGlobe(canvas, {
       devicePixelRatio: 2,
       width:  width,
-      height: height,,
+      height: height,
       phi:    0,
       theta:  0.4,
       dark:   1,
