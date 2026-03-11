@@ -67,6 +67,4 @@ export function initGlobe() {
       },
     });
   });
-
-  return globe;
 }
