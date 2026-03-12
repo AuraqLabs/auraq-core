@@ -4,8 +4,15 @@
 Thank you for your interest in contributing! This guide outlines how to organize, document, and extend the codebase efficiently so that modularity does not compromise discoverability and maintainability.
 
 ---
+## 1. Repository Canonicality
 
-## 1. General Principles
+The canonical source of truth for this repository is GitHub:
+`https://github.com/AuraqLabs/auraq-core`
+
+Two mirrors are maintained at `https://kinu.tngl.sh/auraq-core` and `https://sr.ht/kinucyber/auraq-core" and are kept in sync automatically.
+Do not push directly to the mirror — all contributions should target the GitHub remote.
+
+## 2. General Principles
 
 1. **Keep modules focused:** Each module should ideally export **3–5 functions**.  
    - If a module grows beyond this, split it into smaller, logically coherent modules.
@@ -20,7 +27,7 @@ Thank you for your interest in contributing! This guide outlines how to organize
 
 ---
 
-## 2. Module Documentation
+## 3. Module Documentation
 
 ### **Header Comments**
 
@@ -57,7 +64,7 @@ function initPanning() {
 
 ---
 
-## 3. API Reference File
+## 4. API Reference File
 
 Maintain a single **API reference file** (`API.md`) at the repo root.
 
@@ -90,7 +97,7 @@ Another file exists under each module folder.
 
 ---
 
-## 4. Navigation and Discoverability (for vim users)
+## 5. Navigation and Discoverability (for vim users)
 
 1. **Use `ctags` for fast navigation in Vim:**
 
@@ -114,7 +121,7 @@ Another file exists under each module folder.
 
 ---
 
-## 5. Adding Features
+## 6. Adding Features
 
 1. Before adding a new feature, **review the API.md file** to see if an existing function can be extended instead of creating a new one.
 2. If a new function is required:
@@ -127,7 +134,7 @@ Another file exists under each module folder.
 
 ---
 
-## 6. Code Style
+## 7. Code Style
 
 * Prefer **ES6+ syntax**: `const`, `let`, arrow functions, `import/export` modules.
 * Keep functions readable and properly indented.
@@ -135,7 +142,7 @@ Another file exists under each module folder.
 
 ---
 
-## 7. File & Folder Structure
+## 8. File & Folder Structure
 
 ### This Repository
 auraq-core/
@@ -171,7 +178,7 @@ auraq-core/
 
 ---
 
-## 8. Testing
+## 9. Testing
 
 * Test **each module independently** before integrating with other modules.
 * Verify **cross-browser behavior**, especially for scroll/drag interactions (Chrome, Firefox, Safari).
@@ -179,9 +186,13 @@ auraq-core/
 
 ---
 
-## 9. Summary
+## 10. Summary
 
 * **Document everything** (module headers, function docs, API.md)
 * **Use consistent names** for discoverability
 * **Keep modules small and focused**
 * **Update documentation with every change**
+* **GitHub repository is the canonical repository**
+
+For any inquiries: **admin@auraq.org**
+© 2026 Auraq Project 
