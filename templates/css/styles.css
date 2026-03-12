@@ -212,7 +212,8 @@ nav a:hover{
   height: 100%;
   flex-direction: row;
   align-items: stretch;
-  overflow-y: hidden;
+  overflow-x: auto;
+  overflow-y: clip;
 }
 
 .cardStrip .card {
@@ -227,7 +228,6 @@ nav a:hover{
   box-sizing: border-box;
   scroll-behavior: auto;
   touch-action: none;
-  overscroll-behavior: contain;
   cursor: default;
 
   /* hide the scrollbar */
