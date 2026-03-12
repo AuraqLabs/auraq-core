@@ -16,7 +16,8 @@ Modules are served via CDN and imported directly by consumer sites — no build 
 6. [Versioning](#versioning)
 7. [API Documentation](#api-documentation)
 8. [Contribution Guidelines](#contribution-guidelines)
-9. [License](#license)
+9. [Contact](#contact)
+10.[License](#license)
 
 ---
 
