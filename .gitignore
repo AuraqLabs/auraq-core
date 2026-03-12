@@ -1,4 +1,5 @@
 ApplyingLicense*
 serve.py
+.wrangler
 *.swp
 .aider*
