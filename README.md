@@ -150,6 +150,10 @@ Version branches are **write-once** — once cut from a stable `main`, they are 
 
 ---
 
+## Contact
+
+For any inquiries: contact@auraq.org
+
 ## License
 
 GPL-3.0 License © 2026 Auraq Project
