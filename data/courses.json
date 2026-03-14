@@ -1,0 +1,87 @@
+{
+  "courses": {
+    "ST1x": {
+      "name":"Automated Software Testing: Unit Testing, Coverage Criteria and Design for Testability",
+      "display":"Software Tesing: Unit Test, Converages & Designs",
+      "description":"Academic course for applied testing - criteria-driven design that finds real bugs systematically",
+      "domain":"Testing",
+      "tags":["Unit Testng","Coverage Criteria","Test Design"],
+      "institution":"DelftX",
+      "year":"2026",
+      "layer":"1",
+      "branch":"Testing",
+      "edgeOverrides":[]
+    },
+    "ST2x": {
+      "name":"Automated Software Testing: Model and State-based Testing",
+      "display":"Model and State-based Testing",
+      "description":"Testing system as behavior models - State transitions and formal specifications as test oracles",
+      "domain":"Testing",
+      "tags":["State Machines", "Model-Based Testing", "Property Testing"],
+      "institution":"DelftX",
+      "year":"2026",
+      "layer":"2",
+      "branch":"Testing",
+      "edgeOverrides":[]
+    },
+    "MALINTRO1.0": {
+      "name":"Malware Analysis and Assembly Language Introduction",
+      "display":"Malware Analysis",
+      "description":"How softare works under the hood - Execution flow, assembly breakdown, code patterns",
+      "domain":"Security",
+      "tags":["x86", "Assembly Language", "Malware Analysis", "Reverse Engineering"],
+      "institution":"IBM",
+      "year":"2026",
+      "layer":"2",
+      "branch":"Security",
+      "edgeOverrides":[]
+    },
+    "CAD101EN": {
+      "name":"Introduction to Web Development with HTML5, CSS3 and Javascript",
+      "display":"Intro to Web Development",
+      "description":"Foundation of web stack - How layout, style and behavior fit together into a browser document",
+      "domain":"Frontend",
+      "tags":["HTML5", "CSS3", "Javascript", "DOM"],
+      "institution":"IBM",
+      "year":"2026",
+      "layer":"2",
+      "branch":"WebDev",
+      "edgeOverrides":[]
+    },
+    "CC0101EN": {
+      "name":"Introduction to Cloud Computing",
+      "display":"Cloud Computing",
+      "description":"The concept modle behind cloud - Service Layers, deployment models and trade-offs",
+      "domain":"Cloud",
+      "tags":["Cloud Architecture", "Deployment Models", "SAAS / PAAS / IAAS"],
+      "institution":"IBM",
+      "year":"2026",
+      "layer":"3",
+      "branch":"WebDev",
+      "edgeOverrides":[]
+    },
+    "CD0131EN": {
+      "name":"Cloud DevOps",
+      "display":"Git and GitHub Basics",
+      "description":"How modern software teams ship - CI/CD pipelines, remote version controlling, iterative delivery and distributed data",
+      "domain":"Cloud",
+      "tags":["DevOps", "NoSql", "Git", "GitHub", "CI/CD", "Version Control"],
+      "institution":"IBM",
+      "year":"2026",
+      "layer":"4",
+      "branch":"",
+      "edgeOverrides":[]
+    },
+    "CAD0210EN": {
+      "name":"Developing Frontend Apps with React",
+      "display":"Frontend Apps with React",
+      "description":"Modern approach to web development - How UIs are structured, composed and made reaction through component-driven design ",
+      "domain":"Frontend",
+      "tags":["Component-Driven Thinking", "React", "UI Composition", "State Management", "JSX"],
+      "institution":"IBM",
+      "year":"2026",
+      "layer":"3",
+      "branch":"WebDev",
+      "edgeOverrides":[]
+  }
+}
