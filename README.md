@@ -16,7 +16,8 @@ Modules are served via CDN and imported directly by consumer sites — no build 
 6. [Versioning](#versioning)
 7. [API Documentation](#api-documentation)
 8. [Contribution Guidelines](#contribution-guidelines)
-9. [License](#license)
+9. [Contact](#contact)
+10.[License](#license)
 
 ---
 
@@ -149,6 +150,10 @@ Version branches are **write-once** — once cut from a stable `main`, they are 
 > See [CONTRIBUTING.md](./CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for detailed guidelines.
 
 ---
+
+## Contact
+
+For any inquiries: contact@auraq.org
 
 ## License
 
