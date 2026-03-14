@@ -38,6 +38,9 @@
 
 :root {
 
+  /* --- Dev --- */
+  --border-pixel: 0px;
+
   /* ── Color ── */
   
   --theme-color: 255, 145, 36; /* Orange theme */
@@ -115,7 +118,7 @@ body, html {
 }
 
 body {
-  border: 1px solid green;
+  border: var(--border-pixel) solid green;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -143,7 +146,7 @@ h5 { font-size: var(--fs-h5); }
 h6 { font-size: var(--fs-h6); }
 
 header, footer {
-  border: 1px solid blue;
+  border: var(--border-pixel) solid blue;
   background-color: rgb(var(--secondary-color));
   display: flex;
   padding: 4px;
@@ -156,7 +159,7 @@ header, footer {
 }
 
 nav {
-  border: 1px solid purple;
+  border: var(--border-pixel) solid purple;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -180,7 +183,7 @@ nav a:hover{
 
 .site-identity {
   font-family: var(--font-display);
-  border: 1px solid purple;
+  border: var(--border-pixel) solid purple;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -223,7 +226,7 @@ nav a:hover{
 
 .scrollContainer {
   background-color: transparent;
-  border: 1px solid red;
+  border: var(--border-pixel) solid red;
   position: relative;
   box-sizing: border-box;
   scroll-behavior: auto;
@@ -236,7 +239,7 @@ nav a:hover{
 
 /* Content Section Styling */
 .content-section {
-  border: 1px solid red;
+  border: var(--border-pixel) solid red;
   background: transparent;
   display: flex;
   flex-wrap: wrap;
@@ -296,7 +299,7 @@ nav a:hover{
 }
 
 .content-section article, .content-section figure {
-  border: 1px solid yellow;
+  border: var(--border-pixel) solid yellow;
   width: 650px;
 }
 .content-section article {
