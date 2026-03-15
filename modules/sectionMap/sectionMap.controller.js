@@ -23,13 +23,10 @@ import {
   getNormalizedPositionFromPointer
 } from './sectionMap.engine.js';
 
+import { createSectionMapState } from './sectionMap.state.js';
+
 export function createSectionMapController(container, sections, bar, ticks, thumb) {
-  let cancelAnimation = null;
-  let isDragging      = false;
-  let hasMoved        = false;
-  let lastPointerX    = 0;
-  let lastPointerT    = 0;
-  let pointerVelX     = 0;
+  const state = createSectionMapState();
   
   // array of ticks' positions
   let tickPositions = measureTickPositions(ticks);
@@ -55,9 +52,9 @@ export function createSectionMapController(container, sections, bar, ticks, thum
   const momentumScroller = createMomentumScroller(container);
 
   function cancelPendingAnimation() {
-    if (cancelAnimation) {
-      cancelAnimation();
-      cancelAnimation = null;
+    if (state.cancelAnimation) {
+      state.cancelAnimation();
+      state.cancelAnimation = null;
     }
   }
 
@@ -72,7 +69,7 @@ export function createSectionMapController(container, sections, bar, ticks, thum
     momentumScroller.cancel();
     cancelPendingAnimation();
     const target = getSectionScrollTarget(sections, normalizedPosition, sectionNorms);
-    cancelAnimation = animateScrollTo(container, target);
+    state.cancelAnimation = animateScrollTo(container, target);
   }
 
   function cancelAll() {
@@ -86,31 +83,31 @@ export function createSectionMapController(container, sections, bar, ticks, thum
   container.addEventListener('pointerdown', cancelAll, { passive: true });
 
   bar.addEventListener('pointerdown', (e) => {
-    isDragging   = true;
-    hasMoved     = false;
-    lastPointerX = e.clientX;
-    lastPointerT = performance.now();
-    pointerVelX  = 0;
+    state.isDragging   = true;
+    state.hasMoved     = false;
+    state.lastPointerX = e.clientX;
+    state.lastPointerT = performance.now();
+    state.pointerVelX  = 0;
     bar.setPointerCapture(e.pointerId);
     e.stopPropagation();
   });
 
   bar.addEventListener('pointermove', (e) => {
-    if (!isDragging) return;
-    hasMoved = true;
+    if (!state.isDragging) return;
+    state.hasMoved = true;
 
     const now = performance.now();
-    const dt  = now - lastPointerT;
-    if (dt > 0) pointerVelX = (e.clientX - lastPointerX) / dt;
-    lastPointerX = e.clientX;
-    lastPointerT = now;
+    const dt  = now - state.lastPointerT;
+    if (dt > 0) state.pointerVelX = (e.clientX - state.lastPointerX) / dt;
+    state.lastPointerX = e.clientX;
+    state.lastPointerT = now;
 
     const normalized = getNormalizedPositionFromPointer(bar, e.clientX, tickPositions, sectionNorms);
     scrollLerp(normalized);
   });
 
   bar.addEventListener('pointerup', (e) => {
-    if (!hasMoved) {
+    if (!state.hasMoved) {
       const normalized = getNormalizedPositionFromPointer(bar, e.clientX, tickPositions, sectionNorms);
       scrollAnimated(normalized);
     } else {
@@ -119,15 +116,15 @@ export function createSectionMapController(container, sections, bar, ticks, thum
       const barWidth   = getBarRect(bar).width;
       const scrollable = getScrollable(container);
       const scale      = scrollable / barWidth * 16;
-      momentumScroller.kick(pointerVelX * scale);
+      momentumScroller.kick(state.pointerVelX * scale);
     }
-    isDragging = false;
-    hasMoved   = false;
+    state.isDragging = false;
+    state.hasMoved   = false;
   });
 
   bar.addEventListener('pointercancel', () => {
     cancelAll();
-    isDragging = false;
+    state.isDragging = false;
     hasMoved   = false;
   });
 }
