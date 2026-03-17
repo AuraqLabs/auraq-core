@@ -30,6 +30,8 @@ A node:click
 
 A node popup is a div with [w] and [h], which opens up when node is pressed. It has the following elements
 - Domain - Course
+- Institute Icon
+- Institute name
 - A close button
 - Name
 - Description
