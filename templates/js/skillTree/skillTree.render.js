@@ -12,18 +12,15 @@
  */
 
 import {
-  setActive(),
-  setNodeDimmed(),
-  setPopupVisible()
+  setActive,
+  setNodeDimmed,
+  setPopupVisible
 } from './skillTree.dom.js';
-
-import {
-  createSkillTreeStates()
-} from './skillTree.state.js';
 
 export function initContainer(container) {
  container.setAttribute('data-panning-axis','xy');
  container.classList.add('skillTreeContainer');
+ injectStyles();
 }
 
 export function createFilters(container, domains) {
@@ -36,7 +33,7 @@ export function createFilters(container, domains) {
     const filterButton = document.createElement('button');
     filterButton.className = 'skillTree-filterButton';
     filterBar.appendChild(filterButton);
-    filter.push(filterButton);
+    filters.push(filterButton);
   }
 
   return { filterBar, filters };
@@ -49,26 +46,61 @@ export function createFilters(container, domains) {
  */
 function createNode(container, nodeData) {
   const node = document.createElement('div');
-  node.className = 'skillTree-node';
+  node.className = `skillTree-node domain-${nodeData.domain}`;
+  node.dataset.id = nodeData.id; //for activation when clicked
+  node.dataset.domain = nodeData.domain; //for filters
+  node.dataset.institute = nodeData.institute; //for filters
+  node.dataset.year = nodeData.year; //for filters
   container.appendChild(node);
 
-  const nodeDomain = createElement('div');
+  const nodeDomain = document.createElement('div');
   nodeDomain.className = 'nodeDomain';
+  nodeDomain.textContent = nodeData.domain;
 
-  const nodeDisplay = createElement('div');
+  const nodeDisplay = document.createElement('div');
   nodeDisplay.className = 'nodeDisplay';
+  nodeDisplay.textContent = nodeData.display;
 
-  const nodeInstitute = createElement('div');
+  const nodeInstitute = document.createElement('div');
   nodeInstitute.className = 'nodeInstitute';
+  nodeInstitute.textContent = nodeData.institute;
 
-  const nodeYear = createElement('div');
+  const nodeYear = document.createElement('div');
   nodeYear.className = 'nodeYear';
+  nodeYear.textContent = nodeData.year;
 
-  return { node };
+  node.appendChild(nodeDomain);
+  node.appendChild(nodeDisplay);
+  node.appendChild(nodeInstitute);
+  node.appendChild(nodeYear);
+
+  return node;
 }
 
 export function createNodes(container, nodesData) {
+  const nodes = [];
   for (const data of nodesData) {
-    
+    const node = createNode(container, data);
+    nodes.push(node);
   }
+
+  return { nodes };
+}
+
+export function createEdges() {
+}
+
+export function createPopups() {
+}
+
+// Rudimentary CSS Configuration
+function injectStyles() {
+  if (document.getElementById('skillTree-styles')) return;
+
+  const style = document.createElement('style');
+  style.id = 'skillTree-styles';
+  style.textContent = `
+
+  `;
+  document.head.appendChild(style);
 }
