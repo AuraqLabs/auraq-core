@@ -47,6 +47,14 @@ Auraq provides a clean, reusable foundation for static web projects with the fol
 
 ```
 Auraq/
+├─ vendor/                        # Shared reusable modules
+│   └─ cobe/
+│       ├─ cobe.init.js         # Composition root - Discovery & Wiring
+│       ├─ cobe.create.js
+│       ├─ cobe.phenomenon.js
+│       ├─ cobe.shader.js
+│       ├─ cobe.texture.js
+│       └─ API.md
 ├─ modules/                        # Shared reusable modules
 │   └─ panning/
 │       ├─ panning.init.js         # Composition root - Discovery & Wiring
