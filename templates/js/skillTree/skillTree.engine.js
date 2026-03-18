@@ -6,6 +6,7 @@
  * Exports:
  *   - computeBranchIndex(courses): array
  *   - computeNodePositions(courses, nodeWidth, nodeHeight, gapX, gapY): array
+ *   - computeEdgePositions(courses, nodeWidth, nodeHeight, gapX, gapY): array
  *   - inferEdges(courses): array
  *   - computePopupSides(nodeX, canvasWidth): String
  */
@@ -14,7 +15,7 @@
  * @param: {Array} courses
  * @returns: {Object}
  */
-function computeBranchIndex (courses) {
+export function computeBranchIndex (courses) {
   const branches = [...new Set(courses.map(c => c.branch))];
   const index = {};
   branches.forEach((branch, i) => index[branch] = i);

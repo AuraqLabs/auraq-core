@@ -17,6 +17,11 @@ import {
   setPopupVisible
 } from './skillTree.dom.js';
 
+import {
+  computeEdgePoints,
+  computePopupSide
+} from './skillTree.engine.js';
+
 export function initContainer(container) {
  container.setAttribute('data-panning-axis','xy');
  container.classList.add('skillTreeContainer');
@@ -77,20 +82,96 @@ function createNode(container, nodeData) {
   return node;
 }
 
-export function createNodes(container, nodesData) {
+export function createNodes(container, nodesData, positions) {
   const nodes = [];
-  for (const data of nodesData) {
-    const node = createNode(container, data);
+  for (const nodeData of nodesData) {
+    const node = createNode(container, nodeData);
+    const pos = positions.find(p => p.id === nodeData.id);
+    if (pos) {
+      node.style.position = 'absolute';
+      node.style.left = `${pos.x}px`;
+      node.style.top = `${pos.y}px`;
+    }
     nodes.push(node);
   }
 
   return { nodes };
 }
 
-export function createEdges() {
+export function createEdge(svgEl, x1, y1, x2, y2) {
+  const midY = (y1 + y2) / 2;
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', `M ${x1},${y1} C ${x1},${midY} ${x2},${midY} ${x2},${y2}`);
+  path.classList.add('skillTree-edge');
+  svgEl.appendChild(path);
+  return path;
 }
 
-export function createPopups() {
+export function createEdges(svgEl, edges, positions, nodeWidth, nodeHeight) {
+  edges.forEach(edge => {
+    const sourcePos = positions.find(p => p.id === edge.fromId);
+    const targetPos = positions.find(p => p.id === edge.toId);
+    if (!sourcePos || !targetPos) return;
+    const { x1, y1, x2, y2 } = computeEdgePoints(sourcePos, targetPos, nodeWidth, nodeHeight);
+    createEdge(svgEl, x1, y1, x2, y2);
+  });
+}
+
+function createPopup(container, nodeData, side) {
+  const popup = document.createElement('div');
+  popup.className = `skillTree-popup popup-${side}`;
+  popup.dataset.forId = nodeData.id;
+
+  const popupDomain   = document.createElement('div');
+  popupDomain.className = 'popup-domain';
+  popupDomain.textContent = `${nodeData.domain} — ${nodeData.display}`;
+
+  const popupName = document.createElement('div');
+  popupName.className = 'popup-name';
+  popupName.textContent = nodeData.name;
+
+  const popupDesc = document.createElement('div');
+  popupDesc.className = 'popup-description';
+  popupDesc.textContent = nodeData.description;
+
+  const popupTags = document.createElement('div');
+  popupTags.className = 'popup-tags';
+  nodeData.tags.forEach(tag => {
+    const span = document.createElement('span');
+    span.textContent = tag;
+    popupTags.appendChild(span);
+  });
+
+  const popupLink = document.createElement('a');
+  popupLink.className = 'popup-link';
+  popupLink.href = nodeData.link;
+  popupLink.target = '_blank';
+  popupLink.textContent = 'View Course';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'popup-close';
+  closeBtn.textContent = '×';
+
+  popup.appendChild(closeBtn);
+  popup.appendChild(popupDomain);
+  popup.appendChild(popupName);
+  popup.appendChild(popupDesc);
+  popup.appendChild(popupTags);
+  popup.appendChild(popupLink);
+
+  container.appendChild(popup);
+  return popup;
+}
+
+export function createPopups(container, courses, positions, canvasWidth) {
+  const popups = [];
+  courses.forEach(nodeData => {
+    const pos = positions.find(p => p.id === nodeData.id);
+    const side = computePopupSide(pos.x, canvasWidth);
+    const popup = createPopup(container, nodeData, side);
+    popups.push(popup);
+  });
+  return { popups };
 }
 
 // Rudimentary CSS Configuration
@@ -100,7 +181,26 @@ function injectStyles() {
   const style = document.createElement('style');
   style.id = 'skillTree-styles';
   style.textContent = `
+    .skillTree-node {
+      border: 4px red solid;
+    }
+    .skillTree-edge {
+      stroke: green;
+      stroke-width: 2px;
+      fill: none;
+    }
+    .skillTree-popup {
+      display: none;
+      border: 4px red solid;
+    }
 
+    .skillTree-popup.visible {
+      display: block;
+    }
+
+    .skillTreeContainer {
+      border: 4px blue solid;
+    }
   `;
   document.head.appendChild(style);
 }

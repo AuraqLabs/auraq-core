@@ -16,7 +16,7 @@
  * @returns: Element
  */
 export function getSkillTreeContainer() {
-  document.querySelectorAll('[data-skill-tree]');
+  return document.querySelector('[data-skill-tree]');
 }
 
 /**
@@ -25,7 +25,7 @@ export function getSkillTreeContainer() {
  * @param {boolean} active
  * @returns: void
  */
-export function setNodeActive(El, active) {
+export function setActive(El, active) {
   El.classList.toggle('active', active);
 }
 
