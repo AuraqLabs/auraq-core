@@ -25,7 +25,12 @@ import {
 export function initContainer(container) {
  container.setAttribute('data-panning-axis','xy');
  container.classList.add('skillTreeContainer');
+ const canvas = document.createElement('div');
+ canvas.id = 'stillTreeCanvas';
+ canvas.style.position = 'relative';
+ container.appendChild(canvas);
  injectStyles();
+ return canvas;
 }
 
 export function createFilters(container, domains) {
@@ -181,12 +186,24 @@ function injectStyles() {
   const style = document.createElement('style');
   style.id = 'skillTree-styles';
   style.textContent = `
+    .skillTreeContainer {
+      border: 4px blue solid;
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: scroll;
+    }
+
     .skillTree-node {
       border: 4px red solid;
+      width: 200px;
+      height: 100px;
+      box-sizing: border-box;
     }
+
     .skillTree-edge {
       stroke: green;
-      stroke-width: 2px;
+      stroke-width: 10px;
       fill: none;
     }
     .skillTree-popup {
@@ -196,10 +213,6 @@ function injectStyles() {
 
     .skillTree-popup.visible {
       display: block;
-    }
-
-    .skillTreeContainer {
-      border: 4px blue solid;
     }
   `;
   document.head.appendChild(style);

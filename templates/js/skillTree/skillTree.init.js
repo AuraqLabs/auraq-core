@@ -16,15 +16,22 @@ export async function initSkillTree() {
   const positions = computeNodePositions(courses, NODE_WIDTH, NODE_HEIGHT, GAP_X, GAP_Y);
   const edges = inferEdges(courses);
 
-  initContainer(container);
+  const canvas = initContainer(container);
 
   const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svgEl.id = 'skillTreeEdges';
-  container.appendChild(svgEl);
+  svgEl.style.position = 'absolute';
+  svgEl.style.top = '0';
+  svgEl.style.left = '0';
+  svgEl.style.width = '100%';
+  svgEl.style.height = '100%';
+  svgEl.style.overflow = 'visible';
+  svgEl.style.pointerEvents = 'none';
+  canvas.appendChild(svgEl);
 
-  createNodes(container, courses, positions);
+  createNodes(canvas, courses, positions);
   createEdges(svgEl, edges, positions, NODE_WIDTH, NODE_HEIGHT);
-  createPopups(container, courses, positions, container.offsetWidth);
+  createPopups(canvas, courses, positions, canvas.offsetWidth);
 }
 
 initSkillTree();
