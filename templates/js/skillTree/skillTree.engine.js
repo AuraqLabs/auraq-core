@@ -33,11 +33,30 @@ export function computeBranchIndex (courses) {
 export function computeNodePositions(courses, nodeWidth, nodeHeight, gapX, gapY) {
   const branchIndex = computeBranchIndex(courses);
 
-  return courses.map(course => ({
-    id: course.id,
-    x: branchIndex[course.branch] * (nodeWidth + gapX),
-    y: (course.layer - 1) * (nodeHeight + gapY)
-  }));
+  // Find max branch width to space sub-columns
+  const groups = {};
+  courses.forEach(c => {
+    const key = `${c.branch}-${c.layer}`;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(c.id);
+  });
+
+  return courses.map(course => {
+    const key = `${course.branch}-${course.layer}`;
+    const group = groups[key];
+    const subIndex = group.indexOf(course.id);
+    const subTotal = group.length;
+
+    // Center the sub-group within the branch column
+    const branchX = branchIndex[course.branch] * (nodeWidth + gapX) * 2;
+    const subOffset = (subIndex - (subTotal - 1) / 2) * (nodeWidth + gapX);
+
+    return {
+      id: course.id,
+      x: branchX + subOffset,
+      y: (course.layer - 1) * (nodeHeight + gapY)
+    };
+  });
 }
 
 /**
