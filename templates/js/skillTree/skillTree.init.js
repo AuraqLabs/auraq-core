@@ -1,9 +1,11 @@
+// skillTree.init.js
+
 import { getSkillTreeContainer } from './skillTree.dom.js';
 import { computeNodePositions, inferEdges } from './skillTree.engine.js';
 import { initContainer, createNodes, createEdges, createPopups } from './skillTree.render.js';
 
 export async function initSkillTree() {
-  const response = await fetch('http://localhost:7000/courses.json');
+  const response = await fetch('http://192.168.0.218:7000/courses.json');
   const data = await response.json();
   const courses = data.courses;
 
@@ -31,7 +33,7 @@ export async function initSkillTree() {
 
   createNodes(canvas, courses, positions);
   createEdges(svgEl, edges, positions, NODE_WIDTH, NODE_HEIGHT);
-  createPopups(canvas, courses, positions, canvas.offsetWidth);
+  createPopups(canvas, courses, positions, container.offsetWidth);
 }
 
 initSkillTree();

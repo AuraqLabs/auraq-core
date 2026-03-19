@@ -15,7 +15,7 @@
  * @param: {Array} courses
  * @returns: {Object}
  */
-export function computeBranchIndex (courses) {
+function computeBranchIndex (courses) {
   const branches = [...new Set(courses.map(c => c.branch))];
   const index = {};
   branches.forEach((branch, i) => index[branch] = i);
