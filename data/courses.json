@@ -29,20 +29,6 @@
       "edgeOverrides": []
     },
     {
-      "id": "MALINTRO1.0",
-      "name": "Malware Analysis and Assembly Language Introduction",
-      "display": "Malware Analysis",
-      "description": "How software works under the hood - execution flow, assembly breakdown, code patterns",
-      "link": "https://www.edx.org/learn/computer-programming/ibm-malware-analysis-and-assembly-language-introduction",
-      "domain": "Security",
-      "tags": ["x86", "Assembly Language", "Malware Analysis", "Reverse Engineering"],
-      "institute": "IBM",
-      "year": 2026,
-      "layer": 2,
-      "branch": "Security",
-      "edgeOverrides": []
-    },
-    {
       "id": "CAD101EN",
       "name": "Introduction to Web Development with HTML5, CSS3 and Javascript",
       "display": "Intro to Web Development",
@@ -96,6 +82,34 @@
       "year": 2026,
       "layer": 4,
       "branch": "WebDev",
+      "edgeOverrides": []
+    },
+    {
+      "id": "CD0231EN",
+      "name": "Cloud DevOps",
+      "display": "Git and GitHub Basics",
+      "description": "How modern software teams ship - CI/CD pipelines, remote version control, iterative delivery and distributed workflows",
+      "link": "https://www.edx.org/learn/github/ibm-git-and-github-basics",
+      "domain": "Cloud",
+      "tags": ["DevOps", "NoSQL", "Git", "GitHub", "CI/CD", "Version Control"],
+      "institute": "IBM",
+      "year": 2026,
+      "layer": 4,
+      "branch": "WebDev",
+      "edgeOverrides": []
+    },
+    {
+      "id": "MALINTRO1.0",
+      "name": "Malware Analysis and Assembly Language Introduction",
+      "display": "Malware Analysis",
+      "description": "How software works under the hood - execution flow, assembly breakdown, code patterns",
+      "link": "https://www.edx.org/learn/computer-programming/ibm-malware-analysis-and-assembly-language-introduction",
+      "domain": "Security",
+      "tags": ["x86", "Assembly Language", "Malware Analysis", "Reverse Engineering"],
+      "institute": "IBM",
+      "year": 2026,
+      "layer": 2,
+      "branch": "Security",
       "edgeOverrides": []
     }
   ]
