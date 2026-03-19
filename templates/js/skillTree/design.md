@@ -1,3 +1,5 @@
+// design.md
+
 Uses panning module as data-panning-axis="xy" to enable movement in both directions
 
 Filter: Selecting a particular domain or institute will disable (dim) all nodes that are not of the selected filter
