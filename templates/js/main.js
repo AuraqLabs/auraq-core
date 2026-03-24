@@ -4,8 +4,8 @@ import { initSectionMap } from 'https://dev.auraq.org/modules/sectionMap/section
 import { initSkillTree } from './skillTree/skillTree.init.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  initPanning();
   initGlobe();
   initSectionMap();
   initSkillTree();
+  initPanning();
 });
