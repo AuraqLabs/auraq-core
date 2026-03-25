@@ -1,8 +1,9 @@
-// panning.state.js
+// panning.init.state
 
 export function createPanningState() {
   return {
     isPanning: false,
+    isPointerDown: false,
     startX: 0,
     startY: 0,
     startScrollX: 0,
