@@ -1,8 +1,10 @@
 // skillTree.init.js
 
-import { getSkillTreeContainer } from './skillTree.dom.js';
-import { computeNodePositions, inferEdges } from './skillTree.engine.js';
-import { initContainer, createNodes, createEdges, createPopups } from './skillTree.render.js';
+import { getSkillTreeContainer, setCanvasDimensions } from './skillTree.dom.js';
+import { computeNodePositions, inferEdges, computeCanvasDimensions } from './skillTree.engine.js';
+import { initContainer, createFilters, createNodes, createEdges, createPopups } from './skillTree.render.js';
+import { createSkillTreeState } from './skillTree.state.js';
+import { createSkillTreeController } from './skillTree.controller.js';
 
 export async function initSkillTree() {
   try {
@@ -18,33 +20,25 @@ export async function initSkillTree() {
     const container = getSkillTreeContainer();
     const positions = computeNodePositions(courses, NODE_WIDTH, NODE_HEIGHT, GAP_X, GAP_Y);
     const edges = inferEdges(courses);
+    const state = createSkillTreeState();
 
     const canvas = initContainer(container);
+    const { canvasWidth, canvasHeight } = computeCanvasDimensions(positions, NODE_WIDTH, NODE_HEIGHT, GAP_X, GAP_Y);
+    setCanvasDimensions(canvas, canvasWidth, canvasHeight);
+    state.canvasWidth = canvasWidth;
 
-    // Set canvas dimensions before appending anything
-    const canvasWidth  = Math.max(...positions.map(p => p.x)) + NODE_WIDTH  + GAP_X * 2;
-    const canvasHeight = Math.max(...positions.map(p => p.y)) + NODE_HEIGHT + GAP_Y * 2;
-    canvas.style.width  = `${canvasWidth}px`;
-    canvas.style.height = `${canvasHeight}px`;
+    const domains = [...new Set(courses.map(c => c.domain))];
+    const { filters } = createFilters(container, domains);
 
-    const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svgEl.id = 'skillTreeEdges';
-    svgEl.style.position = 'absolute';
-    svgEl.style.top = '0';
-    svgEl.style.left = '0';
-    svgEl.style.width = '100%';
-    svgEl.style.height = '100%';
-    svgEl.style.overflow = 'visible';
-    svgEl.style.pointerEvents = 'none';
-    canvas.appendChild(svgEl);
+    const { nodes } = createNodes(canvas, courses, positions);
 
-    createNodes(canvas, courses, positions);
-    createEdges(svgEl, edges, positions, NODE_WIDTH, NODE_HEIGHT);
-    createPopups(canvas, courses, positions, canvasWidth);
+    createEdges(canvas, edges, positions, NODE_WIDTH, NODE_HEIGHT);
+    const { popups } = createPopups(canvas, courses, positions, canvasWidth);
+
+    const controller = createSkillTreeController(state, nodes, popups, filters);
+    controller.bindAll();
 
   } catch (err) {
     console.warn('initSkillTree: failed to initialize', err);
   }
 }
-
-initSkillTree();

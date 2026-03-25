@@ -6,6 +6,7 @@
  * Exports:
  *   getSkillTreeContainer(): Element | null
  *   setActive(El, active): void,
+ *   setCanvasDimensions(canvasEl, canvasWidth, canvasHeight): void
  *   setNodeDimmed(nodeEl, dimmed)
  *   setPopupVisible(popupEl, visible): void,
  *   setPopupPosition(popupEl, x, y, side): void,
@@ -30,6 +31,21 @@ export function setActive(El, active) {
 }
 
 /**
+ * @param {Element} canvasEl
+ * @param {integer} canvasWidth
+ * @param {integer} canvasHeight
+ */
+export function setCanvasDimensions(canvasEl, canvasWidth, canvasHeight) {
+  canvasEl.style.width  = canvasWidth;
+  canvasEl.style.height = canvasHeight;
+}
+
+export function setNodePosition(nodeEl, x, y) {
+  nodeEl.style.left = `${x}px`;
+  nodeEl.style.top = `${y}px`;
+}
+
+/**
  * @param {Element} nodeEl
  * @param {boolean} dimmed
  * @returns: void
@@ -47,7 +63,10 @@ export function setPopupVisible(popupEl, visible) {
   popupEl.classList.toggle('visible', visible);
 }
 
-export function setPopupPosition(popupEl, x, y, side) {
+
+export function setPopupPosition(popupEl, left, top) {
+    popupEl.style.left = left;
+    popupEl.style.top = top;
 }
 
 export function setPopupArrowPosition(popupArrEl, x, y, side) {
