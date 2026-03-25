@@ -13,6 +13,7 @@
 
 import {
   setActive,
+  setNodePosition,
   setNodeDimmed,
   setPopupVisible
 } from './skillTree.dom.js';
@@ -48,6 +49,9 @@ export function createFilters(container, domains) {
   for (let i = 0; i < domains.length; i++) {
     const filterButton = document.createElement('button');
     filterButton.className = 'skillTree-filterButton';
+    filterButton.dataset.domain = domains[i];
+    filterButton.textContent = domains[i];
+    filterButton.style.setProperty('--nc', DOMAIN_COLORS[domains[i]] ?? '#FF9124');
     filterBar.appendChild(filterButton);
     filters.push(filterButton);
   }
@@ -108,18 +112,27 @@ export function createNodes(container, nodesData, positions) {
   for (const nodeData of nodesData) {
     const node = createNode(container, nodeData);
     const pos = positions.find(p => p.id === nodeData.id);
-    if (pos) {
-      node.style.position = 'absolute';
-      node.style.left = `${pos.x}px`;
-      node.style.top = `${pos.y}px`;
-    }
+    if (pos) { setNodePosition(node, pos.x, pos.y)}
     nodes.push(node);
   }
 
   return { nodes };
 }
 
-export function createEdge(svgEl, x1, y1, x2, y2) {
+export function createEdge(canvas, x1, y1, x2, y2) {
+  
+  const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svgEl.id = 'skillTreeEdges';
+  svgEl.style.position = 'absolute';
+  svgEl.style.top = '0';
+  svgEl.style.left = '0';
+  svgEl.style.width = '100%';
+  svgEl.style.height = '100%';
+  svgEl.style.overflow = 'visible';
+  svgEl.style.pointerEvents = 'none';
+  svgEl.style.zIndex = '0';
+  canvas.appendChild(svgEl);
+
   const midY = (y1 + y2) / 2;
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
   path.setAttribute('d', `M ${x1},${y1} C ${x1},${midY} ${x2},${midY} ${x2},${y2}`);
@@ -146,7 +159,7 @@ function createPopup(container, nodeData, side) {
 
   const popupDomain   = document.createElement('div');
   popupDomain.className = 'popup-domain';
-  popupDomain.textContent = `${nodeData.domain} — ${nodeData.display}`;
+  popupDomain.textContent = `${nodeData.domain}`;
 
   const popupName = document.createElement('div');
   popupName.className = 'popup-name';
@@ -348,11 +361,13 @@ function injectStyles() {
       to   { opacity: 1; transform: scale(1)    translateY(0);   }
     }
     .popup-domain {
+      color: var(--nc, #FF9124);
+      line-height: 1;
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.58rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 900;
     }
     .popup-name {
       font-family: 'Faustina', serif;
@@ -365,8 +380,8 @@ function injectStyles() {
       font-size: 0.79rem;
       color: rgba(239,249,240,0.52);
       line-height: 1.65;
-      border-left: 2px solid var(--nc, #FF9124);
-      padding-left: 10px;
+      border-bottom: 2px solid var(--nc, #FF9124);
+      padding-bottom: 10px;
       margin-bottom: 13px;
     }
     .popup-tags {

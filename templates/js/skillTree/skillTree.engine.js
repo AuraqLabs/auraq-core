@@ -8,6 +8,8 @@
  *   - computeNodePositions(courses, nodeWidth, nodeHeight, gapX, gapY): array
  *   - computeEdgePositions(courses, nodeWidth, nodeHeight, gapX, gapY): array
  *   - inferEdges(courses): array
+ *   - computeCanvasDimensions(positions, nodeWidth, nodeHeight, gapWidth, gapHeight): array
+ *   - computePopupPosition(popupEl, nodeEl): String
  *   - computePopupSides(nodeX, canvasWidth): String
  */
 
@@ -92,6 +94,59 @@ export function inferEdges(courses) {
     }
   }
   return edges;
+}
+
+/**
+ * @param: {Object} positions
+ * @param: {integer} NodeWidth
+ * @param: {integer} NodeHeight
+ * @param: {integer} GapWidth
+ * @param: {integer} Gapheight
+ */
+export function computeCanvasDimensions(positions, nodeWidth, nodeHeight, gapX, gapY) {
+  
+  const minX = Math.min(...positions.map(p => p.x));
+  const maxX = Math.max(...positions.map(p => p.x));
+
+  const width  = maxX - minX + nodeWidth  + gapX * 2;
+  const height = Math.max(...positions.map(p => p.y)) + nodeHeight + gapY * 2;
+  
+  const canvasWidth = `${width}px`;
+  const canvasHeight = `${height}px`;
+
+  return { canvasWidth, canvasHeight };
+}
+
+/**
+ * @param: {Object} popupEl
+ * @param: {Object} nodeEl
+ */
+export function computePopupPosition(popupEl, nodeEl) {
+  const nodeLeft   = parseInt(nodeEl.style.left);
+  const nodeTop    = parseInt(nodeEl.style.top);
+  const nodeWidth  = nodeEl.offsetWidth || 300;
+  const nodeHeight = nodeEl.offsetHeight || 150;
+  const popupWidth = 300;
+  const gap = 20;
+
+  let popupEl_left = null;
+  let popupEl_top = null;
+
+  if (popupEl.classList.contains('popup-left')) {
+    popupEl_left = `${nodeLeft - popupWidth - gap}px`;
+    popupEl_top  = `${nodeTop}px`;
+  } else if (popupEl.classList.contains('popup-right')) {
+    popupEl_left = `${nodeLeft + nodeWidth + gap}px`;
+    popupEl_top  = `${nodeTop}px`;
+  } else {
+    popupEl_left = `${nodeLeft}px`;
+    popupEl_top  = `${nodeTop + nodeHeight + gap}px`;
+  }
+    
+    const left = popupEl_left;
+    const top = popupEl_top;
+
+  return { left, top }
 }
 
 /**
