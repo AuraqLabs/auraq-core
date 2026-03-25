@@ -30,14 +30,13 @@ const DOMAIN_COLORS = {
 };
 
 export function initContainer(container) {
- container.setAttribute('data-panning-axis','xy');
- container.classList.add('skillTreeContainer');
- const canvas = document.createElement('div');
- canvas.id = 'skillTreeCanvas';
- canvas.style.position = 'relative';
- container.appendChild(canvas);
- injectStyles();
- return canvas;
+  container.classList.add('skillTreeContainer');
+  const canvas = document.createElement('div');
+  canvas.id = 'skillTreeCanvas';
+  canvas.style.position = 'relative';
+  container.appendChild(canvas);
+  injectStyles();
+  return canvas;
 }
 
 export function createFilters(container, domains) {
@@ -211,6 +210,7 @@ function injectStyles() {
       overflow: auto;
       scrollbar-width: none;
       cursor: grab;
+      touch-action: none;
       user-select: none;
     }
     .skillTreeContainer:active { cursor: grabbing; }
@@ -223,13 +223,14 @@ function injectStyles() {
     /* ── Nodes ── */
     .skillTree-node {
       position: absolute;
-      width: 200px;
-      height:100px;
-      background: #171111;
-      border: 1px solid rgba(239,249,240,0.07);
+      width: 300px;
+      height:150px;
+      background: rgb(var(--primary-color));
+      border: 1px solid rgba(var(--foreground-color),0.07);
       border-radius: 10px;
       cursor: pointer;
       overflow: visible;
+      font-family: var(--font-display);
       transition: transform 0.25s cubic-bezier(0.22,1,0.36,1),
                   box-shadow 0.22s ease,
                   border-color 0.2s ease,
@@ -284,8 +285,8 @@ function injectStyles() {
       align-items: flex-start;
     }
     .nodeDomain {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.52rem;
+      font-family: var(--font-display);
+      font-size: var(--fs-micro);
       letter-spacing: 0.3em;
       text-transform: uppercase;
       font-weight: 600;
