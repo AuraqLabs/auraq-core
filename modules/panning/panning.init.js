@@ -16,17 +16,16 @@ export function initPanning() {
     const axis = getAxis(container);
     const state = createPanningState();
     const controller = createPanningController(container, state, axis);
-
     bind(container, 'pointerdown', controller.onPointerDown);
-    bind(container, 'pointermove', controller.onPointerMove);
-    bind(container, 'pointerup', controller.onPointerUp);
-    bind(container, 'pointercancel', controller.onPointerUp);
+    bind(document, 'pointermove', controller.onPointerMove);
+    bind(document, 'pointerup',   controller.onPointerUp);
+    bind(document, 'pointercancel', controller.onPointerUp);
 
     if (axis === 'x') {
       const scrollableParent = getNearestYScrollable(container);
       if (scrollableParent) {
         bind(container, 'wheel', (e) => {
-	  if (e.shiftKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+          if (e.shiftKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
           scrollableParent.scrollTop += e.deltaY;
           e.preventDefault();
         }, { passive: false });
