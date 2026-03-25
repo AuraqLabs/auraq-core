@@ -1,4 +1,4 @@
-// panning.state.js
+// panning.init.state
 
 export function createPanningState() {
   return {
