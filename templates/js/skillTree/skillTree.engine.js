@@ -136,6 +136,6 @@ export function computePopupCoords(nodeLeft, nodeTop, nodeWidth, nodeHeight, sid
  * @returns: String
  */
 export function computePopupSide(nodeX, canvasWidth, viewportWidth) {
-  if (parseInt(viewportWidth) <= 800) return 'below';
-  return nodeX > (parseInt(canvasWidth) / 2) ? 'left' : 'right';
+  if (viewportWidth <= 800) return 'below';
+  return nodeX > canvasWidth / 2 ? 'left' : 'right';
 }
