@@ -12,10 +12,7 @@
  */
 
 import {
-  setActive,
   setNodePosition,
-  setNodeDimmed,
-  setPopupVisible
 } from './skillTree.dom.js';
 
 import {
