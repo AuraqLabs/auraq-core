@@ -129,7 +129,7 @@ export function computeCanvasDimensions(positions, nodeWidth, nodeHeight, gapX, 
  */
 export function computePopupCoords(nodeLeft, nodeTop, nodeWidth, nodeHeight, side, popupWidth, gap) {
   if (side === 'left') return { left: nodeLeft - popupWidth - gap + 'px', top: nodeTop + 'px'};
-  if (side === 'right') return { left: nodeLeft + popupWidth + gap + 'px', top: nodeTop + 'px'};
+  if (side === 'right') return { left: nodeLeft + nodeWidth + gap + 'px', top: nodeTop + 'px'};
   return { left: nodeLeft + 'px', top: nodeTop + nodeHeight + gap + 'px' };
 }
 
