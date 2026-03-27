@@ -7,7 +7,7 @@
  *   - createSkillTreeController(state, nodes, popups, filters): { bindAll }
  */
 
-import { setActive, setNodeDimmed, setPopupVisible, setPopupPosition } from './skillTree.dom.js';
+import { setActive, setNodeDimmed, setPopupVisible, setPopupPosition, getNodeRect } from './skillTree.dom.js';
 import { computePopupCoords } from './skillTree.engine.js';
 
 export function createSkillTreeController(state, nodes, popups, filters) {
@@ -48,10 +48,10 @@ export function createSkillTreeController(state, nodes, popups, filters) {
 
     if (!popup) return;
 
-    const nodeLeft = parseInt(nodeEl.style.left);
-    const nodeTop = parseInt(nodeEl.style.top);
-    const nodeWidth = nodeEl.offsetWidth || 300;
-    const nodeHeight = nodeEl.offsetHeight|| 150;
+    const nodeLeft = getNodeRect(nodeEl).left;
+    const nodeTop = getNodeRect(nodeEl).top;
+    const nodeWidth = getNodeRect(nodeEl).width;
+    const nodeHeight = getNodeRect(nodeEl).height;
     const side = popup.classList.contains('popup-left') ? 'left'
                : popup.classList.contains('popup-right') ? 'right' : 'below';
     const popupWidth = 300;
