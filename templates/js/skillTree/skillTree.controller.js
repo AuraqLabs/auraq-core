@@ -48,10 +48,7 @@ export function createSkillTreeController(state, nodes, popups, filters) {
 
     if (!popup) return;
 
-    const nodeLeft = getNodeRect(nodeEl).left;
-    const nodeTop = getNodeRect(nodeEl).top;
-    const nodeWidth = getNodeRect(nodeEl).width;
-    const nodeHeight = getNodeRect(nodeEl).height;
+    const { nodeLeft, nodeTop, nodeWidth, nodeHeight } = getNodeRect(nodeEl);
     const side = popup.classList.contains('popup-left') ? 'left'
                : popup.classList.contains('popup-right') ? 'right' : 'below';
     const popupWidth = 300;

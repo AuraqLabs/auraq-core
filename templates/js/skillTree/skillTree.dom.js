@@ -74,9 +74,9 @@ export function setPopupArrowPosition(popupArrEl, x, y, side) {
 
 export function getNodeRect(nodeEl) {
   return {
-    left: parseInt(nodeEl.style.left),
-    top: parseInt(nodeEl.style.top),
-    width: nodeEl.offsetWidth || 300,
-    height: nodeEl.offsetHeight|| 150
+    nodeLeft: parseInt(nodeEl.style.left),
+    nodeTop: parseInt(nodeEl.style.top),
+    nodeWidth: nodeEl.offsetWidth || 300,
+    nodeHeight: nodeEl.offsetHeight|| 150
   };
 }
