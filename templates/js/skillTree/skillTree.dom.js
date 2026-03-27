@@ -65,8 +65,8 @@ export function setPopupVisible(popupEl, visible) {
 
 
 export function setPopupPosition(popupEl, left, top) {
-    popupEl.style.left = left;
-    popupEl.style.top = top;
+    popupEl.style.left = left + 'px';
+    popupEl.style.top = top + 'px';
 }
 
 export function setPopupArrowPosition(popupArrEl, x, y, side) {
