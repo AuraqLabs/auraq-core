@@ -32,7 +32,7 @@ function computeBranchIndex (courses) {
  * @param: {number} gapY
  * @returns: {number} id, {number} x, {number} y
  */
-export function computeNodePositions(courses, nodeWidth, nodeHeight, gapX, gapY) {
+export function computeNodeCoords(courses, nodeWidth, nodeHeight, gapX, gapY) {
   const branchIndex = computeBranchIndex(courses);
 
   // Find max branch width to space sub-columns
@@ -118,35 +118,19 @@ export function computeCanvasDimensions(positions, nodeWidth, nodeHeight, gapX, 
 }
 
 /**
- * @param: {Object} popupEl
- * @param: {Object} nodeEl
+ * @param: {integer} nodeLeft
+ * @param: {integer} nodeTop
+ * @param: {integer} nodeWidth
+ * @param: {integer} nodeHeight
+ * @param: {String} side
+ * @param: {integer} popupWidth
+ * @param: {integer} gap
+ * @returns: array
  */
-export function computePopupPosition(popupEl, nodeEl) {
-  const nodeLeft   = parseInt(nodeEl.style.left);
-  const nodeTop    = parseInt(nodeEl.style.top);
-  const nodeWidth  = nodeEl.offsetWidth || 300;
-  const nodeHeight = nodeEl.offsetHeight || 150;
-  const popupWidth = 300;
-  const gap = 20;
-
-  let popupEl_left = null;
-  let popupEl_top = null;
-
-  if (popupEl.classList.contains('popup-left')) {
-    popupEl_left = `${nodeLeft - popupWidth - gap}px`;
-    popupEl_top  = `${nodeTop}px`;
-  } else if (popupEl.classList.contains('popup-right')) {
-    popupEl_left = `${nodeLeft + nodeWidth + gap}px`;
-    popupEl_top  = `${nodeTop}px`;
-  } else {
-    popupEl_left = `${nodeLeft}px`;
-    popupEl_top  = `${nodeTop + nodeHeight + gap}px`;
-  }
-    
-    const left = popupEl_left;
-    const top = popupEl_top;
-
-  return { left, top }
+export function computePopupCoords(nodeLeft, nodeTop, nodeWidth, nodeHeight, side, popupWidth, gap) {
+  if (side === 'left') return { left: nodeLeft - popupWidth - gap + 'px', top: nodeTop + 'px'};
+  if (side === 'right') return { left: nodeLeft + popupWidth + gap + 'px', top: nodeTop + 'px'};
+  return { left: nodeLeft + 'px', top: nodeTop + nodeHeight + gap + 'px' };
 }
 
 /**
