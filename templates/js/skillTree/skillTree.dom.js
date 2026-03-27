@@ -71,3 +71,12 @@ export function setPopupPosition(popupEl, left, top) {
 
 export function setPopupArrowPosition(popupArrEl, x, y, side) {
 }
+
+export function getNodeRect(nodeEl) {
+  return {
+    left: parseInt(nodeEl.style.left),
+    top: parseInt(nodeEl.style.top),
+    width: nodeEl.offsetWidth || 300,
+    height: nodeEl.offsetHeight|| 150
+  };
+}
