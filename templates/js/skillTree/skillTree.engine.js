@@ -108,11 +108,8 @@ export function computeCanvasDimensions(positions, nodeWidth, nodeHeight, gapX, 
   const minX = Math.min(...positions.map(p => p.x));
   const maxX = Math.max(...positions.map(p => p.x));
 
-  const width  = maxX - minX + nodeWidth  + gapX * 2;
-  const height = Math.max(...positions.map(p => p.y)) + nodeHeight + gapY * 2;
-  
-  const canvasWidth = `${width}px`;
-  const canvasHeight = `${height}px`;
+  const canvasWidth  = maxX - minX + nodeWidth  + gapX * 2;
+  const canvasHeight = Math.max(...positions.map(p => p.y)) + nodeHeight + gapY * 2;
 
   return { canvasWidth, canvasHeight };
 }
@@ -128,9 +125,9 @@ export function computeCanvasDimensions(positions, nodeWidth, nodeHeight, gapX, 
  * @returns: array
  */
 export function computePopupCoords(nodeLeft, nodeTop, nodeWidth, nodeHeight, side, popupWidth, gap) {
-  if (side === 'left') return { left: nodeLeft - popupWidth - gap + 'px', top: nodeTop + 'px'};
-  if (side === 'right') return { left: nodeLeft + nodeWidth + gap + 'px', top: nodeTop + 'px'};
-  return { left: nodeLeft + 'px', top: nodeTop + nodeHeight + gap + 'px' };
+  if (side === 'left') return { left: nodeLeft - popupWidth - gap, top: nodeTop };
+  if (side === 'right') return { left: nodeLeft + nodeWidth + gap, top: nodeTop };
+  return { left: nodeLeft, top: nodeTop + nodeHeight + gap };
 }
 
 /**
