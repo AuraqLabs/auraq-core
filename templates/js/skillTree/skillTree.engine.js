@@ -5,11 +5,11 @@
  * Owns all coordinate mapping, math, loops and pure geometry functions
  * Exports:
  *   - computeBranchIndex(courses): array
- *   - computeNodePositions(courses, nodeWidth, nodeHeight, gapX, gapY): array
- *   - computeEdgePositions(courses, nodeWidth, nodeHeight, gapX, gapY): array
+ *   - computeNodeCoords(courses, nodeWidth, nodeHeight, gapX, gapY): array
+ *   - computeEdgePoints(courses, nodeWidth, nodeHeight, gapX, gapY): array
  *   - inferEdges(courses): array
  *   - computeCanvasDimensions(positions, nodeWidth, nodeHeight, gapWidth, gapHeight): array
- *   - computePopupPosition(popupEl, nodeEl): String
+ *   - computePopupCoords(popupEl, nodeEl): String
  *   - computePopupSides(nodeX, canvasWidth): String
  */
 
