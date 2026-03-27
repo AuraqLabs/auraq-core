@@ -121,6 +121,15 @@ export function createNodes(container, nodesData, positions) {
 
 export function createEdge(canvas, x1, y1, x2, y2) {
   
+  const midY = (y1 + y2) / 2;
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', `M ${x1},${y1} C ${x1},${midY} ${x2},${midY} ${x2},${y2}`);
+  path.classList.add('skillTree-edge');
+  canvas.appendChild(path);
+  return path;
+}
+
+export function createEdges(canvas, edges, positions, nodeWidth, nodeHeight) {
   const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svgEl.id = 'skillTreeEdges';
   svgEl.style.position = 'absolute';
@@ -133,15 +142,6 @@ export function createEdge(canvas, x1, y1, x2, y2) {
   svgEl.style.zIndex = '0';
   canvas.appendChild(svgEl);
 
-  const midY = (y1 + y2) / 2;
-  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  path.setAttribute('d', `M ${x1},${y1} C ${x1},${midY} ${x2},${midY} ${x2},${y2}`);
-  path.classList.add('skillTree-edge');
-  svgEl.appendChild(path);
-  return path;
-}
-
-export function createEdges(svgEl, edges, positions, nodeWidth, nodeHeight) {
   edges.forEach(edge => {
     const sourcePos = positions.find(p => p.id === edge.fromId);
     const targetPos = positions.find(p => p.id === edge.toId);
