@@ -36,8 +36,8 @@ export function setActive(El, active) {
  * @param {integer} canvasHeight
  */
 export function setCanvasDimensions(canvasEl, canvasWidth, canvasHeight) {
-  canvasEl.style.width  = canvasWidth;
-  canvasEl.style.height = canvasHeight;
+  canvasEl.style.width  = `${canvasWidth}px`;
+  canvasEl.style.height = `${canvasHeight}px`;
 }
 
 export function setNodePosition(nodeEl, x, y) {
@@ -65,8 +65,8 @@ export function setPopupVisible(popupEl, visible) {
 
 
 export function setPopupPosition(popupEl, left, top) {
-    popupEl.style.left = left + 'px';
-    popupEl.style.top = top + 'px';
+    popupEl.style.left = `${left}px`;
+    popupEl.style.top = `${top}px`;
 }
 
 export function setPopupArrowPosition(popupArrEl, x, y, side) {
