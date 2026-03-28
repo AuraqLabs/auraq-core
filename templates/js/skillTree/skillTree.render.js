@@ -200,7 +200,7 @@ export function createPopups(container, courses, positions, canvasWidth) {
   const popups = [];
   courses.forEach(nodeData => {
     const pos = positions.find(p => p.id === nodeData.id);
-    const side = computePopupSide(pos.x, canvasWidth, getViewportWidth);
+    const side = computePopupSide(pos.x, canvasWidth, getViewportWidth());
     const popup = createPopup(container, nodeData, side);
     popups.push(popup);
   });
