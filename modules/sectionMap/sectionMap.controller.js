@@ -33,12 +33,18 @@ export function createSectionMapController(container, sections, bar, ticks, thum
   // array of sections' position in normalized 0-1 scale
   let sectionNorms  = computeSectionNorms(getSectionOffsetTops(sections), getScrollable(container));
   
-  new ResizeObserver(() => {
+  function recompute() {
     tickPositions = measureTickPositions(ticks);
     sectionNorms  = computeSectionNorms(getSectionOffsetTops(sections), getScrollable(container));
     const normalized = normalizeScroll(container);
     updateThumb(thumb, computeThumbPx(normalized, tickPositions, sectionNorms), normalized);
-  }).observe(bar); //Upon the resize of "bar", reposition ticks, recompute section normals and update thumb
+  }
+
+  const ro = new ResizeObserver(recompute);
+  ro.observe(bar);
+
+  const mainEl = container.querySelector('main') ?? container.firstElementChild;
+  if (mainEl) ro.observe(mainEl);
 
   // Keeps thumb in sync as page scrolls
   createTrackingLoop(container, (normalized) => {
