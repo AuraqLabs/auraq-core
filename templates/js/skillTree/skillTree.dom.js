@@ -85,6 +85,18 @@ export function getNodeRect(nodeEl) {
   };
 }
 
+/**
+ * @returns: integer
+ */
 export function getViewportWidth() {
   return window.innerWidth;
+}
+
+/**
+ * @param: {Element} popupEl
+ * @returns: String
+ */
+export function getPopupSide(popupEl) {
+  return popupEl.classList.contains('popup-left') ? 'left'
+       : popupEl.classList.contains('popup-right') ? 'right' : 'below';
 }
