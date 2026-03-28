@@ -65,13 +65,17 @@ export function setPopupVisible(popupEl, visible) {
 
 
 export function setPopupPosition(popupEl, left, top) {
-    popupEl.style.left = `${left}px`;
-    popupEl.style.top = `${top}px`;
+  popupEl.style.left = `${left}px`;
+  popupEl.style.top = `${top}px`;
 }
 
 export function setPopupArrowPosition(popupArrEl, x, y, side) {
 }
 
+/**
+ * @param {Element} nodeEl
+ * @returns: array
+ */
 export function getNodeRect(nodeEl) {
   return {
     nodeLeft: parseInt(nodeEl.style.left),
@@ -79,4 +83,8 @@ export function getNodeRect(nodeEl) {
     nodeWidth: nodeEl.offsetWidth || 300,
     nodeHeight: nodeEl.offsetHeight|| 150
   };
+}
+
+export function getViewportWidth() {
+  return window.innerWidth;
 }
