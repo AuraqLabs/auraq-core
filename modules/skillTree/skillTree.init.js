@@ -8,7 +8,7 @@ import { createSkillTreeController } from './skillTree.controller.js';
 
 export async function initSkillTree() {
   try {
-    const response = await fetch('http://192.168.0.218:7000/courses.json');
+    const response = await fetch('https://dev.auraq.org/data/courses.json');
     const data = await response.json();
     const courses = data.courses;
 
