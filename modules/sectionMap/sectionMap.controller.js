@@ -131,6 +131,6 @@ export function createSectionMapController(container, sections, bar, ticks, thum
   bar.addEventListener('pointercancel', () => {
     cancelAll();
     state.isDragging = false;
-    hasMoved   = false;
+    state.hasMoved   = false;
   });
 }
