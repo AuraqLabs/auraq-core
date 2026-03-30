@@ -152,6 +152,6 @@ function injectStyles() {
 
     .sectionMap-bar:hover .sectionMap-tick {
       background: rgb(220, 140, 35);
-  `;
+    };
   document.head.appendChild(style);
 }
