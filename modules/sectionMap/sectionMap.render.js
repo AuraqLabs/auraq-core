@@ -146,7 +146,7 @@ function injectStyles() {
     }
 
     .sectionMap-bar:hover .sectionMap-thumb {
-      width: (${THUMB_WIDTH} + 4)px;
+      width: ${THUMB_WIDTH + 4}px;
       height: 24px
     }
 
