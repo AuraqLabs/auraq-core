@@ -76,7 +76,7 @@ Queries the DOM for all `[data-panning-axis]` elements and initialises pointer-b
 
 Pointer event logic and momentum physics engine.
 
-### `createPanningController(container, state, axis, nestedContainerSelector)`
+### `createPanningController(container, state, axis)`
 
 Creates and returns the three pointer event handlers for a given container.
 
