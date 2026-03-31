@@ -85,7 +85,6 @@ Creates and returns the three pointer event handlers for a given container.
 | `container` | `Element` | — | The scroll container to control |
 | `state` | `Object` | — | State object from `createPanningState()` |
 | `axis` | `string` | `'xy'` | Scroll axis: `'x'`, `'y'`, or `'xy'` |
-| `nestedContainerSelector` | `string` | `'[data-panning-axis]'` | Selector used to detect nested panning containers and skip pointer capture |
 
 **Returns:** `{ onPointerDown, onPointerMove, onPointerUp }`
 
@@ -149,9 +148,6 @@ Returns `container.scrollTop`.
 
 ### `setScrollY(container, value)`
 Sets `container.scrollTop` to `value`.
-
-### `capturePointer(container, pointerId)`
-Calls `container.setPointerCapture(pointerId)`.
 
 ### `bind(container, event, handler, options?)`
 Calls `container.addEventListener(event, handler, options)`.
