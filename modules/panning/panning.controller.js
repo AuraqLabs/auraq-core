@@ -2,10 +2,8 @@
 
 import { setScrollX, setScrollY, getScrollX, getScrollY } from "./panning.dom.js";
 
-export function createPanningController(container, state, axis = 'xy') {
-  const friction = 0.85;
-  const minVelocity = 0.02;
-  const momentumScale = 20;
+export function createPanningController(container, state, axis = 'xy', config) {
+  const { friction, minVelocity, momentumScale, dragThreshold } = config;
 
   const allowX = axis === 'x' || axis === 'xy';
   const allowY = axis === 'y' || axis === 'xy';
@@ -34,8 +32,6 @@ export function createPanningController(container, state, axis = 'xy') {
     state.momentumFrameID = requestAnimationFrame(momentumStep);
   }
 
-  const DRAG_THRESHOLD = 5;
-
   function onPointerDown(e) {
     state.isPointerDown = true;
     state.isPanning = false;
@@ -57,7 +53,7 @@ export function createPanningController(container, state, axis = 'xy') {
     const dy = e.clientY - state.startY;
 
     if (!state.isPanning) {
-      if (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD) {
+      if (Math.abs(dx) > dragThreshold || Math.abs(dy) > dragThreshold) {
         state.isPanning = true;
       } else {
         return;
