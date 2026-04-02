@@ -21,6 +21,31 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
+All configuration is optional — calling `initPanning()` with no arguments uses the defaults from `panning.config.js`.
+
+---
+
+## Configuration
+
+Pass an options object to override any default. Unspecified keys stay at their default values.
+
+```javascript
+// Override one key, rest stay default
+initPanning({ dragThreshold: 10 });
+
+// Override several keys
+initPanning({ dragThreshold: 10, friction: 0.9 });
+```
+
+| Option | Default | Description |
+|---|---|---|
+| `dragThreshold` | `5` | px — minimum pointer travel before a pan gesture commits |
+| `friction` | `0.85` | Velocity decay per frame — lower = slides longer |
+| `minVelocity` | `0.02` | px/frame — momentum stops below this threshold |
+| `momentumScale` | `20` | Multiplier applied to velocity when advancing scroll |
+
+Defaults are defined in `panning.config.js` on the CDN. Consumers never import or host this file — the options object passed to `initPanning()` is the only configuration surface.
+
 ---
 
 ## CSS Requirements
@@ -56,19 +81,41 @@ Panning containers must be scroll containers. The following properties are requi
 
 ---
 
+## Module Architecture
+
+```
+panning.init.js       ← composition root — discovery, config merge, wiring
+panning.controller.js ← pointer events, momentum physics
+panning.dom.js        ← all DOM reads/writes and event binding
+panning.state.js      ← state factory
+panning.config.js     ← default constants (internal — CDN only)
+```
+
+Import graph (one-directional, no cycles):
+
+```
+init.js → config.js
+init.js → state.js
+init.js → controller.js → dom.js
+init.js → dom.js
+```
+
+---
+
 ## panning.init.js
 
-Entry point. Discovers all panning containers then wires state, controller, and input handlers.
+Entry point. Merges consumer options with defaults, discovers all panning containers, then wires state, controller, and input handlers.
 
-### `initPanning()`
+### `initPanning(options?)`
 
 Queries the DOM for all `[data-panning-axis]` elements and initialises pointer-based panning and wheel redirection on each.
 
-- **Parameters:** none
+- **Parameters:** `options` — optional config object (see [Configuration](#configuration))
 - **Returns:** void
 - **Side effects:**
-  - Binds `pointerdown`, `pointermove`, `pointerup`, `pointercancel` on every container
-  - Binds a `wheel` handler on `x`-axis containers that redirects vertical wheel delta to the nearest y-scrollable ancestor, preserving native horizontal scrolling via touchpad and shift+wheel
+  - Binds `pointerdown` on every container
+  - Binds `pointermove`, `pointerup`, `pointercancel` on `document`
+  - Binds a `wheel` handler (registered with `{ passive: false }`, calls `e.preventDefault()`) on `x`-axis containers that redirects vertical wheel delta to the nearest y-scrollable ancestor, preserving native horizontal scrolling via touchpad and shift+wheel
 
 ---
 
@@ -76,25 +123,18 @@ Queries the DOM for all `[data-panning-axis]` elements and initialises pointer-b
 
 Pointer event logic and momentum physics engine.
 
-### `createPanningController(container, state, axis)`
+### `createPanningController(container, state, axis, config)`
 
 Creates and returns the three pointer event handlers for a given container.
 
-| Parameter | Type | Default | Description |
-|---|---|---|---|
-| `container` | `Element` | — | The scroll container to control |
-| `state` | `Object` | — | State object from `createPanningState()` |
-| `axis` | `string` | `'xy'` | Scroll axis: `'x'`, `'y'`, or `'xy'` |
+| Parameter | Type | Description |
+|---|---|---|
+| `container` | `Element` | The scroll container to control |
+| `state` | `Object` | State object from `createPanningState()` |
+| `axis` | `string` | Scroll axis: `'x'`, `'y'`, or `'xy'` |
+| `config` | `Object` | Merged config object from `initPanning()` |
 
 **Returns:** `{ onPointerDown, onPointerMove, onPointerUp }`
-
-**Physics constants** (intentionally non-configurable — tuning causes jitter):
-
-| Constant | Value | Role |
-|---|---|---|
-| `friction` | `0.85` | Velocity decay per frame |
-| `minVelocity` | `0.02` | Threshold below which momentum stops |
-| `momentumScale` | `20` | Multiplier applied to velocity when advancing scroll |
 
 ---
 
@@ -111,6 +151,7 @@ Returns a fresh, isolated state object for one panning container.
 ```javascript
 {
   isPanning: false,
+  isPointerDown: false,
   startX: 0,
   startY: 0,
   startScrollX: 0,
@@ -128,7 +169,7 @@ Returns a fresh, isolated state object for one panning container.
 
 ## panning.dom.js
 
-All DOM reads, writes, pointer capture, and event binding.
+All DOM reads, writes, and event binding.
 No logic lives here — only direct DOM access.
 
 ### `getPanningContainers()`
