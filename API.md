@@ -17,15 +17,15 @@ Each module ships its own detailed API.md within its folder.
 | Export | File | Description |
 |---|---|---|
 | `initPanning()` | `panning.init.js` | Discovers all `[data-panning-axis]` containers and initialises panning |
-| `createPanningController(container, state, axis, nestedContainerSelector)` | `panning.controller.js` | Returns pointer event handlers and momentum engine for one container |
 | `createPanningState()` | `panning.state.js` | Returns a fresh isolated state object for one container |
+| `createPanningController(container, state, axis, nestedContainerSelector)` | `panning.controller.js` | Returns pointer event handlers and momentum engine for one container |
+| `bind(container, event, handler, options?)` | `panning.dom.js` | Adds an event listener |
 | `getPanningContainers()` | `panning.dom.js` | Returns all `[data-panning-axis]` elements |
 | `getAxis(container)` | `panning.dom.js` | Returns the axis value of a container |
+| `getNearestYScrollable(element)` | `panning.dom.js` | Walks up DOM to find nearest y-scrollable ancestor |
 | `getScrollX/Y(container)` | `panning.dom.js` | Reads scroll position |
 | `setScrollX/Y(container, value)` | `panning.dom.js` | Writes scroll position |
 | `capturePointer(container, pointerId)` | `panning.dom.js` | Captures pointer to container |
-| `bind(container, event, handler, options?)` | `panning.dom.js` | Adds an event listener |
-| `getNearestYScrollable(element)` | `panning.dom.js` | Walks up DOM to find nearest y-scrollable ancestor |
 
 ---
 
@@ -34,5 +34,5 @@ Each module ships its own detailed API.md within its folder.
 | Module | Status |
 |---|---|
 | Panning | Live |
-| Navigation | Planned |
-| Carousel | Planned |
+| Section Map | Live |
+| Skill Tree | Live |
