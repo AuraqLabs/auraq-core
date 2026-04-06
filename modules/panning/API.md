@@ -5,7 +5,6 @@
 Smooth pointer-based panning with momentum and wheel redirection for nested containers.
 Supports configurable scroll axis and arbitrary nesting depth.
 
----
 
 ## Usage
 ```html
@@ -21,9 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-All configuration is optional — calling `initPanning()` with no arguments uses the defaults from `panning.config.js`.
+All configuration is optional - calling `initPanning()` with no arguments uses the defaults from `panning.config.js`.
 
----
 
 ## Configuration
 
@@ -39,14 +37,12 @@ initPanning({ dragThreshold: 10, friction: 0.9 });
 
 | Option | Default | Description |
 |---|---|---|
-| `dragThreshold` | `5` | px — minimum pointer travel before a pan gesture commits |
-| `friction` | `0.85` | Velocity decay per frame — lower = slides longer |
-| `minVelocity` | `0.02` | px/frame — momentum stops below this threshold |
-| `momentumScale` | `20` | Multiplier applied to velocity when advancing scroll |
+| `dragThreshold` | `5` | px - minimum pointer travel before a pan gesture commits |
+| `friction` | `0.85` | Velocity decay per frame - lower = slides longer |
+| `minVelocity` | `0.02` | px/frame - momentum stops below this threshold |
+| `momentumScale` | `20` | Multiplie  applied to velocity when advancing scroll |
 
-Defaults are defined in `panning.config.js` on the CDN. Consumers never import or host this file — the options object passed to `initPanning()` is the only configuration surface.
-
----
+Defaults are defined in `panning.config.js` on the CDN. Consumers never import or host this file - the options object passed to `initPanning()` is the only configuration surface.
 
 ## CSS Requirements
 
@@ -84,20 +80,20 @@ Panning containers must be scroll containers. The following properties are requi
 ## Module Architecture
 
 ```
-panning.init.js       ← composition root — discovery, config merge, wiring
-panning.controller.js ← pointer events, momentum physics
-panning.dom.js        ← all DOM reads/writes and event binding
-panning.state.js      ← state factory
-panning.config.js     ← default constants (internal — CDN only)
+panning.init.js       <- composition root - discovery, config merge, wiring
+panning.controller.js <- pointer events, momentum physics
+panning.dom.js        <- all DOM reads/writes and event binding
+panning.state.js      <- state factory
+panning.config.js     <- default constants (internal - CDN only)
 ```
 
 Import graph (one-directional, no cycles):
 
 ```
-init.js → config.js
-init.js → state.js
-init.js → controller.js → dom.js
-init.js → dom.js
+init.js -> config.js
+init.js -> state.js
+init.js -> controller.js -> dom.js
+init.js -> dom.js
 ```
 
 ---
@@ -110,7 +106,7 @@ Entry point. Merges consumer options with defaults, discovers all panning contai
 
 Queries the DOM for all `[data-panning-axis]` elements and initialises pointer-based panning and wheel redirection on each.
 
-- **Parameters:** `options` — optional config object (see [Configuration](#configuration))
+- **Parameters:** `options` - optional config object (see [Configuration](#configuration))
 - **Returns:** void
 - **Side effects:**
   - Binds `pointerdown` on every container
@@ -170,7 +166,7 @@ Returns a fresh, isolated state object for one panning container.
 ## panning.dom.js
 
 All DOM reads, writes, and event binding.
-No logic lives here — only direct DOM access.
+No logic lives here - only direct DOM access.
 
 ### `getPanningContainers()`
 Returns `NodeList` of all `[data-panning-axis]` elements in the document.
