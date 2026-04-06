@@ -37,7 +37,7 @@ Every JS module should begin with a header comment as per JSDocs spec (@) contai
 - Exported Functions (manually, not part of JSDocs specs)
 - `@description`: Purpose and high-level behavior
 - `@module`
-- `@autor`
+- `@author`
 - `@license`
 
 Example:
@@ -130,14 +130,90 @@ The format for this documentation is yet to be determined
 
 ## 6. Adding Features
 
-1. Before adding a new feature, **review the API.md file** to see if an existing function can be extended instead of creating a new one.
-2. If a new function is required:
+Before adding a new feature, **review the root API.md** to understand
+the existing module landscape and determine the right approach.
 
-   * Add it to the correct module
-   * Update the **module header comments**
-   * Update the module's API.md
-   * Update **API.md**
-3. Test your changes in isolation before integrating with other modules.
+In some cases, you'd want to extend an existing module whereas in other you'd want to create an entirely new module.
+
+---
+
+### When to extend an existing module
+
+If all of the following are true, add the function to an existing module:
+
+- The feature's responsibility clearly belongs to an existing module
+- The target file stays within the 3-5 exported functions guideline
+- The feature shares the module's existing state, DOM surface, and lifecycle
+
+**If a new function is required:**
+
+1. Add it to the correct module file
+2. Document it with a JSDoc block - description, `@param`, `@returns`,
+   and `@throws` where applicable
+3. Update the exports list in the file header
+4. Update the module's `API.md`
+5. Update the root `API.md`
+
+---
+
+### When to create a new module
+
+If any of the following are true, a new module is likely the right call:
+
+- The feature has a distinct responsibility that doesn't belong to any
+  existing module
+- Adding it would push an existing module's file beyond the 3-5 exported
+  functions guideline
+- It requires its own state, DOM surface, or lifecycle that would feel
+  foreign inside an existing module
+- It could conceivably be used independently by a consumer site
+
+**If a new module is required:**
+
+1. Create a folder under `modules/<moduleName>/` following the established
+   file structure:
+   ```
+   modules/<moduleName>/
+   |- <moduleName>.init.js
+   |- <moduleName>.controller.js
+   |- <moduleName>.dom.js
+   |- <moduleName>.state.js
+   |- API.md
+   ```
+   Add or remove files as the module warrants - not every module needs
+   all five. For example, a purely computational module may not need a
+   `dom.js` or `state.js`. Alternatively, some modules may need separate `render.js` or `engine.js`.
+
+2. Write a JSDoc file header in each new file using `@file`, `@module` and `description`:
+   ```javascript
+   /**
+    * @file <moduleName>.dom.js
+    * Exports:
+    *   - functionOne()
+    *   - functionTwo()
+    * @description Owns all DOM reads and writes for the <moduleName> module.
+    * @module <moduleName>/dom
+    * @author <author>
+    * @license GPL-3.0
+    */
+   ```
+
+3. Document every exported function with a JSDoc block
+   `@description`, `@param`, `@returns`, and `@throws` where applicable
+
+4. Create the module's `API.md` following the structure of an existing
+   module's API.md as a reference
+
+5. Update the root `API.md` module index
+
+6. Update the repository structure section in `README.md`
+
+7. Test the module independently before integrating with other modules
+
+---
+
+> When in doubt, prefer a focused new module over bloating an existing one. Modularity is cheaper to maintain than untangling a module that has grown beyond its original responsibility.
+
 
 ## 7. Code Style
 
