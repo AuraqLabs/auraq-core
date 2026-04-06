@@ -2,18 +2,21 @@
 
 Thank you for your interest in contributing! This guide outlines how to organize, document, and extend the codebase efficiently so that modularity does not compromise discoverability and maintainability.
 
----
 ## 1. Repository Canonicality
 
 The canonical source of truth for this repository is GitHub:
-`https://github.com/AuraqLabs/auraq-core`
+- https://github.com/AuraqLabs/auraq-core
 
-Two mirrors are maintained at `https://kinu.tngl.sh/auraq-core` and `https://sr.ht/kinucyber/auraq-core" and are kept in sync automatically.
-Do not push directly to the mirror — all contributions should target the GitHub remote.
+Two mirrors are maintained at 
+- https://kinu.tngl.sh/auraq-core
+- https://sr.ht/kinucyber/auraq-core
+
+The mirrors are kept in sync automatically.
+Do not push directly to the mirror - all contributions should target the GitHub remote.
 
 ## 2. General Principles
 
-1. **Keep modules focused:** Each module should ideally export **3–5 functions**.  
+1. **Keep modules focused:** Each module should ideally export **3-5 functions**.  
    - If a module grows beyond this, split it into smaller, logically coherent modules.
 
 2. **Use consistent naming:** Prefix/suffix function names by module or type for clarity.  
@@ -23,78 +26,85 @@ Do not push directly to the mirror — all contributions should target the GitHu
 ```
 
 3. **Keep functions short:** Aim for functions to perform **a single responsibility**. This makes modules easier to understand, test, and reuse.
-
----
+   - If a function has multiple responsibilities, split into smaller, atomic functions
 
 ## 3. Module Documentation
 
 ### **Header Comments**
 
-Every JS module should begin with a header comment summarizing its purpose, exports, and high-level behavior.
+Every JS module should begin with a header comment as per JSDocs spec (@) containing following
+- `@file`
+- Exported Functions (manually, not part of JSDocs specs)
+- `@description`: Purpose and high-level behavior
+- `@module`
+- `@autor`
+- `@license`
 
 Example:
 
 ```javascript
 /**
- * panning.init.js
+ * @file sectionMap.engine.js
  * Exports:
- *   - initPanning(): void
- * Handles drag + momentum scrolling for div with 'data-panning-axis="xy"' attributes.
+ *   - computeSectionNorms()
+ *   - computeThumbPx()
+ *   - normalizeScroll()
+ *   ...
+
+ * @description Owns all scroll math, coordinate mapping, rAF loops,
+ * and pure geometry functions for the sectionMap module.
+ *
+ * @module sectionMap/engine
+ * @auther KinuCyber
+ * @license GPL-3.0
  */
 ```
-
+---
 ### **Function Documentation**
 
-Each function should include a brief description, its parameters, return values, and side effects if any.
+All function documentation must follow JSDoc syntax, containing the following
+.
+- Description: Resonsibility/Purpose
+- `@param`
+- `@returns` (where applicable)
+- `@throws` (where applicable)
 
 Example:
 
 ```javascript
 /**
- * initPanning()
- * Queries all divs with 'data-panning-axis="xy"' attribute
- * Initializes drag and momentum scrolling on the given divs.
- * Returns void
+ * Approximates cubic-bezier(0.22, 1, 0.36, 1) from the design system.
+ * @param {number} t — 0 to 1
+ * @returns {number}
  */
-function initPanning() {
-    ...
-}
 ```
 
----
+For details on JSDoc, see https://jsdoc.app/
 
 ## 4. API Reference File
 
-Maintain a single **API reference file** (`API.md`) at the repo root.
+Maintain a single **API reference file** per module in respective module directory.
+
+This file should list all the features of the module.
+Update this file whenever you add, remove or modify a function from corresponding module
+
+This file contains the following
+- `Usage`
+- `Configuration`
+- `CSS Requirements`
+- `Module Architecture`
+- `<module>.<role>.js`
+    - `Exported function`
+    - `Exported function`
+    - ...
+- ...
+
+### Another file exists under repo root (`API.md`)
 
 * This file should list **all modules**, their **exported functions**, **parameters**, **return values**, and **example usage**.
-* Update this file **whenever you add, remove, or modify a function**.
+* Update this file **whenever you add, remove, or modify a module**.
 
-Example:
-
-````markdown
-# JS Modules API
-
-## panning.init.js
-- `initPanning(): void`
-  - Queries DOM for divs with `data-panning-axis=""` attributes
-  - Initializes drag + momentum scroll on the panning divs
-  - Usage:
-    ```html
-    <div data-panning-axis="xy">
-    ```
-    ```javascript
-    import { initPanning } from 'https://cdn.auraq.org/modules/panning/panning.init.js';
-    initPanning();
-    ```
-````
-
-Another file exists under each module folder.
-
-* This file should list all the features of the module.
-* Update this file whenever you add, remove or modify a function from corresponding module
-
----
+The format for this documentation is yet to be determined
 
 ## 5. Navigation and Discoverability (for vim users)
 
@@ -118,8 +128,6 @@ Another file exists under each module folder.
 
 3. **Avoid scattering logic unnecessarily:** Keep related modules logically grouped in folders (`panning/panning.init.js`, `panning/panning.dom.js`, etc).
 
----
-
 ## 6. Adding Features
 
 1. Before adding a new feature, **review the API.md file** to see if an existing function can be extended instead of creating a new one.
@@ -131,15 +139,11 @@ Another file exists under each module folder.
    * Update **API.md**
 3. Test your changes in isolation before integrating with other modules.
 
----
-
 ## 7. Code Style
 
 * Prefer **ES6+ syntax**: `const`, `let`, arrow functions, `import/export` modules.
 * Keep functions readable and properly indented.
 * Add **meaningful comments** where necessary, but avoid cluttering obvious logic.
-
----
 
 ## 8. File & Folder Structure
 
@@ -175,15 +179,11 @@ auraq-core/
 │   └─ resources.md
 └─ README.md
 
----
-
 ## 9. Testing
 
 * Test **each module independently** before integrating with other modules.
 * Verify **cross-browser behavior**, especially for scroll/drag interactions (Chrome, Firefox, Safari).
 * Ensure **momentum/elasticity** feel is smooth.
-
----
 
 ## 10. Summary
 
