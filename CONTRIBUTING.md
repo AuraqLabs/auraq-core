@@ -1,4 +1,3 @@
-````markdown
 # Contributing to Auraq Core
 
 Thank you for your interest in contributing! This guide outlines how to organize, document, and extend the codebase efficiently so that modularity does not compromise discoverability and maintainability.
