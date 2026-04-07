@@ -36,13 +36,14 @@ Do not push directly to the mirror - all contributions should target the GitHub 
 ### **Header Comments**
 
 Every JS module should begin with a header comment as per JSDocs spec (@) containing following
-- `@file`
-- Exported Functions (manually, not part of JSDocs specs)
-- `@description`: Purpose and high-level behavior
-- `@module`
+- `@file` - file name
+- `@description` - purpose and high-level behavior
+- `@module` - logical module path, not the full file path
+(e.g. `sectionMap/engine`)
 - `@author`
 - `@license`
-
+- Additionally, include a manually maintained exports list directly
+  below `@file`. This is a project convention, not part of the JSDoc spec:
 Example:
 
 ```javascript
@@ -58,27 +59,27 @@ Example:
  * and pure geometry functions for the sectionMap module.
  *
  * @module sectionMap/engine
- * @auther KinuCyber
+ * @author KinuCyber
  * @license GPL-3.0
  */
 ```
 ---
 ### **Function Documentation**
 
-All function documentation must follow JSDoc syntax, containing the following
-.
-- Description: Resonsibility/Purpose
-- `@param`
-- `@returns` (where applicable)
-- `@throws` (where applicable)
+All function documentation must follow JSDoc syntax, containing the following:
+
+- A plain text description of the function's responsibility
+- `@param {type} name - description` for each parameter
+- `@returns {type} description` (where applicable)
+- `@throws {type} description` (where applicable)
 
 Example:
 
 ```javascript
 /**
  * Approximates cubic-bezier(0.22, 1, 0.36, 1) from the design system.
- * @param {number} t — 0 to 1
- * @returns {number}
+ * @param {number} t - normalized time, 0 to 1
+ * @returns {number} eased value between 0 and 1
  */
 ```
 
