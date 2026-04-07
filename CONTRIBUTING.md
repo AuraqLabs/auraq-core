@@ -182,7 +182,7 @@ If any of the following are true, a new module is likely the right call:
    |- <moduleName>.controller.js
    |- <moduleName>.dom.js
    |- <moduleName>.state.js
-   |- API.md
+   `- API.md
    ```
    Add or remove files as the module warrants - not every module needs
    all five. For example, a purely computational module may not need a
@@ -228,37 +228,56 @@ If any of the following are true, a new module is likely the right call:
 ## 8. File & Folder Structure
 
 ### This Repository
+```
 auraq-core/
-├─ modules/     # Reusable modules (drag-scroll, navigation, etc.)
-│   ├─ panning/
-│   │   ├─ API.md
-│   │   ├─ panning.controller.js
-│   │   ├─ panning.dom.js
-│   │   ├─ panning.init.js
-│   │   └─ panning.state.js
-│   └─ utils/  # Reserved for future shared utilities
-├─ vendor/     # Third Party Modules (locally built)
-│   └─ cobe/
-│       ├─ cobe.create.js
-│       ├─ cobe.init.js
-│       ├─ cobe.phenomenon.js
-│       ├─ cobe.shader.js
-│       └─ cobe.texture.js
-├─ templates/   # Base HTML/CSS/JS template for any new portfolio site
-│   ├─ assets/
-│   ├─ index.html
-│   ├─ css/
-│   │   └─styles.css
-│   └─ js/
-│       └─main.js
-├─ API.md
-├─ CODE_OF_CONDUCT.md
-├─ CONTRIBUTING.md
-├─ LICENSE
-├─ further-reading/
-│   └─ resources.md
-└─ README.md
-
+|- data/        # Reusable data
+|   `- courses.json
+|- further-reading/
+|   `- resources.md # For inspirations
+|- modules/     # Reusable modules
+|   |- panning/
+|   |   |- API.md
+|   |   |- panning.controller.js
+|   |   |- panning.dom.js
+|   |   |- panning.init.js
+|   |   `- panning.state.js
+|   |- sectionMap/
+|   |   |- API.md
+|   |   |- sectionMap.controller.js
+|   |   |- sectionMap.dom.js
+|   |   |- sectionMap.engine.js
+|   |   |- sectionMap.init.js
+|   |   |- sectionMap.render.js
+|   |   `- sectionMap.state.js
+|   |- skillTree/
+|   |   |- API.md
+|   |   |- skillTree.controller.js
+|   |   |- skillTree.dom.js
+|   |   |- skillTree.engine.js
+|   |   |- skillTree.init.js
+|   |   |- skillTree.render.js
+|   |   `- skillTree.state.js
+|   `- utils/  # Reserved for future shared utilities
+|- templates/   # Base HTML/CSS/JS template for any new portfolio site
+|   |- assets/
+|   |- index.html
+|   |- css/
+|   |   `-styles.css
+|   `- js/
+|       `-main.js
+|- vendor/     # Third Party Modules (locally built)
+|   `- cobe/
+|       |- cobe.create.js
+|       |- cobe.init.js
+|       |- cobe.phenomenon.js
+|       |- cobe.shader.js
+|       `- cobe.texture.js
+|- API.md
+|- CODE_OF_CONDUCT.md
+|- CONTRIBUTING.md
+|- LICENSE
+`- README.md
+```
 ## 9. Testing
 
 * Test **each module independently** before integrating with other modules.
