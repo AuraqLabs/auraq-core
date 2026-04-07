@@ -7,7 +7,7 @@ Thank you for your interest in contributing! This guide outlines how to organize
 The canonical source of truth for this repository is GitHub:
 - https://github.com/AuraqLabs/auraq-core
 
-Two mirrors are maintained at 
+Two mirrors are maintained at: 
 - https://kinu.tngl.sh/auraq-core
 - https://sr.ht/kinucyber/auraq-core
 
@@ -16,14 +16,17 @@ Do not push directly to the mirror - all contributions should target the GitHub 
 
 ## 2. General Principles
 
-1. **Keep modules focused:** Each module should ideally export **3-5 functions**.  
-   - If a module grows beyond this, split it into smaller, logically coherent modules.
+1. **Keep modules focused:** Each module file should ideally export **3-5 functions**.
+   - If a module file grows beyond this, split it into smaller, logically coherent files.
 
-2. **Use consistent naming:** Prefix/suffix function names by module or type for clarity.  
-   Example:
-```javascript
-   initPanning()
-```
+2. **Use consistent naming:** Name functions by their verb and responsibility
+   - `get`/`set` for DOM reads and writes
+   - `compute` for pure math
+   - `create` for factory functions
+   - `init` for entry points
+   - Module-prefix only public entry points where disambiguation across modules is needed.
+
+   - Example: `initPanning()`
 
 3. **Keep functions short:** Aim for functions to perform **a single responsibility**. This makes modules easier to understand, test, and reuse.
    - If a function has multiple responsibilities, split into smaller, atomic functions
