@@ -14,7 +14,66 @@ Two mirrors are maintained at:
 The mirrors are kept in sync automatically.
 Do not push directly to the mirror - all contributions should target the GitHub remote.
 
-## 2. General Principles
+> [!CAUTION]
+> Sourcehut (sr.ht) will become the canonical source of truth in near future
+>
+> **DO NOT FILE ISSUES ON GITHUB!**
+> Contact **admin@auraq.org** for any issues
+
+## 2. File & Folder Structure
+
+```
+auraq-core/
+|- data/        # Reusable data
+|   `- courses.json
+|- further-reading/
+|   `- resources.md # For inspirations
+|- modules/     # Reusable modules
+|   |- panning/
+|   |   |- API.md
+|   |   |- panning.controller.js
+|   |   |- panning.dom.js
+|   |   |- panning.init.js
+|   |   `- panning.state.js
+|   |- sectionMap/
+|   |   |- API.md
+|   |   |- sectionMap.controller.js
+|   |   |- sectionMap.dom.js
+|   |   |- sectionMap.engine.js
+|   |   |- sectionMap.init.js
+|   |   |- sectionMap.render.js
+|   |   `- sectionMap.state.js
+|   |- skillTree/
+|   |   |- API.md
+|   |   |- skillTree.controller.js
+|   |   |- skillTree.dom.js
+|   |   |- skillTree.engine.js
+|   |   |- skillTree.init.js
+|   |   |- skillTree.render.js
+|   |   `- skillTree.state.js
+|   `- utils/  # Reserved for future shared utilities
+|- templates/   # Base HTML/CSS/JS template for any new portfolio site
+|   |- assets/
+|   |- index.html
+|   |- css/
+|   |   `-styles.css
+|   `- js/
+|       `-main.js
+|- vendor/     # Third Party Modules (locally built)
+|   `- cobe/
+|       |- cobe.create.js
+|       |- cobe.init.js
+|       |- cobe.phenomenon.js
+|       |- cobe.shader.js
+|       `- cobe.texture.js
+|- API.md
+|- CODE_OF_CONDUCT.md
+|- CONTRIBUTING.md
+|- LICENSE
+`- README.md
+```
+
+## 3. General Principles
 
 1. **Keep modules focused:** Each module file should ideally export **3-5 functions**.
    - If a module file grows beyond this, split it into smaller, logically coherent files.
@@ -31,9 +90,15 @@ Do not push directly to the mirror - all contributions should target the GitHub 
 3. **Keep functions short:** Aim for functions to perform **a single responsibility**. This makes modules easier to understand, test, and reuse.
    - If a function has multiple responsibilities, split into smaller, atomic functions
 
-## 3. Module Documentation
+## 4. Code Style
 
-### **Header Comments**
+* Prefer **ES6+ syntax**: `const`, `let`, arrow functions, `import/export` modules.
+* Keep functions readable and properly indented.
+* Add **meaningful comments** where necessary, but avoid cluttering obvious logic.
+
+## 5. Module Documentation
+
+### **Header Documentation**
 
 Every JS module should begin with a header comment as per JSDocs spec (@) containing following
 - `@file` - file name
@@ -66,7 +131,7 @@ Example:
 ---
 ### **Function Documentation**
 
-All function documentation must follow JSDoc syntax, containing the following:
+All function comments must follow JSDoc syntax, containing the following:
 
 - A plain text description of the function's responsibility
 - `@param {type} name - description` for each parameter
@@ -85,8 +150,9 @@ Example:
 
 For details on JSDoc, see https://jsdoc.app/
 
-## 4. API Reference File
+## 6. API Reference File
 
+### Module API.md
 Maintain a single **API reference file** per module in respective module directory.
 
 This file should list all the features of the module.
@@ -103,36 +169,14 @@ This file contains the following
     - ...
 - ...
 
-### Another file exists under repo root (`API.md`)
+### Root API.md
 
 * This file should list **all modules**, their **exported functions**, **parameters**, **return values**, and **example usage**.
 * Update this file **whenever you add, remove, or modify a module**.
 
 The format for this documentation is yet to be determined
 
-## 5. Navigation and Discoverability (for vim users)
-
-1. **Use `ctags` for fast navigation in Vim:**
-
-   ```bash
-   ctags -R .
-   ```
-
-   * Jump to function definitions using:
-
-     ```
-     :tag functionName
-     ```
-
-2. **Vim search patterns:** Use consistent function prefixes for quick searches:
-
-   ```vim
-   :vimgrep /initPanning/ **/*.js
-   ```
-
-3. **Avoid scattering logic unnecessarily:** Keep related modules logically grouped in folders (`panning/panning.init.js`, `panning/panning.dom.js`, etc).
-
-## 6. Adding Features
+## 7. Adding Features
 
 Before adding a new feature, **review the root API.md** to understand
 the existing module landscape and determine the right approach.
@@ -141,7 +185,7 @@ In some cases, you'd want to extend an existing module whereas in other you'd wa
 
 ---
 
-### When to extend an existing module
+### Extend an existing module
 
 If all of the following are true, add the function to an existing module:
 
@@ -160,7 +204,7 @@ If all of the following are true, add the function to an existing module:
 
 ---
 
-### When to create a new module
+### Create a new module
 
 If any of the following are true, a new module is likely the right call:
 
@@ -212,6 +256,28 @@ If any of the following are true, a new module is likely the right call:
 
 6. Update the repository structure section in `README.md`
 
+## 8. Navigation and Discoverability (for vim users)
+
+1. **Use `ctags` for fast navigation in Vim:**
+
+   ```bash
+   ctags -R .
+   ```
+
+   * Jump to function definitions using:
+
+     ```
+     :tag functionName
+     ```
+
+2. **Vim search patterns:** Use consistent function prefixes for quick searches:
+
+   ```vim
+   :vimgrep /initPanning/ **/*.js
+   ```
+
+3. **Avoid scattering logic unnecessarily:** Keep related modules logically grouped in folders (`panning/panning.init.js`, `panning/panning.dom.js`, etc).
+
 7. Test the module independently before integrating with other modules
 
 ---
@@ -219,65 +285,7 @@ If any of the following are true, a new module is likely the right call:
 > When in doubt, prefer a focused new module over bloating an existing one. Modularity is cheaper to maintain than untangling a module that has grown beyond its original responsibility.
 
 
-## 7. Code Style
 
-* Prefer **ES6+ syntax**: `const`, `let`, arrow functions, `import/export` modules.
-* Keep functions readable and properly indented.
-* Add **meaningful comments** where necessary, but avoid cluttering obvious logic.
-
-## 8. File & Folder Structure
-
-### This Repository
-```
-auraq-core/
-|- data/        # Reusable data
-|   `- courses.json
-|- further-reading/
-|   `- resources.md # For inspirations
-|- modules/     # Reusable modules
-|   |- panning/
-|   |   |- API.md
-|   |   |- panning.controller.js
-|   |   |- panning.dom.js
-|   |   |- panning.init.js
-|   |   `- panning.state.js
-|   |- sectionMap/
-|   |   |- API.md
-|   |   |- sectionMap.controller.js
-|   |   |- sectionMap.dom.js
-|   |   |- sectionMap.engine.js
-|   |   |- sectionMap.init.js
-|   |   |- sectionMap.render.js
-|   |   `- sectionMap.state.js
-|   |- skillTree/
-|   |   |- API.md
-|   |   |- skillTree.controller.js
-|   |   |- skillTree.dom.js
-|   |   |- skillTree.engine.js
-|   |   |- skillTree.init.js
-|   |   |- skillTree.render.js
-|   |   `- skillTree.state.js
-|   `- utils/  # Reserved for future shared utilities
-|- templates/   # Base HTML/CSS/JS template for any new portfolio site
-|   |- assets/
-|   |- index.html
-|   |- css/
-|   |   `-styles.css
-|   `- js/
-|       `-main.js
-|- vendor/     # Third Party Modules (locally built)
-|   `- cobe/
-|       |- cobe.create.js
-|       |- cobe.init.js
-|       |- cobe.phenomenon.js
-|       |- cobe.shader.js
-|       `- cobe.texture.js
-|- API.md
-|- CODE_OF_CONDUCT.md
-|- CONTRIBUTING.md
-|- LICENSE
-`- README.md
-```
 ## 9. Testing
 
 * Test **each module independently** before integrating with other modules.
