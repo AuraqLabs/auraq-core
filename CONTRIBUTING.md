@@ -92,11 +92,112 @@ auraq-core/
 
 ## 4. Code Style
 
-* Prefer **ES6+ syntax**: `const`, `let`, arrow functions, `import/export` modules.
-* Keep functions readable and properly indented.
-* Add **meaningful comments** where necessary, but avoid cluttering obvious logic.
+- Prefer **ES6+ syntax**: `const`, `let`, arrow functions, `import/export` modules.
+- Keep functions readable and properly indented.
+- Add **meaningful comments** where necessary, but avoid cluttering obvious logic.
 
-## 5. Module Documentation
+## 5. Commit Guidelines
+
+The commit workflow is currently Pull Request based, but planed to be email-driven, patch-based commit workflow to achieve pure decentralization
+
+Until then, follow [Conventional Commit](https://conventionalcommits.org) guidelines:-
+
+-# The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
+
+> Commits MUST be prefixed with a type, which consists of following
+> - build
+> - docs
+> - feat
+> - fix
+> - refactor
+> - style
+> - test
+> 
+> followed by the OPTIONAL scope, OPTIONAL `!`, and REQUIRED terminal colon `:` and a space.
+>
+> Example: `docs(readme): <whateva>`
+
+> The type `build` MUST be used when changes affect build step (such
+> as data directory or data-injector.js)
+
+> The type `docs` MUST be used for documentation only (including API)
+
+> The type `feat` MUST be used when a commit adds a new feature to your
+> application or library.
+
+> The type `fix` MUST be used when a commit represents a bug fix for
+> your application.
+
+> The type `refactor` MUST be used when a code change that neither
+> fixes a bug nor adds a feature
+
+> The type `style` MUST be used when changes that do not affect the
+> meaning of the code (white-space, format, missing semi-colons, etc)
+
+> The type `test`  MUST be used when a test has been set up of any kind
+
+> A scope MAY be provided after a type. A scope MUST consist of the
+> name of the module or global file affected
+>
+> Example: `refactor(panning): <whateva>`, `docs(panning): <whateva>`
+
+> A description MUST immediately follow the colon and space after the
+> type/scope prefix. The description is a short summary of the code
+>.changes
+> 
+> Example: `refactor(panning): Introduce engine.js to contain math"
+
+> A longer commit body MAY be provided after the short description,
+> providing additional contextual information about the code changes.
+> The body MUST begin one blank line after the description.
+
+> A commit body is free-form and MAY consist of any number of
+> newline separated paragraphs.
+
+> One or more footers MAY be provided one blank line after the body.
+> Each footer MUST consist of a word token, followed by either
+> a `:<space>` or `<space>#` separator, followed by a string value
+> (this is inspired by the git trailer convention).
+>
+> Example: `Refs: #123456`
+
+> A footer's token MUST use - in place of whitespace characters
+> This helps differentiate the footer section from a multi-paragraph
+> body). An exception is made for `BREAKING CHANGE`,
+> which MAY also be used as a token.
+> 
+> Example: `Acked-by: <name@address>`
+
+> A footer's value MAY contain spaces and newlines, and parsing
+> MUST terminate when the next valid footer token/separator
+> pair is observed.
+
+> Breaking changes MUST be indicated in the type/scope prefix
+> of a commit, or as an entry in the footer.
+
+> If included as a footer, a breaking change MUST consist of the
+> uppercase text BREAKING CHANGE, followed by a colon, space, and
+> description
+>
+> Example: `BREAKING CHANGE: env now take sprecedence over config`
+
+> If included in the type/scope prefix, breaking changes MUST be
+> indicated by a `!` immediately before the `:`
+> If `!` is used, `BREAKING CHANGE: ` MAY be omitted from the footer
+> section, and the commit description SHALL be used to describe the
+> breaking change.
+
+> Types other than prescribed may be used upon approval from
+> admin@auraq.org
+
+> The units of information that make up Conventional Commits MUST NOT
+> be treated as case-sensitive by implementors, with the exception of
+> BREAKING CHANGE which MUST be uppercase.
+
+> BREAKING-CHANGE MUST be synonymous with BREAKING CHANGE, when used
+> as a token in a footer.
+
+## 6. Module Documentation
 
 ### **Header Documentation**
 
@@ -150,7 +251,7 @@ Example:
 
 For details on JSDoc, see https://jsdoc.app/
 
-## 6. API Reference File
+## 7. API Reference File
 
 ### Module API.md
 Maintain a single **API reference file** per module in respective module directory.
@@ -176,7 +277,7 @@ This file contains the following
 
 The format for this documentation is yet to be determined
 
-## 7. Adding Features
+## 8. Adding Features
 
 Before adding a new feature, **review the root API.md** to understand
 the existing module landscape and determine the right approach.
@@ -256,7 +357,7 @@ If any of the following are true, a new module is likely the right call:
 
 6. Update the repository structure section in `README.md`
 
-## 8. Navigation and Discoverability (for vim users)
+## 9. Navigation and Discoverability (for vim users)
 
 1. **Use `ctags` for fast navigation in Vim:**
 
@@ -284,15 +385,13 @@ If any of the following are true, a new module is likely the right call:
 
 > When in doubt, prefer a focused new module over bloating an existing one. Modularity is cheaper to maintain than untangling a module that has grown beyond its original responsibility.
 
-
-
-## 9. Testing
+## 10. Testing
 
 * Test **each module independently** before integrating with other modules.
 * Verify **cross-browser behavior**, especially for scroll/drag interactions (Chrome, Firefox, Safari).
 * Ensure **momentum/elasticity** feel is smooth.
 
-## 10. Summary
+## 11. Summary
 
 * **Document everything** (module headers, function docs, API.md)
 * **Use consistent names** for discoverability
