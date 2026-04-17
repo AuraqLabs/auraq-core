@@ -2,7 +2,7 @@
 
 **Auraq Core** is a modular frontend templating system. It provides the UI/UX and interaction layer for all of my static portfolio sites. Unique features include direct-manipulation scrolling with momentum, horizontal navigation systems, and a `<noscript>` fallback so sites remain functional even when JavaScript is disabled.
 
-Modules are served via CDN and imported directly by consumer sites — no build step, no submodules.
+Modules are served via CDN and imported directly by consumer sites during build.
 
 ---
 
@@ -35,10 +35,12 @@ Auraq provides a clean, reusable foundation for static web projects with the fol
 
 ## Features
 
-- **Panning** — Smooth pointer-based panning with momentum, configurable axis, and nested container support
-- **Navigation** *(planned)* — Modular vertical or horizontal nav bars with active indicators
-- **Carousel** *(planned)* — Flexible card carousel module
-- **Centralized Documentation** — Each module ships with its own `API.md`
+- **Panning** -- Smooth pointer-based panning with momentum, configurable axis, and nested container support
+- **Section Map** -- Modular bar at bottom of page, acting as a map of sections
+- **Skill Tree** -- Graph-based nodes of courses and projects
+- **Minimal Build**: Data injection from auraq-hive and auraq-core as the only build step
+- **Centralized Data**: All sites' dynamic data (courses, projects, blogs, etc) are stored on auraq-hive
+- **Documentation** — Each module ships with its own `API.md`
 - **JavaScript Disabled Fallback** — Core content remains accessible without JS
 
 ---
