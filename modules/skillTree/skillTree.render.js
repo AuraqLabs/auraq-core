@@ -1,5 +1,7 @@
 // skillTree.render.js
 
+// TODO: Report card - render a .skillTree-reportCard below popup for each entry in nodeData.report[], linking to lab reports or demos. Blocks: exams. see design.md for popup positioning reference.
+
 /**
  * skillTree.render.js
  * Owns DOM creation and visual updates for tree, nodes and edges
