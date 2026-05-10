@@ -6,8 +6,10 @@ Behavior of link:-
 - hover: popups up the Link Preview
 
 Appearance of Preview:-
-small card with preview of page, beneath which are two icons for
+- small card with preview of page, beneath which are two icons for
 opening the link on same tab or new tab
+- the card much appear above or beneath the object of link, determined
+by the object's position in viewport
 
 Constraits:
 - icons might be hard to press on phone so bigger hitbox
