@@ -4,3 +4,4 @@ serve.py
 .wrangler
 *.swp
 .aider*
+.backlog
