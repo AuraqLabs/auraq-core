@@ -36,7 +36,22 @@ Each module ships its own detailed API.md within its folder.
 | Panning | Live |
 | Section Map | Live |
 | Skill Tree | Live |
-| Skill Accordian | Planned |
+| Skill Accordion | Planned |
 | Link Preview | Planned |
 | Text Selectable in Panning | Planned |
 | Dark/Light Theme Toggle | Planned |
+| Lightbox | Planned |
+| Phase Stepper | Planned |
+| Progression Slider | Planned |
+| Variant Switcher | Planned |
+| Technical Summary | Planned |
+| Filter Bar | Planned |
+| Gallery Card | Planned |
+| Source Profiles | Planned |
+| Dispatch Feed | Planned |
+| Parallax | Planned |
+| Code Block | Planned |
+| Data Embed | Planned |
+| Status Indicator | Planned |
+| Status Badge | Planned |
+| 
