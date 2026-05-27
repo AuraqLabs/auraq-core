@@ -210,9 +210,38 @@ For details on JSDoc, see https://jsdoc.app/
 
 ## 7. Theming Documentation
 
-The theming convention at following are followed
+The theming is combination of
+- CSS Custom Properties
+- Design Token Hierarchy
+
+Read about CSS Custom Properties at 
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties
+- https://web.dev/learn/css/custom-properties
+- https://css-tricks.com/css-custom-properties-theming/
+
+Read about Design Token Hierarchy at
+- https://piccalil.li/blog/how-were-approaching-theming-with-modern-css/
+- https://piccalil.li/blog/how-were-approaching-theming-with-modern-css/
+- https://dev.to/whoisryosuke/theming-in-modern-design-systems-2034
+
+Further (optional) reading about css `@layer`
+- https://dev.to/whoisryosuke/theming-in-modern-design-systems-2034
+- https://www.smashingmagazine.com/2022/01/introduction-css-cascade-layers/
+- https://www.smashingmagazine.com/2025/09/integrating-css-cascade-layers-existing-project/
+- https://ishadeed.com/article/cascade-layers/
+
+Further (optiona) reading about css `@property`
+- https://web.dev/blog/at-property-baseline
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property
+- https://moderncss.dev/providing-type-definitions-for-css-with-at-property/
+
+
+The theming convention at following are ideal examples
 - https://github.com/material-components/material-web/blob/mwc/docs/theming.md
 - https://mui.com/material-ui/customization/css-layers/
+
+Icons may be used from the following
+- https://fonts.google.com/icons
 
 Note: Not implemented yet, this is just a planned part
 
