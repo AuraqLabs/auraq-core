@@ -208,7 +208,15 @@ Example:
 
 For details on JSDoc, see https://jsdoc.app/
 
-## 7. API Reference File
+## 7. Theming Documentation
+
+The theming convention at following are followed
+- https://github.com/material-components/material-web/blob/mwc/docs/theming.md
+- https://mui.com/material-ui/customization/css-layers/
+
+Note: Not implemented yet, this is just a planned part
+
+## 8. API Reference File
 
 ### Module API.md
 Maintain a single **API reference file** per module in respective module directory.
@@ -234,7 +242,7 @@ This file contains the following
 
 The format for this documentation is yet to be determined
 
-## 8. Adding Features
+## 9. Adding Features
 
 Before adding a new feature, **review the root API.md** to understand
 the existing module landscape and determine the right approach.
@@ -314,7 +322,7 @@ If any of the following are true, a new module is likely the right call:
 
 6. Update the repository structure section in `README.md`
 
-## 9. Navigation and Discoverability (for vim users)
+## 10. Navigation and Discoverability (for vim users)
 
 1. **Use `ctags` for fast navigation in Vim:**
 
@@ -342,13 +350,15 @@ If any of the following are true, a new module is likely the right call:
 
 > When in doubt, prefer a focused new module over bloating an existing one. Modularity is cheaper to maintain than untangling a module that has grown beyond its original responsibility.
 
-## 10. Testing
+## 11. Testing
 
 * Test **each module independently** before integrating with other modules.
 * Verify **cross-browser behavior**, especially for scroll/drag interactions (Chrome, Firefox, Safari).
-* Ensure **momentum/elasticity** feel is smooth.
+* Ensure **animations/transitions** feel smooth (momentum, elasticity, etc)
 
-## 11. Summary
+Note: This is not implemeneted yet
+
+## 12. Summary
 
 * **Document everything** (module headers, function docs, API.md)
 * **Use consistent names** for discoverability
