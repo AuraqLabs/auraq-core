@@ -133,6 +133,7 @@ Scope MUST be the name of the affected module or global file.
 
     docs(panning): clarify axis configuration
     refactor(sectionMap): extract scroll math to engine.js
+    docs(api): add further planned features in api.md
 
 If there are multiple scopes in single commit (say root and module api
 are updated with same data), split them into separate commits such that
