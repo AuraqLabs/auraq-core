@@ -54,4 +54,5 @@ Each module ships its own detailed API.md within its folder.
 | Data Embed | Planned |
 | Status Indicator | Planned |
 | Status Badge | Planned |
+| Waveform Card (ath10k logs diagram) | Planned |
 | 
