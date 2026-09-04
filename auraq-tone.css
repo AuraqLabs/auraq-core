@@ -1,0 +1,46 @@
+@layer auraq.base, auraq.modules, auraq.theme;
+/* unlayed consumer CSS wings automatically */
+
+/* Primitive color tokens */
+:root {
+  --color-orange-500: #FF9124;
+  --color-orange-600: #F16724;
+  --color-orange-400: #FDA40B;
+  --color-green-500:  #149B48;
+  --color-near-black: #140A0A;
+  --color-surface:    #1E1E1E;
+  --color-foreground: #EFF9F0;
+}
+
+/* Semantic color tokens */
+:root {
+  --theme-color:   var(--color-orange-500);
+  --accent-color:  var(--color-green-500);
+  --bg-color:      var(--color-near-black);
+  --surface-color: var(--color-surface);
+  --text-color:    var(--color-foreground);
+}
+
+/* Type scale tokens */
+:root {
+  --fs-micro: 0.75rem;
+  --fs-meta:  0.875rem;
+  --fs-base:  1rem;
+  --fs-h6: 1.25rem;
+  --fs-h5: 1.5625rem;
+  --fs-h4: 1.9375rem;
+  --fs-h3: 2.4375rem;
+  --fs-h2: 3.0625rem;
+  --fs-h1: 3.8125rem;
+}
+
+/* Font family tokens */
+:root {
+  --font-primary:     "Exo 2", system-ui, sans-serif;
+  --font-heading:     "Faustina", serif;
+  --font-heading-alt: "Space Grotesk", system-ui, sans-serif;
+  --font-mono:        "Space Mono", monospace;
+  --font-display:     "Aldrich", system-ui, sans-serif;
+  --font-display-alt: "Orbitron", system-ui, sans-serif;
+  --font-arabic:      "Zain", system-ui, sans-serif;
+}                                                      
