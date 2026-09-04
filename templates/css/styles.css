@@ -80,7 +80,7 @@ body, html {
   width: 100%;
   font-family: var(--font-primary);
   background-color: transparent;
-  color: #e0e0e0
+  color: var(--text-color);
 }
 
 body {
@@ -93,7 +93,7 @@ body {
   position: relative;
   font-size: var(--fs-base);
   z-index: auto;
-  background-color: #1e1e1e;
+  background-color: var(--bg-color);
 }
 
 small, .meta {
@@ -317,7 +317,7 @@ nav a:hover{
 .cta-button::before {
   content: "";
   position: absolute;
-  background: #272727;
+  background: color-mix(in srgb, var(--surface-color) 85%, white);
   border-radius: 9px;
   transition: 0.5s;
 }
