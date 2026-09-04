@@ -36,31 +36,13 @@
 
  */
 
+/* auraq-tone.css file */
+@import url("https://tone.auraq.org");
+
 :root {
 
   /* --- Dev --- */
   --border-pixel: 0px;
-
-  /* ── Color ── */
-  
-  --theme-color: 255, 145, 36; /* Orange theme */
-  --accent-color: 20, 155, 72; /* Green accent */
-  --primary-color: 20, 10, 10; /* Primary base */
-  --secondary-color: 30, 30, 30; /* Surface */
-  --foreground-color: 239, 249, 240; /* Text */
-
-  /* ── Type Scale ── */
-
-  --fs-micro: 0.75rem;   /* 12px */
-  --fs-meta:  0.875rem;  /* 14px */
-  --fs-base:  1rem;      /* 16px */
-
-  --fs-h6: 1.25rem;      /* 20px */
-  --fs-h5: 1.5625rem;    /* 25px */
-  --fs-h4: 1.9375rem;    /* 31px */
-  --fs-h3: 2.4375rem;    /* 39px */
-  --fs-h2: 3.0625rem;    /* 49px */
-  --fs-h1: 3.8125rem;    /* 61px */
 
   /* ── Type Fonts ── */
   
@@ -72,22 +54,6 @@
   --font-aldrich: "Aldrich", system-ui, sans-serif;		/* Display / Accent */
   --font-orbitron: "Orbitron", system-ui, sans-serif;		/* Display / Accent */
   --font-space-mono: "Space Mono", monospace;			/* Alternative Codes, Micro UI */
-  
-
-  /* Primary (Body + UI) */
-  --font-primary: var(--font-exo);
-
-  /* Headings + Hero */
-  --font-heading: var(--font-faustina);
-  --font-heading-alt: var(--font-space-grotesk);
-
-  /* Code + Micro UI */
-  --font-mono: var(--font-google-sans-code);
-  --font-mono-alt: var(--font-space-mono);
-
-  /* Accent / Display (optional, rare) */
-  --font-display: var(--font-aldrich);
-  --font-display-alt: var(--font-orbitron);
 }
 
 /* Global Reset */
@@ -147,12 +113,12 @@ h6 { font-size: var(--fs-h6); }
 
 header, footer {
   border: var(--border-pixel) solid blue;
-  background-color: rgb(var(--secondary-color));
+  background-color: var(--surface-color);
   display: flex;
   padding: 4px;
   position: relative;
   width: 100%;
-  color: rgb(var(--theme-color));
+  color: var(--theme-color);
   text-align: center;
   gap: 24px;
   justify-content: space-between;
@@ -169,7 +135,7 @@ nav {
 
 nav a {
   font-size: 16px;
-  color: rgb(var(--theme-color));
+  color: var(--theme-color);
   transition: color 0.2s ease-out;
   text-decoration: none;
   font-weight: bold;
@@ -177,8 +143,8 @@ nav a {
 }
 
 nav a:hover{
-  color: rgb(var(--foreground-color));
-  text-shadow: 0 0 2px rgb(var(--accent-color));
+  color: var(--text-color);
+  text-shadow: 0 0 2px var(--accent-color);
 }
 
 .site-identity {
@@ -250,7 +216,7 @@ nav a:hover{
   margin-left: 10px;
   margin-right: 10px;
   padding: 24px;
-  background: rgb(var(--secondary-color));
+  background: var(--surface-color);
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(0,0,0,0);
   text-align: center;
@@ -323,11 +289,11 @@ nav a:hover{
 .cta-button {
   position: relative;
   text-decoration: none;
-  color: var(--foreground-color);
+  color: var(--text-color);
   background: transparent;
   padding: 14px 22px;
   border-radius: 10px;
-  border: 4px solid rgba(var(--foreground-color), 0.7);
+  border: 4px solid color-mix(in srgb, var(--text-color) 70%, transparent);
   font-family: var(--font-mono);
   font-weight: 800;
   font-size: 1.25em;
@@ -338,7 +304,7 @@ nav a:hover{
   width: 4px; /* Line thickness */
   height: 60px; /* Line length */
   border-radius: 2px;
-  background-color: rgba(var(--foreground-color), 0.7); /* Line color */
+  background-color: color-mix(in srgb, var(--text-color) 70%, transparent); /* Line color */
   font-weight: thin;
   margin: 0 10px; /* Space on both sides of the line */
 }
