@@ -230,12 +230,14 @@ nav a:hover{
   position: relative;
   box-sizing: border-box;
   scroll-behavior: auto;
-  touch-action: none;
   cursor: default;
-
+  overflow-y: auto;
+  
   /* hide the scrollbar */
   scrollbar-width: none;
 }
+
+[data-js] .scrollContainer { touch-action: none; }
 
 /* Content Section Styling */
 .content-section {
