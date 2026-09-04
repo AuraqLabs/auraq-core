@@ -7,18 +7,23 @@
   --color-orange-600: #F16724;
   --color-orange-400: #FDA40B;
   --color-green-500:  #149B48;
-  --color-near-black: #140A0A;
+  --color-dark-900: #140A0A;
+  --color-dark-800: #1E1E1E;
+  --color-dark-700: #272727;
+  --color-dark-600: #2F2F2F;
   --color-surface:    #1E1E1E;
   --color-foreground: #EFF9F0;
 }
 
 /* Semantic color tokens */
 :root {
-  --theme-color:   var(--color-orange-500);
-  --accent-color:  var(--color-green-500);
-  --bg-color:      var(--color-near-black);
-  --surface-color: var(--color-surface);
-  --text-color:    var(--color-foreground);
+  --theme-color:     var(--color-orange-500);
+  --accent-color:    var(--color-green-500);
+  --bg-color:        var(--color-dark-900);
+  --surface-color:   var(--color-dark-800);
+  --surface-color-2: var(--color-dark-700);
+  --surface-color-3: var(--color-dark-600);
+  --text-color:      var(--color-foreground);
 }
 
 /* Type scale tokens */
