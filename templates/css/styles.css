@@ -93,7 +93,7 @@ body {
   position: relative;
   font-size: var(--fs-base);
   z-index: auto;
-  background-color: var(--bg-color);
+  background-color: var(--surface-color);
 }
 
 small, .meta {
