@@ -86,71 +86,73 @@ function injectStyles() {
   const style = document.createElement('style');
   style.id = 'sectionMap-styles';
   style.textContent = `
-    .sectionMap-bar {
-      position: fixed;
-      bottom: 64px;
-      right: 256px;
-      width: auto;
-      height: 36px;
-      aspect-ratio: 20/2;
-      opacity: 0.4;
-      transition: opacity 200ms ease-out;
-      background: rgba(20, 10, 10, 0.88);
-      border: 2px rgba(255,255,255,0.22) solid;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      padding: 0 ${BAR_PADDING}px;
-      box-sizing: border-box;
-      cursor: pointer;
-      z-index: 9999;
-      touch-action: none;
-      user-select: none;
-      isolation: isolate;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    @media (max-width: 800px) {
+    @layer auraq.sectionMap {
       .sectionMap-bar {
-        width: 90vw;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 20px;
+        position: fixed;
+        bottom: 64px;
+        right: 256px;
+        width: auto;
+        height: 36px;
+        aspect-ratio: 20/2;
+        opacity: var(--sectionMap-bar-opacity, 0.4);
+        transition: opacity 200ms ease-out;
+        background: var(--sectionMap-bar-bg, color-mix(in srgb, var(--bg-color, #140A0A) 88%, transparent));
+        border: 2px solid var(--sectionMap-bar-border, color-mix(in srgb, var(--text-color, #EFF9F0) 21%, transparent));
+        border-radius: var(--sectionMap-bar-radius, 8px);
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 0 ${BAR_PADDING}px;
+        box-sizing: border-box;
+        cursor: pointer;
+        z-index: 9999;
+        touch-action: none;
+        user-select: none;
+        isolation: isolate;
+        -webkit-tap-highlight-color: transparent;
       }
-    }
 
-    .sectionMap-tick {
-      width: 2px;
-      height: 16px;
-      background: rgb(125, 125, 125);
-      border-radius: 1px;
-      flex-shrink: 0;
-      pointer-events: none;
-    }
+      @media (max-width: 800px) {
+        .sectionMap-bar {
+          width: 90vw;
+          left: 50%;
+          transform: translateX(-50%);
+          bottom: 20px;
+        }
+      }
 
-    .sectionMap-thumb {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: ${THUMB_WIDTH}px;
-      height: 18px;
-      background: rgb(255, 145, 36);
-      border-radius: 2px;
-      pointer-events: none;
-    }
+      .sectionMap-tick {
+        width: 2px;
+        height: 16px;
+        background: var(--sectionMap-tick-color, var(--text-color, #7D7D7D));
+        border-radius: 1px;
+        flex-shrink: 0;
+        pointer-events: none;
+      }
 
-    .sectionMap-bar:hover {
-      opacity: 1;
-      transition: none;
-    }
+      .sectionMap-thumb {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: ${THUMB_WIDTH}px;
+        height: 18px;
+        background: var(--sectionMap-thumb-color, var(--theme-color, #FF9124));
+        border-radius: var(--sectionMap-thumb-radius, 2px);
+        pointer-events: none;
+      }
 
-    .sectionMap-bar:hover .sectionMap-thumb {
-      height: 24px
-    }
+      .sectionMap-bar:hover {
+        opacity: 1;
+        transition: none;
+      }
 
-    .sectionMap-bar:hover .sectionMap-tick {
-      background: rgb(220, 140, 35);
+      .sectionMap-bar:hover .sectionMap-thumb {
+        height: 24px
+      }
+
+      .sectionMap-bar:hover .sectionMap-tick {
+	background: var(--sectionMap-tick-color, var(--text-color, #7D7D7D));
+      }
     }
     `;
   document.head.appendChild(style);
