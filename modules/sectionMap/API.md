@@ -4,7 +4,7 @@ Scroll indicator UI module for Auraq Core. Renders a pill bar with one tick mark
 
 ---
 
-## Consumer Usage
+## HTML Contract (Consumer Usage)
 
 ```javascript
 import { initSectionMap } from 'https://cdn.auraq.org/modules/sectionMap/sectionMap.init.js';
@@ -28,6 +28,27 @@ document.addEventListener('DOMContentLoaded', () => {
 ```
 
 `#main` must use `scroll-behavior: auto` — all three scrollers write `scrollTop` directly and must not fight a browser-managed smooth scroll.
+
+**Design Tokens (CSS Variables)**
+
+The following can be modified per author's taste.
+| Component Token | Semantic Fallback | Default |
+| --- | --- | --- |
+| --sectionMap-bar-bg | --bg-color | #140A0A |
+| --sectionMap-bar-border | --text-color | #EFF9F0 |
+| --sectionMap-bar-radius | | 8px |
+| --sectionMap-bar-opacity | | 0.4 |
+| --sectionMap-tick-color | --text-color | #7D7D7D |
+| --sectionMap-thumb-color | --theme-color | #FF9124 |
+| --sectionMap-thumb-radius | | 2px |
+
+Motion: easing approximates `cubic-bezier(0.22, 1, 0.36, 1)`. Click animation: 380ms (within the design system panel range of 300–450ms). Drag lerp settles in ~300ms at 60fps. Momentum friction: `0.85` per frame, matching the panning module.
+
+**Responsive:** At `≤800px`, the bar switches from `right: 256px` fixed positioning to `width: 90vw` centred at the bottom of the viewport (`bottom: 20px`). `ResizeObserver` re-measures tick positions and section norms on this transition automatically.
+
+> [!NOTE]
+> The Section Map never exists if JavaScript is disabled.
+> This is a safety feature for No-JS principle.
 
 ---
 
@@ -361,21 +382,6 @@ All DOM reads and writes for the module pass through here. No math, no constants
 |---------------------------------|---------|-----------------------------------------|
 | `setThumbPosition(thumb, px)`   | `void`  | Writes `thumb.style.transform`          |
 | `setAriaValue(element, value)`  | `void`  | Writes `aria-valuenow` on the bar       |
-
----
-
-## Design Tokens Used
-
-| Element | Value                       | Derivation               |
-|---------|-----------------------------|--------------------------|
-| Bar bg  | `rgba(20, 10, 10, 0.88)`    | `--primary-color` at 88% |
-| Border  | `rgba(255, 255, 255, 0.22)` | White at 22% opacity     |
-| Ticks   | `rgb(125, 125, 125)`        | Neutral mid-grey         |
-| Thumb   | `rgb(255, 145, 36)`         | `--theme-color` direct   |
-
-Motion: easing approximates `cubic-bezier(0.22, 1, 0.36, 1)`. Click animation: 380ms (within the design system panel range of 300–450ms). Drag lerp settles in ~300ms at 60fps. Momentum friction: `0.85` per frame, matching the panning module.
-
-**Responsive:** At `≤800px`, the bar switches from `right: 256px` fixed positioning to `width: 90vw` centred at the bottom of the viewport (`bottom: 20px`). `ResizeObserver` re-measures tick positions and section norms on this transition automatically.
 
 ---
 
