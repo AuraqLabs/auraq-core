@@ -163,7 +163,7 @@ function showTree(nodes, treeContainer) {
  * Subsequent "Tree" clicks: shows already-built tree — no rebuild.
  * "Accordion" click:        hides tree, shows accordion.
  */
-export function initSkills() {
+export function initSkillTree() {
   const container = getSkillsContainer();
 
   if (!container) {
