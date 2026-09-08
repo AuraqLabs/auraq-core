@@ -5,3 +5,4 @@ serve.py
 *.swp
 .aider*
 .backlog
+*.bak*
