@@ -60,9 +60,9 @@ export function createFilters(container, domains) {
 }
 
 /**
- * @param: {Element} container
- * @param: {array} array
- * returns: { node: Element }
+ * @param   {Element} container
+ * @param   {object}  nodeData
+ * @returns {Element}
  */
 function createNode(container, nodeData) {
   const node = document.createElement('div');
