@@ -9,11 +9,11 @@
  */
 
 /**
- * Imports setThumbPosition() and setArialvalue from dom.js
+ * Imports setThumbPosition() and setAriavalue from dom.js
  */
 import {
   setThumbPosition,
-  setArialValue
+  setAriaValue
 } from './sectionMap.dom.js';
 
 /**
@@ -75,7 +75,7 @@ export function createBar(sectionCount) {
  */
 export function updateThumb(thumb, px, normalizedPosition) {
   setThumbPosition(thumb, (px - THUMB_WIDTH / 2))
-  setArialValue(thumb.parentElement, Math.round(normalizedPosition * 100));
+  setAriaValue(thumb.parentElement, Math.round(normalizedPosition * 100));
 }
 
 

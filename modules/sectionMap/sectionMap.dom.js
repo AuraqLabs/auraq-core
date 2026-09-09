@@ -16,7 +16,7 @@
  *   - setScrollTop(container, value): void
  *   - getSectionOffsetTop(section): number
  *   - SetThumbPosition(thumb, px): void
- *   - setArialValue(element, value): void
+ *   - setAriaValue(element, value): void
  */
 
 /**
@@ -140,6 +140,6 @@ export function setThumbPosition(thumb, px) {
  * @param {number} value
  * @Returns: void
  */
-export function setArialValue(element, value) {
+export function setAriaValue(element, value) {
   element.setAttribute('aria-valuenow', value);
 }
