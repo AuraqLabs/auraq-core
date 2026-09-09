@@ -36,7 +36,7 @@ Each module ships its own detailed API.md within its folder.
 | Panning | Live |
 | Section Map | Live |
 | Skill Tree | Live |
-| Skill Accordion | Planned |
+| Skill Accordion | Live |
 | Link Preview | Planned |
 | Text Selectable in Panning | Planned |
 | Dark/Light Theme Toggle | Planned |
