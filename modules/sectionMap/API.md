@@ -1,4 +1,4 @@
-# sectionMap Module — API Reference
+# sectionMap Module - API Reference
 
 Scroll indicator UI module for Auraq Core. Renders a pill bar with one tick mark per `<section>` inside `<main>`, and an orange thumb that tracks the current scroll position. Clicking the bar animates to the nearest section. Dragging lerps `scrollTop` in real time and coasts with momentum on release. Both interactions yield immediately to the panning module when a pan gesture begins on `#main`.
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 ```
 
-`#main` must use `scroll-behavior: auto` — all three scrollers write `scrollTop` directly and must not fight a browser-managed smooth scroll.
+`#main` must use `scroll-behavior: auto` - all three scrollers write `scrollTop` directly and must not fight a browser-managed smooth scroll.
 
 **Design Tokens (CSS Variables)**
 
@@ -55,7 +55,8 @@ Motion: easing approximates `cubic-bezier(0.22, 1, 0.36, 1)`. Click animation: 3
 ## Module Architecture
 
 ```
-sectionMap.init.js        ← composition root — discovery and wiring
+sectionMap.init.js        ← composition root - discovery and wiring
+sectionMap.state.js       ← UI state holder
 sectionMap.controller.js  ← pointer events, scroll coordination, animation state
 sectionMap.render.js      ← DOM creation and visual updates for bar, ticks, thumb
 sectionMap.engine.js      ← scroll math, geometry, rAF loops
@@ -122,8 +123,8 @@ initSectionMap();
 Owns all pointer event handling, scroll coordination, and animation state for the sectionMap module. Called once by `init.js` after bar creation.
 
 - Measures `tickPositions` and `sectionNorms` on creation
-- Starts a `ResizeObserver` to re-measure both arrays on bar resize
-- Starts a rAF tracking loop via `createTrackingLoop` — does **not** use a `scroll` event listener, avoiding Firefox's scroll-linked effect warning
+- Starts a `ResizeObserver` to re-measure <main> and both arrays on bar resize
+- Starts a rAF tracking loop via `createTrackingLoop` - does **not** use a `scroll` event listener, avoiding Firefox's scroll-linked effect warning
 - Listens for `pointerdown` on `#main` and cancels all active loops immediately, yielding `scrollTop` ownership to the panning module
 - Binds `pointerdown`, `pointermove`, `pointerup`, `pointercancel` on the bar
 - Tracks pointer velocity (`px/ms`) during drag for momentum handoff on release
@@ -150,7 +151,7 @@ if (bar?._cancelSectionMapAnimation) bar._cancelSectionMapAnimation();
 
 #### `createBar(sectionCount): { bar, ticks, thumb }`
 
-Creates and injects the pill bar into `document.body`. Also injects a `<style>` block idempotently — safe to call multiple times, styles are only injected once.
+Creates and injects the pill bar into `document.body`. Also injects a `<style>` block idempotently - safe to call multiple times, styles are only injected once.
 
 | Parameter      | Type   | Description                    |
 |----------------|--------|--------------------------------|
@@ -172,8 +173,8 @@ aria-valuenow="0"   <!-- updated live by updateThumb -->
 
 | Constant      | Value | Description                                                    |
 |---------------|-------|----------------------------------------------------------------|
-| `BAR_PADDING` | `0`   | Horizontal padding (px) inside the bar — used in CSS only      |
-| `THUMB_WIDTH` | `3`   | Width (px) of the thumb — used in CSS and thumb centering math |
+| `BAR_PADDING` | `0`   | Horizontal padding (px) inside the bar - used in CSS only      |
+| `THUMB_WIDTH` | `3`   | Width (px) of the thumb - used in CSS and thumb centering math |
 
 ---
 
@@ -200,7 +201,7 @@ Pure function. Maps each section's `offsetTop` to its normalized scroll position
 | `offsetTops` | number[] | `offsetTop` of each section in px                     |
 | `scrollable` | number   | `scrollHeight - clientHeight` of the scroll container |
 
-Returns `number[]` — one value per section, clamped to [0, 1]. Returns all zeros if `scrollable ≤ 0`.
+Returns `number[]` - one value per section, clamped to [0, 1]. Returns all zeros if `scrollable ≤ 0`.
 
 ---
 
@@ -214,7 +215,7 @@ Pure function. Returns the pixel X position the thumb centre should sit at, usin
 | `tickPositions`      | number[] | Measured centre X of each tick in px           |
 | `sectionNorms`       | number[] | Normalized scroll position of each section     |
 
-Returns `number` — pixel X of thumb centre.
+Returns `number` - pixel X of thumb centre.
 
 ---
 
@@ -226,7 +227,7 @@ Returns the container's current scroll position as a 0–1 value.
 |-------------|---------|----------------------|
 | `container` | Element | The scroll container |
 
-Returns `number` — clamped to [0, 1]. Returns `0` if container is not scrollable.
+Returns `number` - clamped to [0, 1]. Returns `0` if container is not scrollable.
 
 ---
 
@@ -239,7 +240,7 @@ Starts a rAF loop that polls `scrollTop` on every frame and calls `onUpdate` onl
 | `container`| Element  | The scroll container                                    |
 | `onUpdate` | Function | Called with the new normalized position whenever `scrollTop` changes |
 
-Returns a **stop function** — call it to cancel the loop.
+Returns a **stop function** - call it to cancel the loop.
 
 ```javascript
 const stop = createTrackingLoop(container, (normalized) => { ... });
@@ -291,8 +292,8 @@ Returns an object with two methods:
 
 | Constant      | Value  | Effect                                          |
 |---------------|--------|-------------------------------------------------|
-| `friction`    | `0.85` | Velocity multiplier per frame — matches panning |
-| `minVelocity` | `0.3`  | px/frame — loop stops below this threshold      |
+| `friction`    | `0.85` | Velocity multiplier per frame - matches panning |
+| `minVelocity` | `0.3`  | px/frame - loop stops below this threshold      |
 
 **Velocity conversion in `controller.js`:**
 
@@ -314,13 +315,13 @@ Animates `scrollTop` to `targetScrollTop` using rAF and design-system easing ove
 | `container`       | Element | The scroll container     |
 | `targetScrollTop` | number  | Target `scrollTop` value |
 
-Returns a **cancel function** — call it to abort the animation at any point.
+Returns a **cancel function** - call it to abort the animation at any point.
 
 ---
 
 #### `getSectionScrollTarget(sections, normalizedPosition, sectionNorms): number`
 
-Nearest-neighbor search — maps a 0–1 normalized position to the `offsetTop` of the closest section.
+Nearest-neighbor search - maps a 0–1 normalized position to the `offsetTop` of the closest section.
 
 | Parameter            | Type      | Description                                |
 |----------------------|-----------|--------------------------------------------|
@@ -328,13 +329,13 @@ Nearest-neighbor search — maps a 0–1 normalized position to the `offsetTop` 
 | `normalizedPosition` | number    | 0–1 position                               |
 | `sectionNorms`       | number[]  | Normalized scroll position of each section |
 
-Returns `number` — the `offsetTop` of the nearest section.
+Returns `number` - the `offsetTop` of the nearest section.
 
 ---
 
 #### `getNormalizedPositionFromPointer(bar, pointerX, tickPositions, sectionNorms): number`
 
-Inverse of `computeThumbPx` — maps a pixel position on the bar back to a normalized 0–1 scroll value.
+Inverse of `computeThumbPx` - maps a pixel position on the bar back to a normalized 0–1 scroll value.
 
 | Parameter       | Type      | Description                                |
 |-----------------|-----------|--------------------------------------------|
@@ -343,13 +344,13 @@ Inverse of `computeThumbPx` — maps a pixel position on the bar back to a norma
 | `tickPositions` | number[]  | Measured centre X of each tick in px       |
 | `sectionNorms`  | number[]  | Normalized scroll position of each section |
 
-Returns `number` — clamped to [0, 1].
+Returns `number` - clamped to [0, 1].
 
 ---
 
 ### `sectionMap.dom.js`
 
-All DOM reads and writes for the module pass through here. No math, no constants — pure I/O.
+All DOM reads and writes for the module pass through here. No math, no constants - pure I/O.
 
 #### Measurement
 
@@ -388,14 +389,14 @@ All DOM reads and writes for the module pass through here. No math, no constants
 
 ## Co-existence with the Panning Module
 
-sectionMap and panning share `#main` as their scroll container but are fully decoupled — neither imports the other.
+sectionMap and panning share `#main` as their scroll container but are fully decoupled - neither imports the other.
 
 **Ownership rules:**
 
 - `scrollTop` is owned by whoever last touched it
-- sectionMap yields on `pointerdown` on `#main` — all active rAF loops (lerp, momentum, animation) are cancelled before panning's handler runs
-- Panning yields to sectionMap on bar interaction — `e.stopPropagation()` on the bar's `pointerdown` prevents it reaching panning's listener on `#main`
-- `scroll-behavior: auto` on `#main` must not be changed — all three scrollers rely on `scrollTop` writes taking effect immediately
+- sectionMap yields on `pointerdown` on `#main` - all active rAF loops (lerp, momentum, animation) are cancelled before panning's handler runs
+- Panning yields to sectionMap on bar interaction - `e.stopPropagation()` on the bar's `pointerdown` prevents it reaching panning's listener on `#main`
+- `scroll-behavior: auto` on `#main` must not be changed - all three scrollers rely on `scrollTop` writes taking effect immediately
 
 **Cross-module cancellation (optional):**
 
