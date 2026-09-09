@@ -1,5 +1,3 @@
-// panning.API.md
-
 # Panning Module API
 
 Smooth pointer-based panning with momentum and wheel redirection for nested containers.
@@ -40,7 +38,7 @@ initPanning({ dragThreshold: 10, friction: 0.9 });
 | `dragThreshold` | `5` | px - minimum pointer travel before a pan gesture commits |
 | `friction` | `0.85` | Velocity decay per frame - lower = slides longer |
 | `minVelocity` | `0.02` | px/frame - momentum stops below this threshold |
-| `momentumScale` | `20` | Multiplie  applied to velocity when advancing scroll |
+| `momentumScale` | `20` | Multiplier  applied to velocity when advancing scroll |
 
 Defaults are defined in `panning.config.js` on the CDN. Consumers never import or host this file - the options object passed to `initPanning()` is the only configuration surface.
 
