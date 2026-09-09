@@ -70,6 +70,7 @@ init.js → render.js → dom.js
 init.js → controller.js → engine.js → dom.js
                         → render.js → dom.js
                         → dom.js
+                        → state.js
 ```
 
 ---
@@ -89,9 +90,9 @@ init.js → controller.js → engine.js → dom.js
 
 Ticks are positioned by CSS flex (`justify-content: space-evenly`). After the bar is in the DOM, `measureTickPositions()` reads where flex actually placed each tick. Separately, `computeSectionNorms()` maps each section's `offsetTop` to a normalized 0–1 scroll position.
 
-These two arrays — `tickPositions` and `sectionNorms` — form a shared coordinate system used by `computeThumbPx`, `getNormalizedPositionFromPointer`, and `getSectionScrollTarget`. All three use per-segment interpolation rather than linear estimation, so the thumb lands exactly on tick `i` when section `i` is in view regardless of individual section heights.
+These two arrays - `tickPositions` and `sectionNorms` - form a shared coordinate system used by `computeThumbPx`, `getNormalizedPositionFromPointer`, and `getSectionScrollTarget`. All three use per-segment interpolation rather than linear estimation, so the thumb lands exactly on tick `i` when section `i` is in view regardless of individual section heights.
 
-A `ResizeObserver` on the bar re-measures both arrays whenever the bar resizes, keeping the responsive breakpoint in sync automatically.
+A `ResizeObserver` on the bar re-measures <main> and both arrays whenever the bar resizes, keeping the responsive breakpoint in sync automatically.
 
 ---
 
