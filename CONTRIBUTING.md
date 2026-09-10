@@ -386,7 +386,7 @@ Use a table when the behavior is a matrix of states or inputs; use prose
 and numbered lists for sequential logic.
 
 Examples from existing modules:
-- **Navigation Behaviour** (sectionMap) -- Gesture / Mode / Behaviour table
+- **Navigation Behavior** (sectionMap) -- Gesture / Mode / Behavior table
 - **Animation** (skillAccordion) -- open/close sequences, interrupt
   handling, constants
 - **Two-Renderer Model** (skillTree) -- state table with Accordion / Tree
@@ -463,20 +463,20 @@ section with a one-line note ("Single-file module -- no import graph.").
 File list with one-line role per file:
 
 ```
-<module>.init.js        ← composition root -- discovery and wiring
-<module>.controller.js  ← event handling and state coordination
-<module>.dom.js         ← all DOM reads and writes
-<module>.state.js       ← state factory
-<module>.engine.js      ← pure math and geometry, no DOM access
-<module>.render.js      ← DOM creation and visual updates
+<module>.init.js        <-  composition root -- discovery and wiring
+<module>.controller.js  <-  event handling and state coordination
+<module>.dom.js         <-  all DOM reads and writes
+<module>.state.js       <-  state factory
+<module>.engine.js      <-  pure math and geometry, no DOM access
+<module>.render.js      <-  DOM creation and visual updates
 ```
 
 Followed by an ASCII import graph showing one-directional dependencies:
 
 ```
-init.js → dom.js
-init.js → controller.js → engine.js → dom.js
-                         → dom.js
+init.js -> dom.js
+init.js -> controller.js -> engine.js -> dom.js
+                         -> dom.js
 ```
 
 ---
