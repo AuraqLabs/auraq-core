@@ -24,7 +24,7 @@ export function getScrollX(container) {
   return container.scrollLeft;
 }
 
-export function bind(container, event, handler, options) {
+export function bindEvent(container, event, handler, options) {
   container.addEventListener(event, handler, options);
 }
 
