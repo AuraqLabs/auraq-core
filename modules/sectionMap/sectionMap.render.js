@@ -69,7 +69,7 @@ export function createBar(sectionCount) {
  * Computes the thumb's pixel position via engine.js
  * @param {Element}  thumb
  * @param {number}   normalizedPosition — 0 (top) to 1 (bottom)
- * @param {number[]} tickPositions — measured centre X of each tick in px
+ * @param {number[]} tickPositions — measured center X of each tick in px
  * @param {number[]} sectionNorms  — normalized scroll position of each section
  * Returns: void
  */

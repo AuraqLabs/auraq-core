@@ -21,10 +21,10 @@
 
 /**
  * measureTickPositions(ticks)
- * Reads the rendered centre X of each tick relative to the bar.
+ * Reads the rendered center X of each tick relative to the bar.
  * Must be called after the bar is in the DOM so offsetLeft is available.
  * @param {Element[]} ticks
- * Returns: number[] — centre X of each tick in px
+ * Returns: number[] — center X of each tick in px
  */
 export function measureTickPositions(ticks) {
   return ticks.map(tick => tick.offsetLeft + tick.offsetWidth / 2);

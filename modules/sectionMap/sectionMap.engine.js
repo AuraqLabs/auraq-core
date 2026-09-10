@@ -50,11 +50,11 @@ export function computeSectionNorms(offsetTops, scrollable) {
 }
 
 /**
- * Returns the pixel X position, used for thumb centre
+ * Returns the pixel X position, used for thumb center
  * @param {number}   normalizedPosition — 0 (top) to 1 (bottom)
- * @param {number[]} tickPositions — measured centre X of each tick in px
+ * @param {number[]} tickPositions — measured center X of each tick in px
  * @param {number[]} sectionNorms  — normalized scroll position of each section
- * @returns: number — pixel X of thumb centre
+ * @returns: number — pixel X of thumb center
  */
 export function computeThumbPx(normalizedPosition, tickPositions, sectionNorms) {
   const n = sectionNorms.length;
@@ -275,7 +275,7 @@ export function getSectionScrollTarget(sections, normalizedPosition, sectionNorm
  * Inverse of computeThumbPx — maps a pixel position on bar to normalized
  * @param {Element}  bar       — the pill bar element
  * @param {number}   pointerX      — e.clientX from pointer event
- * @param {number[]} tickPositions — measured centre X of each tick in px
+ * @param {number[]} tickPositions — measured center X of each tick in px
  * @param {number[]} sectionNorms  — normalized scroll position of each section
  * @Returns: number — 0 to 1, clamped
  */
