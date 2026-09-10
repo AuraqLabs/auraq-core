@@ -1,4 +1,4 @@
-# Panning Module API
+# Panning Module - Reference API
 
 Smooth pointer-based panning with momentum and wheel redirection for nested containers.
 Supports configurable scroll axis and arbitrary nesting depth.
@@ -42,7 +42,35 @@ initPanning({ dragThreshold: 10, friction: 0.9 });
 
 Defaults are defined in `panning.config.js` on the CDN. Consumers never import or host this file - the options object passed to `initPanning()` is the only configuration surface.
 
-## CSS Requirements
+---
+
+## No-JS Behavior
+
+Without JavaScript, `[data-panning-axis]` containers are inert HTML elements. No pointer event handlers are registered, no momentum runs, and no wheel redirection is applied. Scroll behavior falls back entirely to native browser overflow: containers scroll if the required `overflow` CSS is present, but only through native input (trackpad, scrollbar, keyboard). No degraded panning experience is provided.
+
+---
+
+## CSS Shipped by Auraq
+
+This module ships no CSS. All required styles must be authored by the consumer. See [CSS Requirements](#css-requirements) under HTML Contract.
+
+---
+
+## HTML Contract
+
+### Required Elements
+
+| Element | Selector | Required | Description |
+|---|---|---|---|
+| Scroll container | `[data-panning-axis]` | Yes | The scrollable element on which panning is initialised. Discovered by `getPanningContainers()`. Must be a valid scroll container with `overflow` set in the direction(s) specified by `data-panning-axis`. |
+
+### Attribute Schema
+
+| Attribute | Element | Values | Default | Description |
+|---|---|---|---|---|
+| `data-panning-axis` | scroll container | `x` \| `y` \| `xy` | `xy` | Declares the scroll axis for this container. Read by `getAxis()` in `panning.dom.js`. Controls which scroll dimensions the pointer and momentum handlers write to, and whether wheel redirection is applied. |
+
+### CSS Requirements
 
 Panning containers must be scroll containers. The following properties are required:
 ```css
@@ -184,7 +212,7 @@ Returns `container.scrollTop`.
 ### `setScrollY(container, value)`
 Sets `container.scrollTop` to `value`.
 
-### `bind(container, event, handler, options?)`
+### `bindEvent(container, event, handler, options?)`
 Calls `container.addEventListener(event, handler, options)`.
 
 ### `getNearestYScrollable(element)`
