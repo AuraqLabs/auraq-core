@@ -338,7 +338,7 @@ toggle pair of buttons appears and the user can switch to the tree view.
 | `data-skill-display` | Yes | String | Short name shown in tree node card |
 | `data-skill-domain` | Yes | String | Domain - drives color coding and filter |
 | `data-skill-branch` | Yes | String | Tree column grouping |
-| `data-skill-layer` | Yes | Integer ≥ 1 | Tree row; determines vertical position |
+| `data-skill-layer` | Yes | Integer >= 1 | Tree row; determines vertical position |
 | `data-skill-institute` | Yes | String | Institution name |
 | `data-skill-year` | Yes | Integer | Year completed or in progress |
 | `data-skill-tags` | Yes | String | Comma-separated tag list |
@@ -527,6 +527,194 @@ Controller concern remains: node click, popup close, filter toggle.
 **`data/courses.json`** - retained at repo root as reference schema only.
 Not used at runtime. A comment at the top of the file notes this.
 
+
+## CONTRIBUTING.md Changes
+
+Changes required to `CONTRIBUTING.md` as a direct consequence of
+conventions established by this overhaul. This section is the spec for
+Block 5 Step 13.
+
+---
+
+### 1 Repository Canonicality
+
+**Changed:** "canonical source of truth" → "temporary canonical source of
+truth" in the opening line and in 12 Summary.
+
+**Changed:** Mirror push prohibition reworded to make the temporary
+nature of the GitHub-primary workflow explicit: "for now (temporarily)".
+
+**Changed:** `[!CAUTION]` block punctuation and line-length fixes.
+No semantic change.
+
+---
+
+### 2 File & Folder Structure
+
+**Added:** `panning.config.js` to the panning module listing.
+
+**Added:** `skillAccordion/` module with `API.md` and
+`skillAccordion.init.js`. SkillAccordion ships as a single-file module;
+the listing reflects that.
+
+**Removed:** `modules/utils/` entry. The folder does not exist in the
+repository.
+
+**Removed:** All inline comments from the directory tree
+(`# Reusable data`, `# For inspirations`, `# Reusable modules`,
+`# Base HTML/CSS/JS template…`, `# Third Party Modules (locally built)`).
+The tree should show structure, not purpose prose. Purpose belongs in
+3 and 9.
+
+**Fixed:** Spacing errors `|-styles.css` → `|- styles.css` and
+`|-main.js` → `|- main.js`.
+
+---
+
+### 3 General Principles
+
+**3.1 — Replaced:** The "3-5 functions per file" export count rule is
+removed. It is not the real invariant and it was misleading.
+
+Replacement: the **archetype model**.
+
+- **Singleton files** (`init`, `state`, `controller`) — export exactly
+  one function. Narrowness is by design.
+- **Collection files** (`dom`, `engine`, `render`) — export as many
+  functions as the module needs, one per DOM operation, geometry
+  computation, or render action.
+
+The real invariant is **one responsibility per function**. If a singleton
+file is growing, the excess logic belongs in `engine.js` or `render.js`.
+
+**3.2 — Added:**
+
+- `bindEvent` over `bind` as the preferred name for event-binding
+  helpers in collection files. Reason: `bind` is ambiguous with
+  `Function.prototype.bind`; `bindEvent` is unambiguous.
+- Singleton files (`init`, `state`, `controller`) always prefix exports
+  with the module name. Collection files (`dom`, `engine`, `render`)
+  never do.
+- Disambiguation belongs at the **import site** via ES6 `as` aliasing,
+  not in function names.
+- Example expanded: `initPanning()`, `createSkillTreeController()`.
+
+**Removed:** "Module-prefix only public entry points where disambiguation
+across modules is needed." Replaced by the clearer singleton/collection
+distinction above.
+
+---
+
+### 5 Commit Guidelines
+
+**Added:** `chore` commit type — maintenance tasks not touching module
+source or docs.
+
+**Changed:** Scope example updated from `docs(api): add further planned
+features in api.md` to `docs(api): add further planned features in root
+api.md`. Reason: disambiguation between root API.md and module API.mds.
+
+**Changed:** Split-commit rule reworded for clarity. No semantic change.
+
+**Added:** `[!NOTE]` callout documenting the tightly-coupled exception:
+when a single logical change spans modules that share a DOM surface or
+where one is a direct enhancement layer of another, commit them together.
+Atomicity of the functional change takes precedence over single-scope in
+those cases. Name the scope after the primary module.
+
+---
+
+### 8 API Reference Files (new section)
+
+This section is entirely new. It was not present in any form before this
+overhaul. It codifies the API.md standard that was implicit and
+inconsistently applied across modules.
+
+**8.1 Module API.md** — full structural standard:
+
+- **Standard Header:** `# <moduleName> Module - API Reference` as the
+  required first line of every module API.md. Rationale: when multiple
+  API files are concatenated, the heading identifies which module's
+  content follows.
+- **One-sentence description** immediately after the heading.
+- **`> See also:`** link to any tightly coupled module's API.md.
+- **`## HTML Contract`** with all required and conditional subsections:
+  Required HTML block; Element Discovery table; Attribute Schema;
+  Content Mapping; Required Site CSS; Corner Cases.
+- **`## No-JS Behavior`** — never omit, never write "N/A". Every module
+  has a no-JS state.
+- **`## <Primary Behavior Section(s)>`** — name and count vary per module.
+  Internal constants documented inline with value, unit, and effect.
+- **`## Exports`** — one `###` subsection per JS file, in import-graph
+  order. Parameter table required for 2+ params; Returns documented for
+  non-void functions; Side effects listed for functions with observable
+  effects; ARIA attributes table where applicable.
+- **`## CSS Custom Properties`** *(conditional)* — for UI modules that
+  inject CSS. Three-column table with full fallback chain in Default.
+- **`## CSS Shipped by Auraq`** *(conditional)* — for behavior-only
+  modules. One line stating "None" and the reason. Do not omit silently.
+- **`## Generated DOM`** *(conditional)* — for modules that inject
+  elements. Two-column table. The site must not author these directly.
+- **`## Module Architecture`** — required for all modules. Multi-file
+  modules include the file list with role labels and ASCII import graph.
+  Single-file modules include the section with: "Single-file module --
+  no import graph."
+- **`## Relationship to <ModuleName>`** *(conditional)* — when two
+  modules share a DOM surface or require a specific init order. Cover:
+  what each module owns, yielding logic, cross-module cancellation API,
+  ordering constraint.
+
+**8.2 Root API.md** — index structure: per-module entry format (path,
+CDN URL, link to module API.md, export table). Planned modules table
+with Live/Planned status. Status promoted as part of the ship commit.
+
+**8.3 design.md lifecycle** — created when a module is planned,
+lives alongside in-progress implementation, deleted when the module
+ships. Deletion commit must state explicitly that design.md is being
+deleted and superseded by API.md.
+
+---
+
+### 9 Adding Features
+
+**Added to "Create a new module" steps:**
+
+- Step 6: Update `README.md` repository structure.
+- Step 7: If a `design.md` existed, delete it per the 8.3 lifecycle
+  and note the deletion in the commit message.
+
+---
+
+### 10 Navigation and Discoverability
+
+**New section.** Was not present before this overhaul. Documents:
+
+- `ctags -R .` for tag-based function navigation in vim.
+- `:tag functionName` for jumping to definitions.
+- `:vimgrep` patterns using consistent function prefixes.
+- Logical grouping principle (keep related files in their module folder).
+
+---
+
+### 11 Testing
+
+**Removed:** "When in doubt, prefer a focused new module over bloating
+an existing one." Relocated as an implicit consequence of the archetype
+model in 3.
+
+**Changed:** Bullet style from `*` to `-`. Implementation note
+reformatted from inline to a `> Note:` blockquote. Spelling fixed:
+"implemeneted" → "implemented".
+
+---
+
+### 12 Summary
+
+**Changed:** "GitHub repository is the canonical repository" →
+"GitHub repository is the temporary canonical repository". Matches 1.
+
+**Changed:** Bullet style from `*` to `-`.
+
 ### COBE
 
 No JS changes. No CSS changes (renders to canvas).
@@ -575,13 +763,16 @@ coupled; otherwise one step per commit.
    refactor `injectStyles()` to `@layer auraq.skillTree` + custom CSS
 10. `modules/skillTree/design.md` - delete (superseded by API.md)
 11. `modules/skillTree/API.md` - full rewrite
+12. templates/js/main.js - update import from initSkillTree to initSkills
 
 **Block 5 - Documentation pass**
 
-12. `modules/panning/API.md` - update HTML contract and CSS requirements
-13. `vendor/cobe/API.md` - create with HTML contract and no-JS behavior
-14. Root `API.md` - update module index; note `initSkills()` rename
-15. `README.md` - update repository structure if directory layout changed
+13. `modules/panning/API.md` - update HTML contract and CSS requirements
+14. `CONTRIBUTING.md` - reflect conventions established by this overhaul;
+    see [CONTRIBUTING.md Changes](#contributingmd-changes) below
+15. `vendor/cobe/API.md` - create with HTML contract and no-JS behavior
+16. Root `API.md` - update module index; note `initSkills()` rename
+17. `README.md` - update repository structure if directory layout changed
 
 **Note on `templates/js/skillTree/`:**
 These files are frozen one-time boilerplate and are not updated in this
