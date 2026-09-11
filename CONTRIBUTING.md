@@ -69,12 +69,21 @@ auraq-core/
 |   `- js/
 |       `- main.js
 |- vendor/
-|   `- cobe/
+|   |- cobe/
+|   |   |- API.md
+|   |   |- cobe.create.js
+|   |   |- cobe.init.js
+|   |   |- cobe.phenomenon.js
+|   |   |- cobe.shader.js
+|   |   `- cobe.texture.js
+|   `- cobev2/
+|       |- API.md
+|       |- cobe.anchor.js
 |       |- cobe.create.js
 |       |- cobe.init.js
-|       |- cobe.phenomenon.js
 |       |- cobe.shader.js
-|       `- cobe.texture.js
+|       |- cobe.texture.js
+|       `- cobe.webgl.js
 |- API.md
 |- CODE_OF_CONDUCT.md
 |- CONTRIBUTING.md
