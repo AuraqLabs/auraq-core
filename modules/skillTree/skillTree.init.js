@@ -112,10 +112,10 @@ function buildTree(treeContainer, courses) {
     minVelocity:   0.02,
     momentumScale: 20
   });
-  bind(treeContainer, 'pointerdown',   panController.onPointerDown);
-  bind(document,      'pointermove',   panController.onPointerMove);
-  bind(document,      'pointerup',     panController.onPointerUp);
-  bind(document,      'pointercancel', panController.onPointerUp);
+  bindEvent(treeContainer, 'pointerdown',   panController.onPointerDown);
+  bindEvent(document,      'pointermove',   panController.onPointerMove);
+  bindEvent(document,      'pointerup',     panController.onPointerUp);
+  bindEvent(document,      'pointercancel', panController.onPointerUp);
 
   const { canvasWidth, canvasHeight } = computeCanvasDimensions(positions, NODE_WIDTH, NODE_HEIGHT, GAP_X, GAP_Y);
   setCanvasDimensions(canvas, canvasWidth, canvasHeight);
