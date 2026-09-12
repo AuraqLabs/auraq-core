@@ -8,7 +8,7 @@ import { createSkillTreeController } from './skillTree.controller.js';
 
 import { createPanningState }      from 'https://cdn.auraq.org/modules/panning/panning.state.js';
 import { createPanningController } from 'https://cdn.auraq.org/modules/panning/panning.controller.js';
-import { bind }                    from 'https://cdn.auraq.org/modules/panning/panning.dom.js';
+import { bindEvent }               from 'https://cdn.auraq.org/modules/panning/panning.dom.js';
 
 const NODE_WIDTH  = 300;
 const NODE_HEIGHT = 150;
